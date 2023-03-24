@@ -1,7 +1,7 @@
 import { Navigation } from "collections";
-import { Button } from "components";
+import { Button, Popup } from "components";
 import Image from "next/image";
-import React, { RefObject } from "react";
+import React, { RefObject, useState } from "react";
 import Clouds from "../../../public/svgs/clouds.svg";
 import Hero1 from "../../../public/svgs/hero1.svg";
 import Hero2 from "../../../public/svgs/hero2.svg";
@@ -15,8 +15,16 @@ const buttons: string[] = ["Login", "Sign Up"];
 export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
   ...props
 }) => {
+  const [loginPopupOpened, setLoginPopupOpened] = useState<boolean>(false);
+
+  const toggleLoginPopup = () => () => {
+    setLoginPopupOpened((state) => !state);
+    document.body.style.overflow = loginPopupOpened ? "auto" : "hidden";
+  };
+
   return (
     <section className="w-full bg-heroBackground overflow-hidden" {...props}>
+      {loginPopupOpened && <Popup closePopup={toggleLoginPopup} />}
       <Image
         src={Clouds}
         alt={"cloudsImg"}
@@ -47,6 +55,7 @@ export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
           <div className="mr-[24px] text-[20px] flex ">
             {buttons.map((button) => (
               <button
+                onClick={button === "Login" ? toggleLoginPopup() : () => {}}
                 key={button}
                 className="bg-white rounded-full hover:text-buttonHover cursor-pointer py-1.5 px-10 hover:shadow-button transition ease-in-out duration-200 first:mr-10"
               >

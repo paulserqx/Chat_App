@@ -1,7 +1,10 @@
 import { Navigation } from "collections";
-import { Button, Popup } from "components";
+import { Popup, TPopups } from "components";
+import { useUser } from "hooks";
 import Image from "next/image";
-import React, { RefObject, useState } from "react";
+import { useRouter } from "next/router";
+import React, { RefObject, useEffect, useState } from "react";
+import { firebaseApi } from "services";
 import Clouds from "../../../public/svgs/clouds.svg";
 import Hero1 from "../../../public/svgs/hero1.svg";
 import Hero2 from "../../../public/svgs/hero2.svg";
@@ -15,16 +18,18 @@ const buttons: string[] = ["Login", "Sign Up"];
 export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
   ...props
 }) => {
-  const [loginPopupOpened, setLoginPopupOpened] = useState<boolean>(false);
+  const [popupOpened, setPopupOpened] = useState<TPopups | null>(null);
 
-  const toggleLoginPopup = () => () => {
-    setLoginPopupOpened((state) => !state);
-    document.body.style.overflow = loginPopupOpened ? "auto" : "hidden";
+  const togglePopup = (type?: TPopups) => () => {
+    setPopupOpened(type || null);
+    document.body.style.overflow = type ? "auto" : "hidden";
   };
 
   return (
     <section className="w-full bg-heroBackground overflow-hidden" {...props}>
-      {loginPopupOpened && <Popup closePopup={toggleLoginPopup} />}
+      {popupOpened && (
+        <Popup closePopup={togglePopup} popupType={popupOpened} />
+      )}
       <Image
         src={Clouds}
         alt={"cloudsImg"}
@@ -55,7 +60,7 @@ export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
           <div className="mr-[24px] text-[20px] flex ">
             {buttons.map((button) => (
               <button
-                onClick={button === "Login" ? toggleLoginPopup() : () => {}}
+                onClick={togglePopup(button === "Login" ? "login" : "signUp")}
                 key={button}
                 className="bg-white rounded-full hover:text-buttonHover cursor-pointer py-1.5 px-10 hover:shadow-button transition ease-in-out duration-200 first:mr-10"
               >

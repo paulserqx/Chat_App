@@ -11,14 +11,23 @@ module.exports = {
         button: '0 8px 15px rgba(0,0,0,.2)'
       },
       animation: {
-        popupOpen: 'popupOpen 0.5s cubic-bezier(.02,1.28,.82,.81)'
+        popupOpen: 'popupOpen 0.2s ease-in',
+        loading: 'loading 1s cubic-bezier(.62,1,.59,.44) infinite'
       },
       keyframes: {
         popupOpen: {
-          "0%": { transform: 'scale(0)' , borderRadius: '50%'
-         },
-         "100%": { transform: 'scale(1)' , borderRadius: '0%'
+          "0%": { transform: 'scale(0)' 
+          },
+         "100%": { transform: 'scale(1)' 
+          },
         },
+        loading: {
+          "0%": { transform: 'rotateZ(0deg) scale(1)' 
+          },
+          "50%": { transform: 'rotateZ(180deg) scale(1.5)' 
+          },
+         "100%": { transform: 'rotateZ(360deg) scale(1)' 
+          },
         }
       }
     },

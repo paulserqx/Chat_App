@@ -5,7 +5,10 @@ module.exports = {
     extend: {
       colors: {
         heroBackground:'#404eed',
-        buttonHover:'#5865f2'
+        buttonHover:'#5865f2',
+        grey: '#313338',
+        darkGrey: '#2B2D31'
+
       },
       boxShadow: {
         button: '0 8px 15px rgba(0,0,0,.2)'

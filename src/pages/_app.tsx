@@ -8,7 +8,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Discord Clone</title>
       </Head>
-      <Component {...pageProps} />
+      <main>
+        <Component {...pageProps} />
+      </main>
     </>
   );
 }

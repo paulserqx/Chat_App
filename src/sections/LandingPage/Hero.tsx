@@ -1,5 +1,5 @@
 import { Navigation } from "collections";
-import { Popup, TPopups } from "components";
+import { Button, Popup, TPopups } from "components";
 import { useUser } from "hooks";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -59,13 +59,11 @@ export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
         <div className="mt-[50px] flex items-center justify-between">
           <div className="mr-[24px] text-[20px] flex ">
             {buttons.map((button) => (
-              <button
+              <Button
                 onClick={togglePopup(button === "Login" ? "login" : "signUp")}
                 key={button}
-                className="bg-white rounded-full hover:text-buttonHover cursor-pointer py-1.5 px-10 hover:shadow-button transition ease-in-out duration-200 first:mr-10"
-              >
-                {button}
-              </button>
+                text={button}
+              />
             ))}
           </div>
         </div>

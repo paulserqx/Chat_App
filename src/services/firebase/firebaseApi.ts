@@ -48,6 +48,23 @@ const createRoom = async (roomName: string): Promise<void | ErrorResponse> => {
   }
 };
 
+const sendMessage = async (
+  roomName: string,
+  message: string
+): Promise<void | ErrorResponse> => {
+  try {
+    await set(ref(db, "messages/" + roomName), {
+      message,
+    });
+  } catch (error: any) {
+    const FirebaseError: TError = error;
+    return {
+      type: "error",
+      error: FirebaseError,
+    };
+  }
+};
+
 const getAllRoomsOnce = async (): Promise<GetAllRoomsResponse[]> => {
   const rooms = await get(child(dbRef, "rooms/"));
   return rooms.val();
@@ -150,6 +167,9 @@ export const firebaseApi = {
       withPassword: createUserWithPassword,
     },
     createRoom,
+    message: {
+      send: sendMessage,
+    },
   },
   GET: {
     allRoomsOnce: getAllRoomsOnce,

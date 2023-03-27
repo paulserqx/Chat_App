@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .room-img {
+    @apply  cursor-pointer mt-[15px] flex p-[15px] rounded-full items-center justify-center bg-gradient-to-r from-blue-600 to-fuchsia-500 text-white hover:rounded-[18px] before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:fixed before:-left-[5px] before:rounded-full before:hover:h-[30px] transition-[height] duration-500 active:before:h-[50px] active:rounded-[18px]
+  }
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin:0;

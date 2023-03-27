@@ -6,3 +6,11 @@ export interface IEmailAndPassword {
 }
 
 export type TError = FirebaseError;
+
+export interface IRoom {
+  name: string;
+}
+
+export type GetAllRoomsResponse = {
+  [key: string]: { name: string };
+};

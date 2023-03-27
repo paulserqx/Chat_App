@@ -27,7 +27,7 @@ export const SignUpPopup: React.FC<SignUpProps> = ({
     });
 
     if (result.type === "data") {
-      router.push("/dashboard");
+      router.push("/chats");
     } else {
       console.log(result);
       const message = result.error.message.split("/")[1].slice(0, -2);

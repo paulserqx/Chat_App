@@ -1,7 +1,6 @@
 import { Sidebar } from "collections";
 import { Button } from "components";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { Dashboard as _Dashboard } from "sections";
 import { firebaseApi } from "services";
 

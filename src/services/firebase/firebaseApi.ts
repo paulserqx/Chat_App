@@ -10,7 +10,7 @@ import {
 import { child, get, getDatabase, onValue, ref, set } from "firebase/database";
 import React from "react";
 import { auth } from "./firebaseInit";
-import { TError, IEmailAndPassword } from "./types";
+import { TError, IEmailAndPassword, GetAllRoomsResponse } from "./types";
 
 const provider = new GoogleAuthProvider();
 
@@ -48,10 +48,16 @@ const createRoom = async (roomName: string): Promise<void | ErrorResponse> => {
   }
 };
 
-const getAllRooms = async () => {
+const getAllRoomsOnce = async (): Promise<GetAllRoomsResponse[]> => {
+  const rooms = await get(child(dbRef, "rooms/"));
+  return rooms.val();
+};
+
+const getAllRooms = async (setter: any) => {
   const roomsRef = ref(db, "rooms/");
   onValue(roomsRef, (rooms) => {
-    console.log(rooms.val());
+    const result: GetAllRoomsResponse = rooms.val();
+    setter(Object.values(result).map((room) => room.name));
   });
 };
 
@@ -146,6 +152,7 @@ export const firebaseApi = {
     createRoom,
   },
   GET: {
+    allRoomsOnce: getAllRoomsOnce,
     allRooms: getAllRooms,
   },
 };

@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useState } from "react";
+import React, { RefObject, useState } from "react";
 import { firebaseApi } from "services";
 interface DashboardProps {
   ref?: RefObject<HTMLDivElement>;
@@ -25,10 +25,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
       alert(res.error.message);
     }
   };
-
-  useEffect(() => {
-    firebaseApi.GET.allRooms();
-  }, []);
 
   return (
     <section

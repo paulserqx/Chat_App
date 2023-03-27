@@ -24,7 +24,7 @@ export const LoginPopup: React.FC<LoginProps> = ({ closePopup, ...props }) => {
     });
 
     if (result.type === "data") {
-      router.push("/dashboard");
+      router.push("/chats");
     } else {
       const message = result.error.message.split("/")[1].slice(0, -2);
       const error = FirebaseErrors[message];

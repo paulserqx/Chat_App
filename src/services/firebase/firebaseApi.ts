@@ -7,7 +7,16 @@ import {
   signOut as _signOut,
   UserCredential,
 } from "firebase/auth";
-import { child, get, getDatabase, onValue, ref, set } from "firebase/database";
+import {
+  child,
+  get,
+  getDatabase,
+  off,
+  onValue,
+  push,
+  ref,
+  set,
+} from "firebase/database";
 import React from "react";
 import { auth } from "./firebaseInit";
 import { TError, IEmailAndPassword, GetAllRoomsResponse } from "./types";
@@ -50,11 +59,19 @@ const createRoom = async (roomName: string): Promise<void | ErrorResponse> => {
 
 const sendMessage = async (
   roomName: string,
-  message: string
+  message: string,
+  user: string,
+  profileImg: string
 ): Promise<void | ErrorResponse> => {
   try {
-    await set(ref(db, "messages/" + roomName), {
+    const roomRef = ref(db, `messages/${roomName}`);
+    const newMessage = push(roomRef);
+    console.log("Key" + newMessage.key);
+    await set(newMessage, {
+      key: newMessage.key,
+      author: user,
       message,
+      profileImg,
     });
   } catch (error: any) {
     const FirebaseError: TError = error;
@@ -65,14 +82,29 @@ const sendMessage = async (
   }
 };
 
+const getMessages = async (
+  roomName: string,
+  setter: React.Dispatch<React.SetStateAction<any[]>>
+) => {
+  const roomMessagesRef = ref(db, `messages/${roomName}`);
+  onValue(roomMessagesRef, (msgs) => {
+    console.log(msgs.val());
+    if (!msgs.val()) return;
+    setter(Object.values(msgs.val()));
+  });
+};
+
 const getAllRoomsOnce = async (): Promise<GetAllRoomsResponse[]> => {
   const rooms = await get(child(dbRef, "rooms/"));
   return rooms.val();
 };
 
-const getAllRooms = async (setter: any) => {
+const getAllRooms = async (
+  setter: React.Dispatch<React.SetStateAction<string[]>>
+) => {
   const roomsRef = ref(db, "rooms/");
   onValue(roomsRef, (rooms) => {
+    if (!rooms.val()) return;
     const result: GetAllRoomsResponse = rooms.val();
     setter(Object.values(result).map((room) => room.name));
   });
@@ -174,5 +206,6 @@ export const firebaseApi = {
   GET: {
     allRoomsOnce: getAllRoomsOnce,
     allRooms: getAllRooms,
+    messages: getMessages,
   },
 };

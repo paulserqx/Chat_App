@@ -14,3 +14,10 @@ export interface IRoom {
 export type GetAllRoomsResponse = {
   [key: string]: { name: string };
 };
+
+export interface IMessage {
+  author: string;
+  message: string;
+  profileImg: string;
+  key: string;
+}

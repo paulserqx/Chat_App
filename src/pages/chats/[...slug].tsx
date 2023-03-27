@@ -11,7 +11,7 @@ export async function getStaticPaths() {
   }));
 
   return {
-    paths,
+    paths: paths || [{ params: { slug: ["none"] } }],
     fallback: "blocking",
   };
 }
@@ -21,7 +21,6 @@ export async function getStaticProps({
 }: {
   params: { slug: string[] };
 }) {
-  console.log(slug[0]);
   return {
     props: {
       slug: slug[0],

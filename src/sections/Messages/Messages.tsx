@@ -1,5 +1,6 @@
-import React, { RefObject, useState } from "react";
-import { firebaseApi } from "services";
+import { useUser } from "hooks";
+import React, { RefObject, useState, useEffect } from "react";
+import { firebaseApi, IMessage } from "services";
 interface MessagesProps {
   slug: string;
   messages: any[];
@@ -12,6 +13,16 @@ export const Messages: React.FC<MessagesProps> = ({
   ...props
 }) => {
   const [message, setMessage] = useState<string>("");
+  const [chat, setChat] = useState<IMessage[]>([]);
+  const { user } = useUser();
+
+  useEffect(() => {
+    setChat([]);
+    firebaseApi.GET.messages(slug, setChat);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
+  // console.log(chat);
 
   return (
     <section
@@ -25,11 +36,24 @@ export const Messages: React.FC<MessagesProps> = ({
       />
       <button
         type="button"
-        onClick={() => firebaseApi.POST.message.send(slug, message)}
+        onClick={() =>
+          firebaseApi.POST.message.send(
+            slug,
+            message,
+            user?.displayName || "Unknown User",
+            user?.photoURL || ""
+          )
+        }
       >
         Send Message
       </button>
       Messages
+      <br />
+      {chat.map((msg, i) => (
+        <div key={msg.key}>
+          {msg.message} {msg.author}
+        </div>
+      ))}
     </section>
   );
 };

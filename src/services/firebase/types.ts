@@ -5,4 +5,4 @@ export interface IEmailAndPassword {
   password: string;
 }
 
-export type Error = FirebaseError;
+export type TError = FirebaseError;

@@ -1,4 +1,5 @@
 interface IFirebaseErrors {
+  [key: string]: string;
   "user-not-found": string;
   "wrong-password": string;
 }

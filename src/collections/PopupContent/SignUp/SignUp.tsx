@@ -31,7 +31,7 @@ export const SignUpPopup: React.FC<SignUpProps> = ({
     } else {
       console.log(result);
       const message = result.error.message.split("/")[1].slice(0, -2);
-      // console.log(FirebaseErrors[message]);
+      console.log(FirebaseErrors[message]);
     }
     setIsLoading(false);
   };

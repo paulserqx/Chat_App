@@ -36,16 +36,16 @@ export const Messages: React.FC<MessagesProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
-  // console.log(chat);
-
-  const handleSubmitMessage = (e: React.FormEvent) => {
+  const handleSubmitMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    firebaseApi.POST.message.send(
+    const res = await firebaseApi.POST.message.send(
       slug,
       message,
       user?.displayName || "Unknown User",
       user?.photoURL || ""
     );
+
+    setMessage("");
   };
 
   return (

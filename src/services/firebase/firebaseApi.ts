@@ -1,10 +1,14 @@
 import { FirebaseError } from "firebase/app";
+import defaultUser from "../../../public/imgs/default_user.jpg";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut as _signOut,
+  updateProfile,
+  User,
   UserCredential,
 } from "firebase/auth";
 import {
@@ -19,7 +23,7 @@ import {
 } from "firebase/database";
 import React from "react";
 import { auth } from "./firebaseInit";
-import { TError, IEmailAndPassword, GetAllRoomsResponse } from "./types";
+import { TError, IEmailAndPasswordSignIn, GetAllRoomsResponse } from "./types";
 
 const provider = new GoogleAuthProvider();
 
@@ -66,7 +70,6 @@ const sendMessage = async (
   try {
     const roomRef = ref(db, `messages/${roomName}`);
     const newMessage = push(roomRef);
-    console.log("Key" + newMessage.key);
     await set(newMessage, {
       key: newMessage.key,
       author: user,
@@ -89,7 +92,6 @@ const getMessages = async (
 ) => {
   const roomMessagesRef = ref(db, `messages/${roomName}`);
   onValue(roomMessagesRef, (msgs) => {
-    console.log(msgs.val());
     if (!msgs.val()) return;
     setter(Object.values(msgs.val()));
   });
@@ -113,12 +115,13 @@ const getAllRooms = async (
 
 const createUserWithPassword = async (
   e: React.FormEvent,
-  { email, password }: IEmailAndPassword
+  { email, password, username }: IEmailAndPasswordSignIn
 ): Promise<ErrorResponse | DataResponse> => {
   e.preventDefault();
 
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
+    await setAdditionUserInfo(username || "Anonymous User");
     return {
       type: "data",
       response: res,
@@ -130,6 +133,14 @@ const createUserWithPassword = async (
       error: FirbaseError,
     };
   }
+};
+
+const setAdditionUserInfo = async (username: string) => {
+  if (!auth.currentUser) return;
+  updateProfile(auth.currentUser, {
+    displayName: username,
+    photoURL: defaultUser.src,
+  });
 };
 
 const signInWithGoogle = async (
@@ -154,7 +165,7 @@ const signInWithGoogle = async (
 
 const signInWithPassword = async (
   e: React.FormEvent,
-  { email, password }: IEmailAndPassword
+  { email, password }: IEmailAndPasswordSignIn
 ): Promise<ErrorResponse | DataResponse> => {
   e.preventDefault();
 

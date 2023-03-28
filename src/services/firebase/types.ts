@@ -1,8 +1,9 @@
 import { FirebaseError } from "firebase/app";
 
-export interface IEmailAndPassword {
+export interface IEmailAndPasswordSignIn {
   email: string;
   password: string;
+  username?: string;
 }
 
 export type TError = FirebaseError;

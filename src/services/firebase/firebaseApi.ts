@@ -72,6 +72,7 @@ const sendMessage = async (
       author: user,
       message,
       profileImg,
+      timePosted: Date.now(),
     });
   } catch (error: any) {
     const FirebaseError: TError = error;
@@ -175,6 +176,7 @@ const signInWithPassword = async (
 const signOut = async (): Promise<ErrorResponse | DataResponse<void>> => {
   try {
     const res = await _signOut(auth);
+    off(ref(db));
     return {
       type: "data",
       response: res,

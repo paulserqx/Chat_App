@@ -20,4 +20,5 @@ export interface IMessage {
   message: string;
   profileImg: string;
   key: string;
+  timePosted: number;
 }

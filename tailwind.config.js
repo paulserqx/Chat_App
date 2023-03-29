@@ -7,7 +7,8 @@ module.exports = {
         heroBackground:'#404eed',
         buttonHover:'#5865f2',
         grey: '#313338',
-        darkGrey: '#2B2D31'
+        darkGrey: '#2B2D31',
+        veryDarkGrey: '#111214'
 
       },
       boxShadow: {

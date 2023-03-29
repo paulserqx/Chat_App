@@ -40,6 +40,23 @@ interface DataResponse<T = UserCredential> {
 const db = getDatabase();
 const dbRef = ref(db);
 
+const changeStatus = async (status: string) => {
+  const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
+  set(usersPathRef, {
+    status,
+  });
+};
+
+const getUserStatus = async (
+  setter: React.Dispatch<React.SetStateAction<string>>
+) => {
+  const statusRef = ref(db, `users/${auth.currentUser?.uid}`);
+  onValue(statusRef, (status) => {
+    const value = status.val().status;
+    setter(value);
+  });
+};
+
 const createRoom = async (roomName: string): Promise<void | ErrorResponse> => {
   try {
     const doesExist = await (
@@ -215,10 +232,12 @@ export const firebaseApi = {
     message: {
       send: sendMessage,
     },
+    changeStatus,
   },
   GET: {
     allRoomsOnce: getAllRoomsOnce,
     allRooms: getAllRooms,
     messages: getMessages,
+    user: getUserStatus,
   },
 };

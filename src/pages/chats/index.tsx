@@ -24,7 +24,9 @@ export default function Dashboard({ ...props }) {
         <section className="w-full h-full">
           <nav className="bg-grey flex absolute z-10 justify-between w-full py-[20px] px-[40px]">
             <div></div>
-            <Button onClick={handleSignOut} text={"Sign Out"} />
+            <button onClick={handleSignOut}>
+              <Button text={"Sign Out"} />
+            </button>
           </nav>
           <_Dashboard />
         </section>

@@ -24,6 +24,7 @@ import {
 import React from "react";
 import { auth } from "./firebaseInit";
 import { TError, IEmailAndPasswordSignIn, GetAllRoomsResponse } from "./types";
+import { Statuses } from "types";
 
 const provider = new GoogleAuthProvider();
 
@@ -48,7 +49,7 @@ const changeStatus = async (status: string) => {
 };
 
 const getUserStatus = async (
-  setter: React.Dispatch<React.SetStateAction<string>>
+  setter: React.Dispatch<React.SetStateAction<Statuses>>
 ) => {
   const statusRef = ref(db, `users/${auth.currentUser?.uid}`);
   onValue(statusRef, (status) => {

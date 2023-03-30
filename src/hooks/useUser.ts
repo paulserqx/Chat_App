@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { auth, firebaseApi } from "services";
 
 export const useUser = () => {

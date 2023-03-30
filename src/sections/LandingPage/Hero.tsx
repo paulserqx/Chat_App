@@ -1,10 +1,7 @@
 import { Navigation } from "collections";
 import { Button, Popup, TPopups } from "components";
-import { useUser } from "hooks";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
-import { firebaseApi } from "services";
 import Clouds from "../../../public/svgs/clouds.svg";
 import Hero1 from "../../../public/svgs/hero1.svg";
 import Hero2 from "../../../public/svgs/hero2.svg";
@@ -59,11 +56,12 @@ export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
         <div className="mt-[50px] flex items-center justify-between">
           <div className="mr-[24px] text-[20px] flex ">
             {buttons.map((button) => (
-              <Button
+              <button
                 onClick={togglePopup(button === "Login" ? "login" : "signUp")}
                 key={button}
-                text={button}
-              />
+              >
+                <Button text={button} />
+              </button>
             ))}
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useState } from "react";
+import React, { RefObject, useContext, useEffect, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoMoon } from "react-icons/io5";
 import { MdDoDisturbOn } from "react-icons/md";
@@ -6,6 +6,7 @@ import { BsFillRecordCircleFill } from "react-icons/bs";
 import { useUser } from "hooks";
 import { statuses } from "utils";
 import { firebaseApi } from "services";
+import { Statuses } from "types";
 
 interface CurrentStatusProps {
   ref?: RefObject<HTMLDivElement>;
@@ -13,7 +14,7 @@ interface CurrentStatusProps {
 
 export const CurrentStatus: React.FC<CurrentStatusProps> = ({ ...props }) => {
   const { changeStatus } = useUser();
-  const [status, setStatus] = useState("online");
+  const [status, setStatus] = useState<Statuses>("online");
 
   useEffect(() => {
     firebaseApi.GET.user(setStatus);
@@ -22,7 +23,7 @@ export const CurrentStatus: React.FC<CurrentStatusProps> = ({ ...props }) => {
   return (
     <div className="statusButton flex justify-between items-center text-white  text-[15px] pl-[10px] hover:bg-slate-600/70 my-[5px] rounded-lg cursor-pointer">
       <div className="flex">
-        {statuses[status].icon}
+        <div className="mr-[10px]">{statuses[status].icon}</div>
         {statuses[status].text}
       </div>
       <RiArrowDropDownLine fontSize={30} className=" -rotate-90" />

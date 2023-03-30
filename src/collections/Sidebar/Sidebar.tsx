@@ -10,6 +10,7 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
   const [rooms, setRooms] = useState<string[]>([]);
   const router = useRouter();
+
   useEffect(() => {
     firebaseApi.GET.allRooms(setRooms);
   }, []);

@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { RefObject, useEffect, useState } from "react";
 import { IoSettingsSharp } from "react-icons/io5";
 import { firebaseApi } from "services";
+import { Statuses } from "types";
 import { shortenDisplayName, statuses } from "utils";
 
 interface CurrentUserProfileProps {
@@ -15,16 +16,14 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
 }) => {
   const { user } = useUser();
   const [openCurrentUser, setOpenCurrentUser] = useState<boolean>(false);
-  const [status, setStatus] = useState<string>("online");
+  const [status, setStatus] = useState<Statuses>("online");
 
   useEffect(() => {
     firebaseApi.GET.user(setStatus);
   }, []);
 
-  console.log(status);
-
   const handleOpenCurrentUser = () => {
-    setOpenCurrentUser((state) => !state);
+    setOpenCurrentUser(!openCurrentUser);
   };
 
   if (!user) return null;

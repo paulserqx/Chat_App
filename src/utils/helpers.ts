@@ -5,3 +5,7 @@ export const shortenDisplayName = (name: string) => {
     return name;
   }
 };
+
+export const transformErrorMessage = (msg: string) => {
+  return msg.split("/")[1].slice(0, -2);
+};

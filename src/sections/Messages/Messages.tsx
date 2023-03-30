@@ -55,7 +55,9 @@ export const Messages: React.FC<MessagesProps> = ({
     >
       <nav className="bg-grey flex  justify-between w-full p-5 ">
         <div className="pl-[20px ] flex items-center">{`You are currently in ${slug}`}</div>
-        <Button onClick={handleSignOut} text={"Sign Out"} />
+        <button onClick={handleSignOut}>
+          <Button text={"Sign Out"} />
+        </button>
       </nav>
       <div className="h-full overflow-auto pl-[20px] ">
         {chat.map((msg) => (

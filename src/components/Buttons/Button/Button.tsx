@@ -2,7 +2,6 @@ import React, { RefObject } from "react";
 
 interface ButtonProps {
   text: string;
-  onClick?: any;
   ref?: RefObject<HTMLAnchorElement>;
 }
 

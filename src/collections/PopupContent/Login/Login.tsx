@@ -3,6 +3,7 @@ import { FirebaseError } from "firebase/app";
 import { useRouter } from "next/router";
 import React, { RefObject, useState } from "react";
 import { firebaseApi, FirebaseErrors } from "services/firebase";
+import { transformErrorMessage } from "utils";
 
 interface LoginProps {
   closePopup: () => () => void;
@@ -26,7 +27,7 @@ export const LoginPopup: React.FC<LoginProps> = ({ closePopup, ...props }) => {
     if (result.type === "data") {
       router.push("/chats");
     } else {
-      const message = result.error.message.split("/")[1].slice(0, -2);
+      const message = transformErrorMessage(result.error.message);
       const error = FirebaseErrors[message];
     }
     setIsLoading(false);

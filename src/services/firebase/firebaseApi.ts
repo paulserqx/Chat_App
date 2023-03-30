@@ -52,8 +52,12 @@ const getUserStatus = async (
 ) => {
   const statusRef = ref(db, `users/${auth.currentUser?.uid}`);
   onValue(statusRef, (status) => {
-    const value = status.val().status;
-    setter(value);
+    if (status.val() === null) {
+      setter("online");
+    } else {
+      const value = status.val().status;
+      setter(value);
+    }
   });
 };
 

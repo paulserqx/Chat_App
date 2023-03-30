@@ -1,5 +1,13 @@
-import { auth } from "services";
+import { useEffect, useRef, useState } from "react";
+import { auth, firebaseApi } from "services";
 
 export const useUser = () => {
-  return { user: auth.currentUser };
+  const handleChangeStatus = (status: string) => async () => {
+    await firebaseApi.POST.changeStatus(status);
+  };
+
+  return {
+    user: auth.currentUser,
+    changeStatus: handleChangeStatus,
+  };
 };

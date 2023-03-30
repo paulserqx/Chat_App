@@ -37,7 +37,7 @@ interface ChatRoomProps {
 export default function ChatRoom(props: ChatRoomProps) {
   return (
     <>
-      <div className="flex h-[100vh]">
+      <div className="flex h-[100vh] overflow-hidden">
         <Sidebar />
         <section className="w-full h-full">
           <Messages {...props} />

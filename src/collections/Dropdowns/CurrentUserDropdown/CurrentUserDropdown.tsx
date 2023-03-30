@@ -7,11 +7,13 @@ import { Statuses } from "types";
 import { statuses } from "utils";
 
 interface CurrentUserDropdownProps {
+  opened: boolean;
   ref?: RefObject<HTMLDivElement>;
 }
 
 export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
   ref,
+  opened,
   ...props
 }) => {
   const { user } = useUser();
@@ -26,9 +28,15 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
   const { photoURL, displayName, metadata, uid } = user;
 
   return (
-    <div className="absolute z-50 rounded-lg flex flex-col translate-y-[-70%] w-[280px]">
+    <div
+      className={
+        opened
+          ? "dropdown-menu dropdown-menu-opened"
+          : "dropdown-menu-closed dropdown-menu" + " z-40"
+      }
+    >
       <div className="w-full rounded-t-lg h-[60px] bg-gradient-to-tr from-cyan-400 to-purple-300 " />
-      <div className="status-dropdown rounded-full w-fit left-[15px] absolute top-[15px] z-20 border-[4px] border-[#232428]">
+      <div className="status-dropdown rounded-full w-fit left-[15px] absolute top-[15px] z-20 border-[6px] border-[#232428]">
         <Image
           src={photoURL || ""}
           width={80}

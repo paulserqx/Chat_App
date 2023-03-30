@@ -19,7 +19,7 @@ export default function Dashboard({ ...props }) {
 
   return (
     <>
-      <div className="flex h-[100vh]">
+      <div className="flex h-[100vh] overflow-hidden">
         <Sidebar />
         <section className="w-full h-full">
           <nav className="bg-grey flex absolute z-10 justify-between w-full py-[20px] px-[40px]">

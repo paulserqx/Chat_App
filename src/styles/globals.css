@@ -9,7 +9,18 @@
   }
 
   .status-bg {
-    @apply absolute hidden cursor-pointer w-full h-full bg-black/50 flex items-center justify-center top-0 rounded-full text-[10px] text-white font-bold
+    @apply absolute hidden cursor-pointer w-full h-full bg-black/50 items-center justify-center top-0 rounded-full text-[10px] text-white font-bold
+  }
+
+
+  .dropdown-menu {
+    @apply absolute z-50 rounded-lg flex flex-col w-[280px]
+  }
+  .dropdown-menu-opened {
+   @apply  translate-y-[-70%] transition-[transform] duration-[400ms] ease-out
+  }
+  .dropdown-menu-closed {
+    @apply translate-y-[200px] transition-[transform] duration-[400ms] 
   }
 }
 

@@ -32,7 +32,13 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
   return (
     <div className="bg-[#232428] w-full p-[10px] ">
       <div className="flex justify-between items-center">
-        {openCurrentUser && <CurrentUserDropdown />}
+        {openCurrentUser && (
+          <div
+            onClick={handleOpenCurrentUser}
+            className="fixed w-full h-full bg-transparent top-0 z-30"
+          />
+        )}
+        <CurrentUserDropdown opened={openCurrentUser} />
         <div
           onClick={handleOpenCurrentUser}
           className="flex items-center cursor-pointer p-[4px] hover:bg-slate-600 hover:rounded-md hover:transition-[background-color] duration-300"

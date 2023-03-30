@@ -1,7 +1,10 @@
 import { CurrentStatus } from "components";
 import { useUser } from "hooks";
 import Image from "next/image";
-import React, { RefObject } from "react";
+import React, { RefObject, useEffect, useState } from "react";
+import { firebaseApi } from "services";
+import { Statuses } from "types";
+import { statuses } from "utils";
 
 interface CurrentUserDropdownProps {
   ref?: RefObject<HTMLDivElement>;
@@ -12,22 +15,33 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
   ...props
 }) => {
   const { user } = useUser();
-  if (!user) return null;
 
+  const [status, setStatus] = useState<Statuses>("online");
+
+  useEffect(() => {
+    firebaseApi.GET.user(setStatus);
+  }, []);
+
+  if (!user) return <div></div>;
   const { photoURL, displayName, metadata, uid } = user;
 
   return (
     <div className="absolute z-50 rounded-lg flex flex-col translate-y-[-70%] w-[280px]">
       <div className="w-full rounded-t-lg h-[60px] bg-gradient-to-tr from-cyan-400 to-purple-300 " />
-      <div className="rounded-full overflow-hidden w-fit left-[15px] absolute top-[30px] z-20">
+      <div className="status-dropdown rounded-full w-fit left-[15px] absolute top-[15px] z-20 border-[4px] border-[#232428]">
         <Image
           src={photoURL || ""}
-          width={60}
-          height={60}
+          width={80}
+          height={80}
+          className="rounded-full"
           alt={`${displayName}'s Image`}
         />
+        <div className="absolute bottom-[-2px] right-[-2px] z-20 p-[4px] rounded-full bg-[#232428]">
+          {statuses[status].icon}
+        </div>
+        <div className="status-bg">VIEW PROFILE</div>
       </div>
-      <div className="pt-[40px] pb-[20px] px-[10px] shadow-button rounded-b-lg bg-[#232428]">
+      <div className="pt-[60px] pb-[20px] px-[10px] shadow-button rounded-b-lg bg-[#232428]">
         <div className="flex flex-col p-[10px] rounded-xl bg-veryDarkGrey/80">
           <div className="border-b-[1px] border-slate-400 text-white pb-[10px] text-[18px]">
             {displayName} #{uid.slice(0, 4)}
@@ -38,7 +52,7 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
               {metadata.creationTime?.slice(0, -13)}
             </div>
           </div>
-          <CurrentStatus />
+          <CurrentStatus status={status} />
         </div>
       </div>
     </div>

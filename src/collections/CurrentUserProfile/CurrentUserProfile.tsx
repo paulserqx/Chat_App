@@ -20,7 +20,7 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
 
   useEffect(() => {
     firebaseApi.GET.user(setStatus);
-  }, []);
+  }, [user]);
 
   const handleOpenCurrentUser = () => {
     setOpenCurrentUser(!openCurrentUser);

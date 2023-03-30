@@ -1,24 +1,22 @@
-import React, { RefObject, useContext, useEffect, useState } from "react";
+import React, { RefObject } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoMoon } from "react-icons/io5";
 import { MdDoDisturbOn } from "react-icons/md";
 import { BsFillRecordCircleFill } from "react-icons/bs";
 import { useUser } from "hooks";
 import { statuses } from "utils";
-import { firebaseApi } from "services";
 import { Statuses } from "types";
 
 interface CurrentStatusProps {
+  status: Statuses;
   ref?: RefObject<HTMLDivElement>;
 }
 
-export const CurrentStatus: React.FC<CurrentStatusProps> = ({ ...props }) => {
+export const CurrentStatus: React.FC<CurrentStatusProps> = ({
+  status,
+  ...props
+}) => {
   const { changeStatus } = useUser();
-  const [status, setStatus] = useState<Statuses>("online");
-
-  useEffect(() => {
-    firebaseApi.GET.user(setStatus);
-  }, []);
 
   return (
     <div className="statusButton flex justify-between items-center text-white  text-[15px] pl-[10px] hover:bg-slate-600/70 my-[5px] rounded-lg cursor-pointer">

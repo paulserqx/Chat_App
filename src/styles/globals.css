@@ -4,14 +4,30 @@
 
 
 @layer components {
-  .room-img {
-    @apply  cursor-pointer mt-[15px] flex p-[15px] rounded-full items-center justify-center bg-gradient-to-r from-blue-600 to-fuchsia-500 text-white hover:rounded-[18px] before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:fixed before:-left-[5px] before:rounded-full before:hover:h-[30px] transition-[height] duration-500 active:before:h-[50px] active:rounded-[18px]
+  .room-img-tail {
+    @apply  cursor-pointer mt-[15px] flex p-[15px] rounded-full items-center justify-center bg-gradient-to-r from-blue-600 to-fuchsia-500 text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:fixed before:-left-[5px] before:rounded-full before:hover:h-[20px] active:before:h-[50px] active:rounded-[18px]
+  }
+
+  .status-bg {
+    @apply absolute hidden cursor-pointer w-full h-full bg-black/50 flex items-center justify-center top-0 rounded-full text-[10px] text-white font-bold
   }
 }
 
+.room-img, .room-img::before {
+  transition: all linear 0.1s;
+}
+
+.room-img:hover{
+  border-radius: 18px;
+}
+
+.status-dropdown:hover .status-bg{
+display: flex;
+}
+
+
 .statusButton:hover .statusMenu{
  display:flex;
-  
 }
 
 *, *::before, *::after {

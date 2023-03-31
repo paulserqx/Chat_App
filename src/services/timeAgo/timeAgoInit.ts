@@ -5,8 +5,6 @@ import it from "javascript-time-ago/locale/it";
 import en from "javascript-time-ago/locale/en";
 import { useRouter } from "next/router";
 
-TimeAgo.addDefaultLocale(en);
-
 TimeAgo.addLocale(bg);
 TimeAgo.addLocale(ru);
 TimeAgo.addLocale(it);
@@ -17,7 +15,8 @@ export const useTimeAgo = () => {
   const timeAgo = new TimeAgo(router.locale || "en");
 
   const formatTime = (time: number) => {
-    return timeAgo.format(time);
+    // return timeAgo.format(time);
+    return time;
   };
   return formatTime;
 };

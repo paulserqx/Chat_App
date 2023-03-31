@@ -5,13 +5,14 @@
 
 @layer components {
   .room-img-tail {
-    @apply  cursor-pointer mt-[15px] flex p-[15px] rounded-full items-center justify-center bg-gradient-to-r from-blue-600 to-fuchsia-500 text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:fixed before:-left-[5px] before:rounded-full before:hover:h-[20px] active:before:h-[50px] active:rounded-[18px]
+    @apply  cursor-pointer mt-[15px] flex p-[15px] rounded-full items-center justify-center bg-gradient-to-r from-blue-600 to-fuchsia-500 text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:fixed before:-left-[5px] before:rounded-full before:hover:h-[20px]
   }
-
   .status-bg {
     @apply absolute hidden cursor-pointer w-full h-full bg-black/50 items-center justify-center top-0 rounded-full text-[10px] text-white font-bold
   }
-
+  .active-room {
+    @apply rounded-[18px] before:h-[40px] before:hover:h-[40px]
+  }
   .dropdown-menu {
     @apply absolute z-50 rounded-lg flex flex-col w-[280px]
   }

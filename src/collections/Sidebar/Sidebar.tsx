@@ -11,6 +11,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
   const [rooms, setRooms] = useState<string[]>([]);
   const router = useRouter();
 
+  const slug = router.query.slug ? router.query.slug[0] : "";
+
+  console.log(slug);
+
   useEffect(() => {
     firebaseApi.GET.allRooms(setRooms);
   }, []);
@@ -25,7 +29,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
 
   return (
     <div
-      className="flex-col justify-between flex w-[30%] h-[-webkit-fill-available] bg-darkGrey"
+      className="flex-col justify-between flex w-[20%] h-[-webkit-fill-available] bg-darkGrey"
       {...props}
     >
       <div className="flex w-full flex-col justify-between ml-[15px]">
@@ -33,7 +37,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
           {rooms.map((room, i) => (
             <div
               key={i}
-              className="room-img-tail room-img"
+              className={
+                slug === room
+                  ? "active-room room-img-tail room-img"
+                  : "room-img-tail room-img"
+              }
               onClick={handleGoToRoom(room)}
             >
               {room.slice(0, 1).toUpperCase()}s

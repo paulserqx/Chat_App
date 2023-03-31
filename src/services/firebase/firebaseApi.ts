@@ -3,7 +3,6 @@ import defaultUser from "../../../public/imgs/default_user.jpg";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut as _signOut,
@@ -64,13 +63,10 @@ const getUserStatus = async (
 
 const createRoom = async (roomName: string): Promise<void | ErrorResponse> => {
   try {
-    const doesExist = await (
-      await get(child(dbRef, `rooms/${roomName}`))
-    ).exists();
+    const doesExist = (await get(child(dbRef, `rooms/${roomName}`))).exists();
 
     if (doesExist) throw Error("Room already exists!");
 
-    console.log(doesExist);
     await set(ref(db, "rooms/" + roomName), {
       name: roomName,
     });

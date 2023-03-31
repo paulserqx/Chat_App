@@ -31,7 +31,7 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
 
   return (
     <div className="bg-[#232428] w-full p-[10px] ">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-center items-center">
         {openCurrentUser && (
           <div
             onClick={handleOpenCurrentUser}
@@ -43,7 +43,7 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
           onClick={handleOpenCurrentUser}
           className="flex items-center cursor-pointer p-[4px] hover:bg-slate-600 hover:rounded-md hover:transition-[background-color] duration-300"
         >
-          <div className="rounded-full mr-[10px]">
+          <div className="rounded-full pr-[3px] ">
             <Image
               className="rounded-full"
               src={photoURL || ""}
@@ -55,14 +55,14 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
               {statuses[status].icon}
             </div>
           </div>
-          <div className="text-[15px] text-white flex flex-col text-ellipsis ">
+          {/* <div className="text-[15px] text-white flex flex-col text-ellipsis ">
             <span className="font-medium">
               {shortenDisplayName(displayName || "")}
             </span>
             <span className="opacity-40">#{uid.slice(0, 4)}</span>
-          </div>
+          </div> */}
         </div>
-        <IoSettingsSharp fill="white" opacity={0.8} size="20px" />
+        {/* <IoSettingsSharp fill="white" opacity={0.8} size="20px" /> */}
       </div>
     </div>
   );

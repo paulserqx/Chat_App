@@ -31,7 +31,6 @@ export const SignUpPopup: React.FC<SignUpProps> = ({
       router.push("/chats");
     } else {
       const message = transformErrorMessage(result.error.message);
-      console.log(FirebaseErrors[message]);
     }
     setIsLoading(false);
   };

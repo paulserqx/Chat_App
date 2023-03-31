@@ -5,7 +5,7 @@
 
 @layer components {
   .room-img-tail {
-    @apply  cursor-pointer mt-[15px] flex p-[15px] rounded-full items-center justify-center bg-gradient-to-r from-blue-600 to-fuchsia-500 text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:fixed before:-left-[5px] before:rounded-full before:hover:h-[20px]
+    @apply  cursor-pointer mt-[15px] flex p-[15px] rounded-full items-center justify-center bg-gradient-to-r from-blue-600 to-fuchsia-500 text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:absolute before:-left-[20px] before:rounded-full before:hover:h-[20px] last-of-type:mb-[15px]
   }
   .status-bg {
     @apply absolute hidden cursor-pointer w-full h-full bg-black/50 items-center justify-center top-0 rounded-full text-[10px] text-white font-bold
@@ -14,13 +14,22 @@
     @apply rounded-[18px] before:h-[40px] before:hover:h-[40px]
   }
   .dropdown-menu {
-    @apply absolute z-50 rounded-lg flex flex-col w-[280px]
+    @apply translate-x-[40%]  absolute z-50 rounded-lg flex flex-col w-[280px]
   }
   .dropdown-menu-opened {
-   @apply  translate-y-[-70%] transition-[transform] duration-[400ms] ease-out
+   @apply  translate-y-[-70%]  transition-[transform] duration-[400ms] ease-out
   }
   .dropdown-menu-closed {
     @apply translate-y-[200px] transition-[transform] duration-[400ms] 
+  }
+  .input {
+    @apply outline-none p-[5px] my-[10px] bg-grey text-white rounded-lg
+  }
+  .submit-button {
+    @apply border-[2px] border-white p-[7px] rounded-lg
+  }
+  .error {
+    @apply text-[12px] text-red-500 mb-[10px]
   }
 }
 
@@ -64,4 +73,16 @@ input, button, textarea, select {
 }
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(66, 67, 68);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(30, 31, 32);
+  border-radius: 20px;
 }

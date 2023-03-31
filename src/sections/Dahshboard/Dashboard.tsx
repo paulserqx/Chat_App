@@ -7,6 +7,9 @@ interface DashboardProps {
 export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
   const [createRoom, setCreateRoom] = useState<string>("");
   const [joinRoom, setJoinRoom] = useState<string>("");
+  const [successfulRoomCreation, setSuccessfulRoomCreation] =
+    useState<boolean>(false);
+  const [error, setError] = useState<string | null>();
 
   const handleJoinRoom = async () => {
     const res = await firebaseApi.POST.createRoom(createRoom);
@@ -17,31 +20,46 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
     }
   };
 
-  const handleCreateRoom = async () => {
+  const handleCreateRoomSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (createRoom.length < 2) {
+      setError("The Room name should be at least 2 characters long");
+      return;
+    }
     const res = await firebaseApi.POST.createRoom(createRoom);
     if (!res) {
       setCreateRoom("");
+      setSuccessfulRoomCreation(true);
+      setError(null);
     } else {
-      alert(res.error.message);
+      setError(res.error.message);
     }
   };
 
   return (
     <section
-      className="w-full h-full bg-slate-400 pt-[76px] overflow-hidden"
+      className="w-full h-full bg-veryDarkGrey/90 pt-[76px] overflow-hidden flex flex-col items-center justify-center"
       {...props}
     >
-      <label htmlFor="createRoom">Create A Room</label>
-      <input
-        type="text"
-        id="createRoom"
-        value={createRoom}
-        onChange={(e) => setCreateRoom(e.target.value)}
-      />
-      <button type="button" onClick={handleCreateRoom}>
-        Join
-      </button>
-      <br />
+      <form
+        className="flex flex-col bg-transparent text-white"
+        onSubmit={(e) => handleCreateRoomSubmit(e)}
+      >
+        <label htmlFor="createRoom">Create A Room</label>
+        <input
+          type="text"
+          id="createRoom"
+          value={createRoom}
+          placeholder="Type a room name here..."
+          className="input"
+          onChange={(e) => setCreateRoom(e.target.value)}
+        />
+        {error && <span className="error">{error}</span>}
+        <button className="submit-button" type="submit">
+          Create
+        </button>
+      </form>
+      {/* <br />
       <label htmlFor="joinRoom">Join Room</label>
       <input
         type="text"
@@ -51,7 +69,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
       />
       <button type="button" onClick={handleJoinRoom}>
         Join
-      </button>
+      </button> */}
     </section>
   );
 };

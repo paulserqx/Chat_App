@@ -5,7 +5,7 @@ import Head from "next/head";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Head>
+      <Head key={"head"}>
         <meta
           name="google-site-verification"
           content="lirRLS53NRFDILy-KzmKtZHZmfRiilm6zVSdKVfh6m0"

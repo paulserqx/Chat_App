@@ -11,10 +11,6 @@ export default function Document() {
             href="https://fonts.gstatic.com"
             crossOrigin="anonymous"
           />
-          <meta
-            name="google-site-verification"
-            content="lirRLS53NRFDILy-KzmKtZHZmfRiilm6zVSdKVfh6m0"
-          />
           <link
             href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"
             rel="stylesheet"

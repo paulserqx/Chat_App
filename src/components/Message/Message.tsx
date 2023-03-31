@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { RefObject } from "react";
-import { IMessage, useTimeAgo } from "services";
+import { IMessage, formatTime } from "services";
 
 interface MessageProps {
   message: IMessage;
@@ -8,7 +8,6 @@ interface MessageProps {
 }
 
 export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
-  const formatTime = useTimeAgo();
   return (
     <div {...props} className="flex items-center mb-[10px]">
       <Image

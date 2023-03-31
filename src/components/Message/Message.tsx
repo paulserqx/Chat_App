@@ -1,7 +1,9 @@
+import { EditMessageForm } from "collections";
 import { MessageOptions } from "components/MessageOptions";
 import Image from "next/image";
-import React, { RefObject } from "react";
-import { IMessage, formatTime } from "services";
+import { useRouter } from "next/router";
+import React, { RefObject, useState } from "react";
+import { IMessage, formatTime, firebaseApi } from "services";
 
 interface MessageProps {
   message: IMessage;
@@ -9,9 +11,33 @@ interface MessageProps {
 }
 
 export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
+  const [editedMessage, setEditedMessage] = useState(message.message);
+  const [edit, setEdit] = useState<boolean>(false);
+
+  console.log(editedMessage);
+
+  const router = useRouter();
+  const slug = router.query.slug!![0];
+
+  const handleSubmitEditMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await firebaseApi.POST.message.edit(message, slug, editedMessage);
+    setEdit(false);
+  };
+
+  const handleSaveNewMessage = async () => {
+    await firebaseApi.POST.message.edit(message, slug, editedMessage);
+    setEdit(false);
+  };
+
   return (
-    <div {...props} className="message">
-      <MessageOptions message={message} />
+    <div {...props} className={edit ? "message-hovered" : "message"}>
+      <MessageOptions
+        message={message}
+        setEdit={setEdit}
+        edit={edit}
+        setEditMessage={setEditedMessage}
+      />
       <Image
         className="rounded-full mr-[10px]"
         src={message.profileImg}
@@ -24,11 +50,26 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
           <h4 className="text-[13px] mr-[5px] text-green-600 ">
             {message.author}
           </h4>
-          <span className="text-[13px] text-white opacity-60">
+          <span className="text-[13px] text-white opacity-70">
             {formatTime(message.timePosted)}
           </span>
         </div>
-        <h4 className="text-[13px] text-white">{message.message}</h4>
+        {edit ? (
+          <EditMessageForm
+            editedMessage={editedMessage}
+            handleSaveNewMessage={handleSaveNewMessage}
+            handleSubmitEditMessage={handleSubmitEditMessage}
+            setEdit={setEdit}
+            setEditedMessage={setEditedMessage}
+          />
+        ) : (
+          <h4 className="text-[13px] text-white">{message.message}</h4>
+        )}
+        {message.edited && (
+          <span className="text-[10px] text-white/40 -bottom-[3px]">
+            (edited)
+          </span>
+        )}
       </div>
     </div>
   );

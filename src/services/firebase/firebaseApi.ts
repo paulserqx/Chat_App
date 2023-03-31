@@ -100,6 +100,7 @@ const sendMessage = async (
       uid: auth.currentUser?.uid,
       message,
       profileImg,
+      edited: false,
       timePosted: Date.now(),
     });
   } catch (error: any) {
@@ -236,11 +237,16 @@ const signOut = async (): Promise<ErrorResponse | DataResponse<void>> => {
   }
 };
 
-const editMessage = async (prevMessage: IMessage, room: string) => {
+const editMessage = async (
+  prevMessage: IMessage,
+  room: string,
+  newMessage: string
+) => {
   const messageRef = ref(db, `messages/${room}/${prevMessage.key}`);
   update(messageRef, {
     ...prevMessage,
-    message: "Edited Msg",
+    message: newMessage,
+    edited: true,
   });
 };
 

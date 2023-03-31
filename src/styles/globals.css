@@ -41,13 +41,16 @@
     @apply hidden left-0 absolute bg-black/10 w-full h-full 
   }
   .message-options {
-    @apply absolute top-[0] right-0 border-[1px] flex items-center rounded-md bg-veryDarkGrey/80
+    @apply absolute top-[0] right-0 border-[1px] border-[veryDarkGrey] flex items-center rounded-md bg-veryDarkGrey/80
+  }
+  .message-hovered {
+    @apply bg-black/10 message
   }
   .icons > * {
     @apply p-[5px] hover:bg-white/10 cursor-pointer
   }
   .icons:hover {
-    @apply shadow-md shadow-white
+    @apply shadow-md shadow-black
   }
 }
 

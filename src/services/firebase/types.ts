@@ -23,4 +23,5 @@ export interface IMessage {
   uid: string;
   key: string;
   timePosted: number;
+  edited: boolean;
 }

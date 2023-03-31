@@ -27,7 +27,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
 
   return (
     <div
-      className="flex-col justify-between flex w-[7rem] h-[-webkit-fill-available] bg-darkGrey"
+      className="flex-col justify-between flex w-[5.5rem] h-[-webkit-fill-available] bg-darkGrey"
       {...props}
     >
       <div className="flex w-full overflow-auto flex-col justify-between pl-[15px]">

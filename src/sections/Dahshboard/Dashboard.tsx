@@ -22,6 +22,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
 
   const handleCreateRoomSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSuccessfulRoomCreation(false);
     if (createRoom.length < 2) {
       setError("The Room name should be at least 2 characters long");
       return;
@@ -42,7 +43,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
       {...props}
     >
       <form
-        className="flex flex-col bg-transparent text-white"
+        className="flex flex-col bg-transparent text-white w-[190px]"
         onSubmit={(e) => handleCreateRoomSubmit(e)}
       >
         <label htmlFor="createRoom">Create A Room</label>
@@ -51,10 +52,13 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
           id="createRoom"
           value={createRoom}
           placeholder="Type a room name here..."
-          className="input"
+          className={error ? "input-error" : "input"}
           onChange={(e) => setCreateRoom(e.target.value)}
         />
         {error && <span className="error">{error}</span>}
+        {successfulRoomCreation && (
+          <span className="error text-green-500">Room Created!</span>
+        )}
         <button className="submit-button" type="submit">
           Create
         </button>

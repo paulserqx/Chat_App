@@ -52,8 +52,14 @@
   .icons:hover {
     @apply shadow-md shadow-black
   }
+  .edit-tooltip {
+    @apply hidden absolute p-[5px] px-[10px] bg-black text-white/90 top-[-25px] left-[50%] translate-x-[-50%] rounded-lg whitespace-nowrap text-[12px]
+  }
 }
 
+.edit:hover .edit-tooltip {
+  display: block;
+}
 .message:hover .message-options-div{
   display: flex;
 }

@@ -45,35 +45,35 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   }, [slug]);
 
   return (
-    <section
-      className="w-full h-full flex flex-col justify-between bg-grey overflow-hidden"
-      {...props}
-    >
-      <nav className="bg-grey flex  justify-between w-full p-5 ">
-        <div className="pl-[20px ] flex items-center">{`You are currently in ${slug}`}</div>
-        <button onClick={handleSignOut}>
-          <Button text={"Sign Out"} />
-        </button>
-      </nav>
-      <div className="h-full overflow-auto">
-        {chat.map((msg) => (
-          <div key={msg.key}>
-            <Message message={msg} />
-          </div>
-        ))}
+    <section className="w-full h-full flex  justify-between bg-grey" {...props}>
+      <div className="flex flex-col basis-[80%]">
+        <nav className="bg-grey flex  justify-between w-full p-5 ">
+          <div className="pl-[20px ] flex items-center">{`You are currently in ${slug}`}</div>
+          <button onClick={handleSignOut}>
+            <Button text={"Sign Out"} />
+          </button>
+        </nav>
+        <div className="overflow-auto pt-[50px] h-full pr-[10px]">
+          {chat.map((msg) => (
+            <div key={msg.key}>
+              <Message message={msg} />
+            </div>
+          ))}
+        </div>
+        <div className="w-full flex">
+          <form onSubmit={(e) => handleSubmitMessage(e)} className="w-full">
+            <input
+              className="w-full"
+              type="text"
+              placeholder={`Message #${slug} server`}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <button type="submit" />
+          </form>
+        </div>
       </div>
-      <div className="w-full flex">
-        <form onSubmit={(e) => handleSubmitMessage(e)} className="w-full">
-          <input
-            className="w-full"
-            type="text"
-            placeholder={`Message #${slug} server`}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <button type="submit" />
-        </form>
-      </div>
+      <div>People </div>
     </section>
   );
 };

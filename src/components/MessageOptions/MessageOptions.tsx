@@ -25,11 +25,13 @@ export const MessageOptions: React.FC<MessageOptionsProps> = ({
   return userId === message.uid ? (
     <div className={edit ? "message-options-div flex" : "message-options-div"}>
       <div className={`message-options icons`}>
-        <div onClick={() => setEdit(!edit)}>
-          <MdModeEditOutline fill="white" />
-        </div>
-        <div>
+        <div className="edit">
           <MdOutlineAddReaction fill="white" />
+          <div className="edit-tooltip">Add Reaction</div>
+        </div>
+        <div onClick={() => setEdit(!edit)} className="edit">
+          <MdModeEditOutline fill="white" />
+          <div className="edit-tooltip">Edit</div>
         </div>
       </div>
     </div>

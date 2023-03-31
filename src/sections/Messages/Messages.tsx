@@ -4,21 +4,16 @@ import { useRouter } from "next/router";
 import React, { RefObject, useState, useEffect } from "react";
 import { firebaseApi, IMessage } from "services";
 interface MessagesProps {
-  slug: string;
-  messages: any[];
   ref?: RefObject<HTMLDivElement>;
 }
 
-export const Messages: React.FC<MessagesProps> = ({
-  messages,
-  slug,
-  ...props
-}) => {
+export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   const [message, setMessage] = useState<string>("");
   const [chat, setChat] = useState<IMessage[]>([]);
   const { user } = useUser();
 
   const router = useRouter();
+  const slug = router.query.slug!![0] as string;
 
   const handleSignOut = async () => {
     try {

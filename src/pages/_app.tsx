@@ -6,11 +6,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head key={"head"}>
-        <meta
-          name="google-site-verification"
-          content="lirRLS53NRFDILy-KzmKtZHZmfRiilm6zVSdKVfh6m0"
-        />
-        <title>Discord Clone</title>
+        <title>Chat App</title>
       </Head>
       <main>
         <Component {...pageProps} />

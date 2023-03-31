@@ -31,13 +31,13 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
 
   return (
     <div className="bg-[#232428] w-full p-[10px] ">
+      {openCurrentUser && (
+        <div
+          onClick={handleOpenCurrentUser}
+          className="fixed w-full h-full bg-transparent top-0 z-30"
+        />
+      )}
       <div className="flex justify-center items-center">
-        {openCurrentUser && (
-          <div
-            onClick={handleOpenCurrentUser}
-            className="fixed w-full h-full bg-transparent top-0 z-30"
-          />
-        )}
         <CurrentUserDropdown opened={openCurrentUser} />
         <div
           onClick={handleOpenCurrentUser}

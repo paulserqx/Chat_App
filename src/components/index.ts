@@ -4,3 +4,4 @@ export * from "./Popup";
 export * from "./Loader";
 export * from "./Message";
 export * from "./CurrentStatus";
+export * from "./MessageOptions";

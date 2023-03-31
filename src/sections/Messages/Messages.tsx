@@ -25,12 +25,6 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
     }
   };
 
-  useEffect(() => {
-    setChat([]);
-    firebaseApi.GET.messages(slug, setChat);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
-
   const handleSubmitMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await firebaseApi.POST.message.send(
@@ -43,6 +37,13 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
     setMessage("");
   };
 
+  useEffect(() => {
+    setChat([]);
+    const getData = async () => await firebaseApi.GET.messages(slug, setChat);
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
   return (
     <section
       className="w-full h-full flex flex-col justify-between bg-grey overflow-hidden"
@@ -54,7 +55,7 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
           <Button text={"Sign Out"} />
         </button>
       </nav>
-      <div className="h-full overflow-auto pl-[20px] ">
+      <div className="h-full overflow-auto">
         {chat.map((msg) => (
           <div key={msg.key}>
             <Message message={msg} />

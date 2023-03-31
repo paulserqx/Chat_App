@@ -1,3 +1,4 @@
+import { MessageOptions } from "components/MessageOptions";
 import Image from "next/image";
 import React, { RefObject } from "react";
 import { IMessage, formatTime } from "services";
@@ -9,7 +10,8 @@ interface MessageProps {
 
 export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
   return (
-    <div {...props} className="flex items-center mb-[10px]">
+    <div {...props} className="message">
+      <MessageOptions message={message} />
       <Image
         className="rounded-full mr-[10px]"
         src={message.profileImg}

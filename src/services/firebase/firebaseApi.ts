@@ -19,10 +19,16 @@ import {
   push,
   ref,
   set,
+  update,
 } from "firebase/database";
 import React from "react";
 import { auth } from "./firebaseInit";
-import { TError, IEmailAndPasswordSignIn, GetAllRoomsResponse } from "./types";
+import {
+  TError,
+  IEmailAndPasswordSignIn,
+  GetAllRoomsResponse,
+  IMessage,
+} from "./types";
 import { Statuses } from "types";
 
 const provider = new GoogleAuthProvider();
@@ -91,6 +97,7 @@ const sendMessage = async (
     await set(newMessage, {
       key: newMessage.key,
       author: user,
+      uid: auth.currentUser?.uid,
       message,
       profileImg,
       timePosted: Date.now(),
@@ -110,8 +117,18 @@ const getMessages = async (
 ) => {
   const roomMessagesRef = ref(db, `messages/${roomName}`);
   onValue(roomMessagesRef, (msgs) => {
-    if (!msgs.val()) return;
-    setter(Object.values(msgs.val()));
+    if (!msgs.val()) {
+      setter([]);
+    } else {
+      const data = Object.values(msgs.val()) as any;
+      // Fixed a unexpected bug where after a client refresh
+      // the msgs.val() returns slug:{data} instead of just data
+      if (msgs.key === roomName) {
+        setter(Object.values(data));
+      } else {
+        setter(Object.values(data[0]));
+      }
+    }
   });
 };
 
@@ -219,6 +236,14 @@ const signOut = async (): Promise<ErrorResponse | DataResponse<void>> => {
   }
 };
 
+const editMessage = async (prevMessage: IMessage, room: string) => {
+  const messageRef = ref(db, `messages/${room}/${prevMessage.key}`);
+  update(messageRef, {
+    ...prevMessage,
+    message: "Edited Msg",
+  });
+};
+
 export const firebaseApi = {
   POST: {
     signIn: {
@@ -232,6 +257,7 @@ export const firebaseApi = {
     createRoom,
     message: {
       send: sendMessage,
+      edit: editMessage,
     },
     changeStatus,
   },

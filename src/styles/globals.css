@@ -25,7 +25,6 @@
   .input {
     @apply outline-none p-[5px] my-[10px] bg-grey text-white rounded-lg border-[2px] border-transparent
   }
-
   .input-error {
     @apply input border-[2px] border-red-500
   }
@@ -35,21 +34,35 @@
   .error {
     @apply text-[12px] text-red-500 mb-[10px] w-full break-words
   }
+  .message {
+    @apply flex items-center p-[10px] 
+  }
+  .message-options-div {
+    @apply hidden left-0 absolute bg-black/10 w-full h-full 
+  }
+  .message-options {
+    @apply absolute top-[0] right-0 border-[1px] flex items-center rounded-md bg-veryDarkGrey/80
+  }
+  .icons > * {
+    @apply p-[5px] hover:bg-white/10 cursor-pointer
+  }
+  .icons:hover {
+    @apply shadow-md shadow-white
+  }
 }
 
+.message:hover .message-options-div{
+  display: flex;
+}
 .room-img, .room-img::before {
   transition: all linear 0.1s;
 }
-
 .room-img:hover{
   border-radius: 18px;
 }
-
 .status-dropdown:hover .status-bg{
 display: flex;
 }
-
-
 .statusButton:hover .statusMenu{
  display:flex;
 }

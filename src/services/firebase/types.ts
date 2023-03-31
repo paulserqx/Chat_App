@@ -20,6 +20,7 @@ export interface IMessage {
   author: string;
   message: string;
   profileImg: string;
+  uid: string;
   key: string;
   timePosted: number;
 }

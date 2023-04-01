@@ -1,5 +1,5 @@
 import { Button, Logo } from "components";
-import React, { RefObject } from "react";
+import React, { RefObject, useEffect, useRef } from "react";
 
 interface EditMessageFormProps {
   editedMessage: string;
@@ -18,10 +18,19 @@ export const EditMessageForm: React.FC<EditMessageFormProps> = ({
   setEditedMessage,
   ...props
 }) => {
+  const inputRef = useRef<HTMLInputElement | any>();
+
+  useEffect(() => {
+    if (setEdit) {
+      inputRef.current?.focus();
+    }
+  }, [setEdit]);
+
   return (
     <>
       <form onSubmit={(e) => handleSubmitEditMessage(e)}>
         <input
+          ref={inputRef}
           className="text-[13px] p-[5px] mt-[5px] rounded-lg text-white bg-veryDarkGrey/40"
           type="text"
           value={editedMessage}

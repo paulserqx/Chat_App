@@ -18,6 +18,7 @@ import {
   onValue,
   push,
   ref,
+  remove,
   set,
   update,
 } from "firebase/database";
@@ -31,7 +32,7 @@ import {
 } from "./types";
 import { Statuses } from "types";
 import { EmojiClickData } from "emoji-picker-react/dist/types/exposedTypes";
-import { IEmoji } from "collections";
+import { IEmoji, IEmojiInfo } from "collections";
 
 const provider = new GoogleAuthProvider();
 
@@ -310,6 +311,18 @@ const reactWithEmoji = async (
   });
 };
 
+const removeEmoji = async (
+  room: string,
+  message: IMessage,
+  emoji: IEmojiInfo
+) => {
+  const emojiRef = ref(
+    db,
+    `messages/${room}/${message.key}/emojies/${emoji.icon}/${emoji.key}`
+  );
+  await remove(emojiRef);
+};
+
 const getEmojis = async (
   room: string,
   message: IMessage,
@@ -362,5 +375,8 @@ export const firebaseApi = {
     messages: getMessages,
     user: getUserStatus,
     emojis: getEmojis,
+  },
+  DELETE: {
+    emoji: removeEmoji,
   },
 };

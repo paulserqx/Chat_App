@@ -1,4 +1,4 @@
-import { EditMessageForm, EmojiPicker, IEmoji } from "collections";
+import { EditMessageForm, EmojiPicker, IEmoji, IEmojiInfo } from "collections";
 import { MessageOptions } from "components/MessageOptions";
 import { Emoji } from "emoji-picker-react";
 import { useUser } from "hooks";
@@ -45,12 +45,24 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
     await firebaseApi.POST.emoji.react(slug, message.key, emoji);
   };
 
+  const handleRemoveEmoji = async (emoji: IEmojiInfo) => {
+    await firebaseApi.DELETE.emoji(slug, message, emoji);
+  };
+
   return (
     <div
       {...props}
       className={edit || emojiPicker ? "message-hovered" : "message"}
     >
-      {emojiPicker && <EmojiPicker message={message} room={slug} />}
+      {emojiPicker && (
+        <>
+          <div
+            onClick={() => setEmojiPicker(false)}
+            className="fixed top-0 left-0 w-full h-full bg-transparent z-40"
+          />
+          <EmojiPicker message={message} room={slug} />
+        </>
+      )}
       <MessageOptions
         message={message}
         setEdit={setEdit}
@@ -106,7 +118,11 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
                 <div
                   onClick={() =>
                     userHasReactedWithEmoji
-                      ? () => {}
+                      ? handleRemoveEmoji(
+                          emoji.emoji.filter(
+                            (emoji) => emoji.from === user?.uid
+                          )[0]
+                        )
                       : handleReactWithEmoji(emoji.emoji[0].icon)
                   }
                   key={"emoji" + i}

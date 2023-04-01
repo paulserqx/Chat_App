@@ -1,6 +1,6 @@
 import { EditMessageForm, EmojiPicker, IEmoji, IEmojiInfo } from "collections";
 import { MessageOptions } from "components/MessageOptions";
-import { Emoji } from "emoji-picker-react";
+import { Emoji, EmojiStyle } from "emoji-picker-react";
 import { useUser } from "hooks";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -130,7 +130,12 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
                     userHasReactedWithEmoji ? "emoji-reacted" : "emoji"
                   }
                 >
-                  <Emoji lazyLoad size={17} unified={emoji.emoji[0].icon} />
+                  <Emoji
+                    emojiStyle={EmojiStyle.GOOGLE}
+                    lazyLoad
+                    size={17}
+                    unified={emoji.emoji[0].icon}
+                  />
                   <span className="ml-[3px]">{emoji.emoji.length}</span>
                 </div>
               );

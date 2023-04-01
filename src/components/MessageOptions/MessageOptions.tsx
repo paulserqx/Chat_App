@@ -1,6 +1,10 @@
 import { useUser } from "hooks";
 import React, { Dispatch, RefObject, useState } from "react";
-import { MdOutlineAddReaction, MdModeEditOutline } from "react-icons/md";
+import {
+  MdOutlineAddReaction,
+  MdModeEditOutline,
+  MdOutlineReply,
+} from "react-icons/md";
 import { IMessage } from "services";
 
 interface MessageOptionsProps {
@@ -40,14 +44,16 @@ export const MessageOptions: React.FC<MessageOptionsProps> = ({
       </div>
     </div>
   ) : (
-    <div className={`message-options icons`}>
-      <div onClick={() => setEmojiPicker(!emojiPicker)} className="edit">
-        <MdOutlineAddReaction fill="white" />
-        <div className="edit-tooltip">Add Reaction</div>
-      </div>
-      <div className="edit">
-        <MdModeEditOutline fill="white" />
-        <div className="edit-tooltip">Reply</div>
+    <div className={edit ? "message-options-div flex" : "message-options-div"}>
+      <div className={`message-options icons`}>
+        <div onClick={() => setEmojiPicker(!emojiPicker)} className="edit">
+          <MdOutlineAddReaction fill="white" />
+          <div className="edit-tooltip">Add Reaction</div>
+        </div>
+        <div className="edit">
+          <MdOutlineReply fill="white" />
+          <div className="edit-tooltip">Reply</div>
+        </div>
       </div>
     </div>
   );

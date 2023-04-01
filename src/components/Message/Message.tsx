@@ -1,4 +1,4 @@
-import { EditMessageForm } from "collections";
+import { EditMessageForm, EmojiPicker } from "collections";
 import { MessageOptions } from "components/MessageOptions";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -13,8 +13,7 @@ interface MessageProps {
 export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
   const [editedMessage, setEditedMessage] = useState(message.message);
   const [edit, setEdit] = useState<boolean>(false);
-
-  console.log(editedMessage);
+  const [emojiPicker, setEmojiPicker] = useState<boolean>(false);
 
   const router = useRouter();
   const slug = router.query.slug!![0];
@@ -32,10 +31,13 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
 
   return (
     <div {...props} className={edit ? "message-hovered" : "message"}>
+      {emojiPicker && <EmojiPicker message={message} room={slug} />}
       <MessageOptions
         message={message}
         setEdit={setEdit}
         edit={edit}
+        setEmojiPicker={setEmojiPicker}
+        emojiPicker={emojiPicker}
         setEditMessage={setEditedMessage}
       />
       <Image

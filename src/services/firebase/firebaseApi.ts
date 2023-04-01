@@ -30,6 +30,8 @@ import {
   IMessage,
 } from "./types";
 import { Statuses } from "types";
+import { EmojiClickData } from "emoji-picker-react/dist/types/exposedTypes";
+import { IEmoji } from "collections";
 
 const provider = new GoogleAuthProvider();
 
@@ -102,6 +104,7 @@ const sendMessage = async (
       profileImg,
       edited: false,
       timePosted: Date.now(),
+      emojis: [],
     });
   } catch (error: any) {
     const FirebaseError: TError = error;
@@ -250,6 +253,51 @@ const editMessage = async (
   });
 };
 
+const addEmoji = async (
+  message: IMessage,
+  room: string,
+  emoji: EmojiClickData
+) => {
+  const emojiesRef = ref(
+    db,
+    `messages/${room}/${message.key}/emojies/${emoji.unified}`
+  );
+
+  const emojiPath = `messages/${room}/${message.key}/emojies`;
+
+  const emojiesValue = await get(child(ref(db), emojiPath));
+
+  const newEmoji = push(emojiesRef);
+  if (emojiesValue.val() === null) {
+    await set(newEmoji, {
+      icon: emoji.unified,
+      from: auth.currentUser?.uid,
+    });
+    return;
+  }
+
+  const emojiType = emojiesValue.val()[emoji.unified] || false;
+
+  if (emojiType) {
+    const usersReacted: IEmoji[] = Object.values(emojiType);
+    let alreadyReacted = false;
+    usersReacted.map((emoji) => {
+      if (emoji.from === auth.currentUser?.uid) {
+        alreadyReacted = true;
+      }
+    });
+
+    if (alreadyReacted) {
+      return "You have already reacted with this emoji!";
+    }
+  }
+
+  await set(newEmoji, {
+    icon: emoji.unified,
+    from: auth.currentUser?.uid,
+  });
+};
+
 export const firebaseApi = {
   POST: {
     signIn: {
@@ -266,6 +314,9 @@ export const firebaseApi = {
       edit: editMessage,
     },
     changeStatus,
+    emoji: {
+      add: addEmoji,
+    },
   },
   GET: {
     allRoomsOnce: getAllRoomsOnce,

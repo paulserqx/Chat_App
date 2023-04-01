@@ -57,7 +57,7 @@
   }
 
   .emoji {
-    @apply ml-[5px] flex text-white/60 cursor-pointer first-of-type:ml-0 p-[5px] bg-veryDarkGrey/70 rounded-md border-[1px] border-transparent hover:border-[1px] hover:border-white/40
+    @apply ml-[5px] flex text-white/60 cursor-pointer first-of-type:ml-0 p-[5px] bg-veryDarkGrey/70 rounded-md border-[1px] border-transparent hover:border-[1px] hover:border-white/40 transition-all
   }
 
   .emoji-reacted {

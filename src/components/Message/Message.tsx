@@ -85,7 +85,7 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
           />
         ) : (
           <>
-            <h4 className="text-[13px] text-white">
+            <h4 className="text-[17px] text-white">
               {message.message}{" "}
               {message.edited && (
                 <span className="text-[10px] text-white/40 ">(edited)</span>

@@ -136,11 +136,6 @@ const getMessages = async (
   });
 };
 
-const getAllRoomsOnce = async (): Promise<GetAllRoomsResponse[]> => {
-  const rooms = await get(child(dbRef, "rooms/"));
-  return rooms.val();
-};
-
 const getAllRooms = async (
   setter: React.Dispatch<React.SetStateAction<string[]>>
 ) => {
@@ -363,7 +358,6 @@ export const firebaseApi = {
     },
   },
   GET: {
-    allRoomsOnce: getAllRoomsOnce,
     allRooms: getAllRooms,
     messages: getMessages,
     user: getUserStatus,

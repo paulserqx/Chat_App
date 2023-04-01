@@ -61,7 +61,7 @@
   }
 
   .emoji-reacted {
-    @apply emoji border-blue-500 hover:border-blue-500 opacity-90
+    @apply emoji border-blue-500 hover:border-red-500 opacity-90
   }
 }
 

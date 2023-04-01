@@ -1,6 +1,6 @@
 import React, { RefObject } from "react";
 import dynamic from "next/dynamic";
-import Picker from "emoji-picker-react";
+import Picker, { EmojiStyle, Theme } from "emoji-picker-react";
 import { EmojiClickData } from "emoji-picker-react/dist/types/exposedTypes";
 import { firebaseApi, IMessage } from "services";
 
@@ -36,9 +36,13 @@ export const EmojiPicker: React.FC<EmojiPickerProps> = ({
   return (
     <div className="emoji-picker absolute right-[0] top-0 z-50">
       <Picker
+        emojiStyle={EmojiStyle.GOOGLE}
         lazyLoadEmojis
         width={"20rem"}
         height={"30rem"}
+        searchPlaceHolder={"Search for emoji"}
+        skinTonesDisabled
+        theme={Theme.DARK}
         onEmojiClick={handleEmojiClick}
       />
     </div>

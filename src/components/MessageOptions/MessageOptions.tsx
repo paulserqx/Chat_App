@@ -45,6 +45,10 @@ export const MessageOptions: React.FC<MessageOptionsProps> = ({
         <MdOutlineAddReaction fill="white" />
         <div className="edit-tooltip">Add Reaction</div>
       </div>
+      <div className="edit">
+        <MdModeEditOutline fill="white" />
+        <div className="edit-tooltip">Reply</div>
+      </div>
     </div>
   );
 };

@@ -272,6 +272,7 @@ const addEmoji = async (
     await set(newEmoji, {
       icon: emoji.unified,
       from: auth.currentUser?.uid,
+      key: newEmoji.key,
     });
     return;
   }
@@ -295,6 +296,7 @@ const addEmoji = async (
   await set(newEmoji, {
     icon: emoji.unified,
     from: auth.currentUser?.uid,
+    key: newEmoji.key,
   });
 };
 
@@ -309,6 +311,7 @@ const reactWithEmoji = async (
   set(newEmoji, {
     from: auth.currentUser?.uid,
     icon: emoji,
+    key: newEmoji.key,
   });
 };
 

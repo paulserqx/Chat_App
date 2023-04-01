@@ -114,7 +114,7 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
                     userHasReactedWithEmoji ? "emoji-reacted" : "emoji"
                   }
                 >
-                  <Emoji size={17} unified={emoji.emoji[0].icon} />
+                  <Emoji lazyLoad size={17} unified={emoji.emoji[0].icon} />
                   <span className="ml-[3px]">{emoji.emoji.length}</span>
                 </div>
               );

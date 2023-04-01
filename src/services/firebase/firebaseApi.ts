@@ -298,6 +298,20 @@ const addEmoji = async (
   });
 };
 
+const reactWithEmoji = async (
+  room: string,
+  messageKey: string,
+  emoji: string
+) => {
+  const emojiRef = ref(db, `messages/${room}/${messageKey}/emojies/${emoji}`);
+
+  const newEmoji = push(emojiRef);
+  set(newEmoji, {
+    from: auth.currentUser?.uid,
+    icon: emoji,
+  });
+};
+
 const getEmojis = async (
   room: string,
   message: IMessage,
@@ -342,6 +356,7 @@ export const firebaseApi = {
     changeStatus,
     emoji: {
       add: addEmoji,
+      react: reactWithEmoji,
     },
   },
   GET: {

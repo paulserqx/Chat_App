@@ -41,6 +41,10 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
     setEdit(false);
   };
 
+  const handleReactWithEmoji = async (emoji: string) => {
+    await firebaseApi.POST.emoji.react(slug, message.key, emoji);
+  };
+
   return (
     <div
       {...props}
@@ -100,6 +104,11 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
               });
               return (
                 <div
+                  onClick={() =>
+                    userHasReactedWithEmoji
+                      ? () => {}
+                      : handleReactWithEmoji(emoji.emoji[0].icon)
+                  }
                   key={"emoji" + i}
                   className={
                     userHasReactedWithEmoji ? "emoji-reacted" : "emoji"

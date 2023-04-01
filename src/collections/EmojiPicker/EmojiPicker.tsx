@@ -12,8 +12,10 @@ const Dynamic = dynamic(
 );
 
 export interface IEmoji {
-  from: string;
-  icon: string;
+  emoji: {
+    from: string;
+    icon: string;
+  }[];
 }
 
 interface EmojiPickerProps {

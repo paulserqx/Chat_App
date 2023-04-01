@@ -21,7 +21,7 @@ import {
   set,
   update,
 } from "firebase/database";
-import React from "react";
+import React, { Dispatch } from "react";
 import { auth } from "./firebaseInit";
 import {
   TError,
@@ -279,7 +279,7 @@ const addEmoji = async (
   const emojiType = emojiesValue.val()[emoji.unified] || false;
 
   if (emojiType) {
-    const usersReacted: IEmoji[] = Object.values(emojiType);
+    const usersReacted: any[] = Object.values(emojiType);
     let alreadyReacted = false;
     usersReacted.map((emoji) => {
       if (emoji.from === auth.currentUser?.uid) {
@@ -295,6 +295,32 @@ const addEmoji = async (
   await set(newEmoji, {
     icon: emoji.unified,
     from: auth.currentUser?.uid,
+  });
+};
+
+const getEmojis = async (
+  room: string,
+  message: IMessage,
+  setter: Dispatch<React.SetStateAction<IEmoji[]>>
+) => {
+  const emojisRef = ref(db, `messages/${room}/${message.key}/emojies`);
+
+  onValue(emojisRef, (emojis) => {
+    if (!emojis.val()) {
+      setter([]);
+    } else {
+      const EmojisArray: any = Object.entries(emojis.val());
+      setter(
+        EmojisArray.map((emoji: any) => {
+          const key = emoji[0];
+          const data = emoji[1];
+          const structuredData = Object.values(data);
+          return {
+            emoji: structuredData,
+          };
+        })
+      );
+    }
   });
 };
 
@@ -323,5 +349,6 @@ export const firebaseApi = {
     allRooms: getAllRooms,
     messages: getMessages,
     user: getUserStatus,
+    emojis: getEmojis,
   },
 };

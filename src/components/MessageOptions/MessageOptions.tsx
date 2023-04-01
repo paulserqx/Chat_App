@@ -40,6 +40,11 @@ export const MessageOptions: React.FC<MessageOptionsProps> = ({
       </div>
     </div>
   ) : (
-    <div>Reply</div>
+    <div className={`message-options icons`}>
+      <div onClick={() => setEmojiPicker(!emojiPicker)} className="edit">
+        <MdOutlineAddReaction fill="white" />
+        <div className="edit-tooltip">Add Reaction</div>
+      </div>
+    </div>
   );
 };

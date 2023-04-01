@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
 import { firebaseApi } from "services";
 import { CurrentUserProfile } from "collections";
+import { Explore } from "components";
 
 interface SidebarProps {
   ref?: RefObject<HTMLDivElement>;
@@ -31,7 +32,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
       {...props}
     >
       <div className="flex w-full overflow-auto flex-col justify-between pl-[15px]">
-        <div className="w-[46px]">
+        <div className="w-[46px] ">
           {rooms.map((room, i) => (
             <div
               key={i}
@@ -45,6 +46,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
               {room.slice(0, 2).toUpperCase()}
             </div>
           ))}
+          <Explore />
         </div>
       </div>
       <CurrentUserProfile />

@@ -106,7 +106,7 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
           </>
         )}
         {emojis.length > 0 && (
-          <div className="flex mt-[5px]">
+          <div className="flex flex-wrap mt-[5px]">
             {emojis.map((emoji, i) => {
               let userHasReactedWithEmoji = false;
               emoji.emoji.map((emoji) => {

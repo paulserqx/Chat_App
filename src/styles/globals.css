@@ -4,6 +4,27 @@
 
 
 @layer components {
+  .button {
+    @apply bg-white rounded-full hover:text-buttonHover cursor-pointer py-1.5 px-5 hover:shadow-button transition ease-in-out duration-200
+  }
+  .room-img:hover .room-tooltip{
+    @apply opacity-100
+  }
+  .room-tooltip {
+    @apply opacity-0 absolute right-[-100%] p-2 whitespace-nowrap bg-veryDarkGrey z-50
+  }
+  .explore {
+    @apply bg-grey room-img-tail room-img p-2 bg-gradient-to-r from-transparent to-transparent hover:bg-green-500
+  }
+  .explore:hover .explore-icon {
+    @apply fill-white
+  }
+  .explore-icon {
+    @apply fill-green-500 w-[26px] h-[30px]
+  }
+  .room-img {
+    @apply w-[46px]
+  }
   .room-img-tail {
     @apply  cursor-pointer mt-[15px] flex p-[15px] rounded-full items-center justify-center bg-gradient-to-r from-blue-600 to-fuchsia-500 text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:absolute before:-left-[20px] before:rounded-full before:hover:h-[20px] last-of-type:mb-[15px]
   }
@@ -57,7 +78,7 @@
   }
 
   .emoji {
-    @apply ml-[5px] flex text-white/60 cursor-pointer first-of-type:ml-0 p-[5px] bg-veryDarkGrey/70 rounded-md border-[1px] border-transparent hover:border-[1px] hover:border-white/40 transition-all
+    @apply mr-[5px] mb-[2px] flex text-white/60 cursor-pointer first-of-type:ml-0 p-[5px] bg-veryDarkGrey/70 rounded-md border-[1px] border-transparent hover:border-[1px] hover:border-white/40 transition-all
   }
 
   .emoji-reacted {

@@ -1,6 +1,7 @@
 import { Button, Message } from "components";
 import { useUser } from "hooks";
 import { useRouter } from "next/router";
+import { BiHash } from "react-icons/bi";
 import React, { RefObject, useState, useEffect } from "react";
 import { firebaseApi, IMessage } from "services";
 interface MessagesProps {
@@ -48,7 +49,10 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
     <section className="w-full h-full flex  justify-between bg-grey" {...props}>
       <div className="flex flex-col basis-[80%]">
         <nav className="bg-grey flex  justify-between w-full p-5 ">
-          <div className="pl-[20px ] flex items-center">{`You are currently in ${slug}`}</div>
+          <div className="pl-[20px ] flex items-center text-white">
+            <BiHash size={20} className="bottom-[-1.5px]" />
+            {slug}
+          </div>
           <button onClick={handleSignOut}>
             <Button text={"Sign Out"} />
           </button>

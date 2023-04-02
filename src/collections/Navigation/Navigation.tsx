@@ -7,10 +7,7 @@ interface NavigationProps {
 
 export const Navigation: React.FC<NavigationProps> = ({ ...props }) => {
   return (
-    <nav
-      className="w-full flex items-center justify-between px-40 py-10"
-      {...props}
-    >
+    <nav className="navigation" {...props}>
       <Logo />
       <Button text="Open Discord" />
     </nav>

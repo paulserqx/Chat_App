@@ -16,6 +16,7 @@ module.exports = {
       },
       animation: {
         popupOpen: 'popupOpen 0.2s ease-in',
+        clouds: 'clouds 120s cubic-bezier(.38,.78,1,.81) infinite',
         loading: 'loading 1s cubic-bezier(.62,1,.59,.44) infinite'
       },
       keyframes: {
@@ -32,6 +33,10 @@ module.exports = {
           },
          "100%": { transform: 'rotateZ(360deg) scale(1)' 
           },
+        },
+        clouds: {
+          '0%': {transform: 'translateX(0%) scale(1.7)'},
+          '100%': {transform: 'translateX(150%) scale(2.2)'},
         }
       }
     },

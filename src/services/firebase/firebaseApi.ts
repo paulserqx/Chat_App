@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import defaultUser from "../../../public/imgs/default_user.jpg";
+import { defaultUser } from "assets";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,

@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('./landing.css');
 
 @layer components {
   .button {
-    @apply bg-white rounded-full hover:text-buttonHover cursor-pointer py-1.5 px-5 hover:shadow-button transition ease-in-out duration-200
+    @apply bg-white rounded-full hover:text-buttonHover cursor-pointer py-2 px-8 hover:shadow-button transition ease-in-out duration-200
   }
   .room-img:hover .room-tooltip{
     @apply opacity-100
@@ -80,12 +81,10 @@
   .emoji {
     @apply mr-[5px] mb-[2px] flex text-white/60 cursor-pointer first-of-type:ml-0 p-[5px] bg-veryDarkGrey/70 rounded-md border-[1px] border-transparent hover:border-[1px] hover:border-white/40 transition-all
   }
-
   .emoji-reacted {
     @apply emoji border-blue-500 hover:border-red-500 opacity-90
   }
 }
-
 .edit:hover .edit-tooltip {
   display: block;
 }

@@ -11,21 +11,18 @@ import React, {
 import { clouds, hero1, hero2 } from "assets";
 
 interface LandingPageHeroProps {
+  togglePopup: (type?: TPopups) => () => void;
+  popupOpened: TPopups | null;
   ref?: RefObject<HTMLDivElement>;
 }
 
 const buttons: string[] = ["Login", "Sign Up"];
 
 export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
+  popupOpened,
+  togglePopup,
   ...props
 }) => {
-  const [popupOpened, setPopupOpened] = useState<TPopups | null>(null);
-
-  const togglePopup = (type?: TPopups) => () => {
-    setPopupOpened(type || null);
-    document.body.style.overflow = type ? "auto" : "hidden";
-  };
-
   return (
     <section className="w-full bg-heroBackground overflow-hidden" {...props}>
       {popupOpened && (

@@ -26,7 +26,7 @@ export const Popup: React.FC<PopupProps> = ({
       <div
         {...props}
         onClick={closePopup()}
-        className="z-10 animate-popupOpen delay-200 flex items-center absolute justify-center bg-slate-900 opacity-[0.9]  w-full h-full"
+        className="z-10 animate-popupOpen delay-200 flex items-center fixed justify-center bg-slate-900 opacity-[0.9]  w-full h-full"
       />
       <CurrentPopup closePopup={closePopup} />
     </>

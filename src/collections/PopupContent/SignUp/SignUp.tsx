@@ -38,7 +38,7 @@ export const SignUpPopup: React.FC<SignUpProps> = ({
   return (
     <div
       {...props}
-      className="z-20 flex items-center justify-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+      className="z-20 flex items-center justify-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
     >
       <form
         onSubmit={handleSignUp}

@@ -1,13 +1,19 @@
 import { section4 } from "assets";
-import { Button } from "components";
+import { Button, TPopups } from "components";
 import Image from "next/image";
 import { RefObject } from "react";
 
 interface section4Props {
+  togglePopup: (type?: TPopups) => () => void;
+  popupOpened: TPopups | null;
   ref?: RefObject<HTMLDivElement>;
 }
 
-export const Section4: React.FC<section4Props> = ({ ...props }) => {
+export const Section4: React.FC<section4Props> = ({
+  popupOpened,
+  togglePopup,
+  ...props
+}) => {
   return (
     <>
       <section className="bg-[#f6f6f6]">
@@ -33,9 +39,19 @@ export const Section4: React.FC<section4Props> = ({ ...props }) => {
       </section>
       <div className="rdy-to-start">
         <h4 className="rdy-to-start-h4">Ready to start your journey?</h4>
-        <Button blueTheme text="Login" />
-        <span className="my-[10px] text-center text-[15px] font-bold">Or</span>
-        <Button blueTheme text="Sign Up" />
+        <div
+          onClick={togglePopup("login")}
+          className="flex flex-col sm:max-w-[50%] w-full"
+        >
+          <Button blueTheme text="Login" />
+        </div>
+        <span className="my-[10px] text-center text-[15px] font-bold ">Or</span>
+        <div
+          onClick={togglePopup("signUp")}
+          className="flex flex-col sm:max-w-[50%] w-full"
+        >
+          <Button blueTheme text="Sign Up" />
+        </div>
       </div>
     </>
   );

@@ -33,9 +33,9 @@
 }
 
 .rdy-to-start {
-    @apply flex flex-col px-[24px] pb-[56px]
+    @apply flex flex-col px-[24px] pb-[56px] max-w-[500px] m-auto items-center
 }
 
 .rdy-to-start-h4 {
-    @apply mt-[30px] text-[32px] font-bold mb-[40px]
+    @apply mt-[30px] text-[32px] font-bold mb-[40px] md:text-[40px] whitespace-nowrap
 }

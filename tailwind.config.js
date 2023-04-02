@@ -36,7 +36,7 @@ module.exports = {
         },
         clouds: {
           '0%': {transform: 'translateX(0%) scale(1.7)'},
-          '100%': {transform: 'translateX(150%) scale(2.2)'},
+          '100%': {transform: 'translateX(100%) scale(2.2)'},
         }
       }
     },

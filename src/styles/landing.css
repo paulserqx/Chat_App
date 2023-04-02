@@ -12,3 +12,30 @@
 .navigation {
     @apply w-full flex items-center justify-between lg:px-40 py-10 md:px-[40px] px-[20px]
 }   
+
+.section {
+    @apply max-w-[1260px] m-auto py-[56px] px-[24px] flex flex-col md:py-[80px] md:px-[40px] md:flex-row lg:py-[120px] lg:justify-between
+}
+
+.last-section {
+    @apply !flex-col-reverse section md:flex-col 
+}
+
+.section-div {
+    @apply mt-[24px] md:basis-[50%] lg:last:basis-[40%] flex flex-col justify-center
+}
+
+.section-h2 {
+    @apply text-[20px] text-[#23272a] font-extrabold sm:text-[28px] md:text-[48px] md:leading-[50px]
+}
+.section-p {
+    @apply mt-[24px] md:leading-8 text-[16px] md:text-[20px] font-normal
+}
+
+.rdy-to-start {
+    @apply flex flex-col px-[24px] pb-[56px]
+}
+
+.rdy-to-start-h4 {
+    @apply mt-[30px] text-[32px] font-bold mb-[40px]
+}

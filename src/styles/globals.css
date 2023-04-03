@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('./landing.css');
+@import url('./forms.css');
 
 @layer components {
   .button {
@@ -47,12 +48,7 @@
   .dropdown-menu-closed {
     @apply translate-y-[200px] transition-[transform] duration-[400ms] 
   }
-  .input {
-    @apply outline-none p-[5px] my-[10px] bg-grey text-white rounded-lg border-[2px] border-transparent
-  }
-  .input-error {
-    @apply input border-[2px] border-red-500
-  }
+
   .submit-button {
     @apply border-[2px] border-white p-[7px] rounded-lg
   }

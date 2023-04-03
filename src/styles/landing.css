@@ -37,5 +37,5 @@
 }
 
 .rdy-to-start-h4 {
-    @apply mt-[30px] text-[32px] font-bold mb-[40px] md:text-[40px] whitespace-nowrap
+    @apply mt-[30px] text-[32px] font-bold mb-[40px] md:text-[40px] sm:whitespace-nowrap
 }

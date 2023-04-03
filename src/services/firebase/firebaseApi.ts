@@ -178,11 +178,7 @@ const setAdditionUserInfo = async (username: string) => {
   });
 };
 
-const signInWithGoogle = async (
-  e: React.FormEvent
-): Promise<ErrorResponse | DataResponse> => {
-  e.preventDefault();
-
+const signInWithGoogle = async (): Promise<ErrorResponse | DataResponse> => {
   try {
     const res = await signInWithPopup(auth, provider);
     return {

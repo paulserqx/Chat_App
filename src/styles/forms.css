@@ -1,0 +1,38 @@
+.input {
+    @apply appearance-none p-[5px] outline-none mb-[5px] !bg-transparent font-medium
+}
+.input[type='email'], .input[type='password'] {
+    @apply text-black !bg-transparent font-medium text-[16px]
+}
+.input[type='email'], .input[type='password'] {
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.351);
+}
+.form-label {
+    @apply text-[14px]
+}
+.input-error {
+    @apply input border-[2px] border-red-500
+  }
+.form-banner-h {
+    @apply text-[20px] whitespace-nowrap font-medium mb-[10px]
+}
+
+.form-banner-span {
+    @apply text-[12px] text-grey/90 mb-[20px]
+}
+
+.or-marker {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.351);
+    margin-bottom: 20px;
+}
+
+.input:-webkit-autofill {
+    -webkit-text-fill-color: black;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    font-size: 16px;
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.351);
+}

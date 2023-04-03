@@ -6,5 +6,5 @@ interface LoaderProps {
 }
 
 export const Loader: React.FC<LoaderProps> = ({ ...props }) => {
-  return <FaDiscord className="fill-white animate-loading" size="70px" />;
+  return <FaDiscord className="fill-black/80 animate-loading" size="70px" />;
 };

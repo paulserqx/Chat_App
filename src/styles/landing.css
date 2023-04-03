@@ -2,7 +2,7 @@
     @apply lg:py-[120px] md:py-[40px] md:pb-[200px] md:pl-[40px] lg:max-w-[780px] md:max-w-[60%] lg:m-auto flex md:items-center justify-center flex-col md:m-0 py-[20px] pb-[250px] items-start px-[20px]
 }
 .hero-banner-text {
-    @apply text-7xl lg:text-center text-white font-extrabold font-sans tracking-wider mb-[40px] md:text-left text-left text-[30px]
+    @apply md:text-7xl lg:text-center lg:whitespace-nowrap lg:tracking-[-2px] text-white font-extrabold font-sans tracking-wider mb-[40px] md:text-left text-left text-[30px]
 }
 
 .hero-p {

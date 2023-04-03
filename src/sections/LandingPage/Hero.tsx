@@ -25,9 +25,7 @@ export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
 }) => {
   return (
     <section className="w-full bg-heroBackground overflow-hidden" {...props}>
-      {popupOpened && (
-        <Popup closePopup={togglePopup} popupType={popupOpened} />
-      )}
+      <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
       <Image
         src={clouds}
         alt={"cloudsImg"}

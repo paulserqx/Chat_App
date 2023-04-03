@@ -1,9 +1,10 @@
-import { LoginPopup, SignUpPopup } from "collections/PopupContent";
+import { EmptyPopup, LoginPopup, SignUpPopup } from "collections/PopupContent";
 import React, { RefObject } from "react";
 
-export type TPopups = "login" | "signUp";
+export type TPopups = "login" | "signUp" | "null";
 
 const popups = {
+  null: EmptyPopup,
   login: LoginPopup,
   signUp: SignUpPopup,
 };
@@ -21,12 +22,18 @@ export const Popup: React.FC<PopupProps> = ({
 }) => {
   const CurrentPopup = popups[popupType];
 
-  return (
+  return popupType === "null" ? (
+    <CurrentPopup closePopup={closePopup} />
+  ) : (
     <>
       <div
         {...props}
         onClick={closePopup()}
-        className="z-10 animate-popupOpen delay-200 flex items-center fixed justify-center bg-slate-900 opacity-[0.9]  w-full h-full"
+        className={
+          popupType
+            ? "z-10 flex items-center fixed justify-center bg-slate-900 opacity-[0.9]  w-full h-full"
+            : "hidden"
+        }
       />
       <CurrentPopup closePopup={closePopup} />
     </>

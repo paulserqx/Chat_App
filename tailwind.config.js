@@ -15,15 +15,15 @@ module.exports = {
         button: '0 8px 15px rgba(0,0,0,.2)'
       },
       animation: {
-        popupOpen: 'popupOpen 0.2s ease-in',
+        popupOpen: 'popupOpen 0.4s ease-out',
         clouds: 'clouds 120s cubic-bezier(.38,.78,1,.81) infinite',
         loading: 'loading 1s cubic-bezier(.62,1,.59,.44) infinite'
       },
       keyframes: {
         popupOpen: {
-          "0%": { transform: 'scale(0)' 
+          "0%": { transform: 'translateY(-100vh)' 
           },
-         "100%": { transform: 'scale(1)' 
+         "100%": { transform: 'translateY(0vh)' 
           },
         },
         loading: {

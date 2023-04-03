@@ -16,11 +16,32 @@
     @apply input border-[2px] border-red-500
   }
 .form-banner-h {
-    @apply text-[20px] whitespace-nowrap font-medium mb-[10px]
+    @apply text-[20px] whitespace-nowrap font-medium mb-[10px] text-center
 }
-
 .form-banner-span {
     @apply text-[12px] text-grey/90 mb-[20px]
+}
+.form-demo-info {
+    position: absolute;
+    top:0;
+    left:-1px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;background-color: rgba(0, 0, 0, 0.901);
+    padding: 10px;
+    color:white;
+    width:101%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-demo-info {
+    @apply md:absolute md:left-[unset] md:right-[-5px] md:h-full md:w-[200px] md:rounded-l-[40px] md:rounded-none
+}
+
+.form {
+    @apply overflow-hidden animate-popupOpen px-5 py-5 pt-[100px] bg-white flex flex-col md:flex-row-reverse md:pt-5 md:pr-[240px]
 }
 
 .or-marker {
@@ -35,4 +56,8 @@
     border: none;
     border-radius: 0%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.351);
+}
+
+.sign-up-form {
+    @apply form flex-col !pt-5
 }

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { RefObject, useState } from "react";
 import { firebaseApi, FirebaseErrors } from "services/firebase";
 import { transformErrorMessage } from "utils";
+import { FaDiscord } from "react-icons/fa";
 
 interface SignUpProps {
   closePopup: () => () => void;
@@ -40,52 +41,67 @@ export const SignUpPopup: React.FC<SignUpProps> = ({
       {...props}
       className="z-20 flex items-center justify-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
     >
-      <form
-        onSubmit={handleSignUp}
-        className="animate-popupOpen px-10 py-5 bg-heroBackground rounded-[20px] flex flex-col w-[300px]"
-      >
-        <label htmlFor="email" className="mb-[10px]">
-          Email
-        </label>
-        <input
-          className="p-2 outline-none mb-[10px]"
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Type Your Email..."
-        />
-        <label htmlFor="password" className="mb-[10px]">
-          Password
-        </label>
-        <input
-          className="p-2 outline-none mb-[10px]"
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Type Your Password..."
-        />
-        <label htmlFor="rePassword" className="mb-[10px]">
-          Repeat Password
-        </label>
-        <input
-          className="p-2 outline-none mb-[20px]"
-          type="password"
-          id="rePassword"
-          value={rePassword}
-          onChange={(e) => setRePassword(e.target.value)}
-          placeholder="Confirm Password..."
-        />
-        {isLoading ? (
-          <div className="flex items-center justify-center">
-            <Loader />
-          </div>
-        ) : (
-          <button type="submit" className="p-2 border-2 rounded-[10px]">
-            Sign Up
-          </button>
-        )}
+      <form onSubmit={handleSignUp} className="form">
+        <div className="form-demo-info">
+          <FaDiscord size={50} className="hidden md:block md:mb-[20px]" />
+          <h1 className="text-[18px] mb-1 md:mb-6">Hint!</h1>
+          <span className="md:mb-1 text-center">
+            Get your demo account, when you try to Login.
+          </span>
+        </div>
+        <div className="or-marker md:hidden">
+          <span className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-[10px] rounded-full bg-white">
+            or
+          </span>
+        </div>
+        <div className="flex flex-col">
+          <h1 className="form-banner-h mb-[20px]">Let&apos;s get started!</h1>
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
+          <input
+            className="input"
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Type Your Email..."
+          />
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            className="input"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Type Your Password..."
+          />
+          <label htmlFor="rePassword" className="form-label">
+            Repeat Password
+          </label>
+          <input
+            className="input"
+            type="password"
+            id="rePassword"
+            value={rePassword}
+            onChange={(e) => setRePassword(e.target.value)}
+            placeholder="Confirm Password..."
+          />
+          {isLoading ? (
+            <div className="flex items-center justify-center mt-[10px]">
+              <Loader />
+            </div>
+          ) : (
+            <button
+              type="submit"
+              className="p-2 py-[15px] border-2 rounded-[10px] bg-black/90 text-white mt-[20px]"
+            >
+              Sign Up
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

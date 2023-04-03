@@ -17,7 +17,7 @@ export const GoogleBtn: React.FC<GoogleBtnProps> = ({ ...props }) => {
       {...props}
       onClick={handleGoogleSignIn}
       type="button"
-      className="flex items-center justify-center border border-black py-[8px] text-[14px] font-medium rounded-md mb-[20px]"
+      className="flex items-center justify-center border border-black py-[8px] text-[14px] font-medium rounded-md mb-[30px] hover:shadow-md"
     >
       <FcGoogle className="mr-[5px]" size={22} />
       Log in with Google

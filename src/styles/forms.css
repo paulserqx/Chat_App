@@ -2,21 +2,21 @@
     @apply z-20 flex items-center justify-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
 }
 .form-error {
-    @apply  text-red-500 mt-[5px]
+    @apply  text-red-500 mt-[5px] text-[15px]
 }
 .input {
-    @apply appearance-none p-[5px] outline-none mb-[5px] !bg-transparent font-medium
+    @apply block appearance-none p-[5px] outline-none mb-[5px] !bg-transparent font-medium
 }
-.input[type='email'], .input[type='password'] {
+.input[type='email'], .input[type='password'] ,.input[type='text'] {
     @apply text-black !bg-transparent font-medium text-[16px]
 }
-.input[type='email'], .input[type='password'] {
+.input[type='email'], .input[type='password'] ,.input[type='text'] {
     border: none;
     border-radius: 0%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.351);
 }
 .form-label {
-    @apply text-[14px]
+    @apply text-[14px] block
 }
 .input-error {
     @apply input border-[2px] border-red-500

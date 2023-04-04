@@ -23,3 +23,27 @@
 .dashboard-room-tooltip {
     @apply hidden absolute top-[-80%] z-10 p-2 whitespace-nowrap bg-white rounded-lg border border-veryDarkGrey/90
 }
+.dashboard-or-marker {
+    @apply border-b-[2px] w-[70%] border-white/60 text-white my-[20px]
+}
+
+.create-room-button {
+    @apply text-white py-[10px] border-white border-[2px] px-[30px] rounded-lg
+}
+
+.create-room-icon-container {
+    @apply flex items-center justify-between
+}
+
+.create-room-icon {
+    @apply flex w-[70px] h-[70px] rounded-full bg-black items-center justify-center
+}
+.create-room-icon:hover .change-room-icon {
+    @apply opacity-100 z-50
+}
+.create-room-submit {
+    @apply text-white
+}
+.change-room-icon {
+    @apply opacity-0 absolute top-[-1px] w-[105%] h-[105%] bg-white/70 flex items-center justify-center -z-10 text-[10px] font-bold transition-opacity cursor-pointer
+}

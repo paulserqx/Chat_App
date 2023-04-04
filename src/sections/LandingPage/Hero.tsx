@@ -1,28 +1,21 @@
 import { Navigation } from "collections";
 import { Button, Popup, TPopups } from "components";
 import Image from "next/image";
-import React, {
-  MutableRefObject,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { RefObject } from "react";
 import { clouds, hero1, hero2 } from "assets";
+import { usePopup } from "hooks";
 
 interface LandingPageHeroProps {
-  togglePopup: (type?: TPopups) => () => void;
-  popupOpened: TPopups | null;
   ref?: RefObject<HTMLDivElement>;
 }
 
 const buttons: string[] = ["Login", "Sign Up"];
 
 export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
-  popupOpened,
-  togglePopup,
   ...props
 }) => {
+  const { popupOpened, togglePopup } = usePopup();
+
   return (
     <section className="w-full bg-heroBackground overflow-hidden" {...props}>
       <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />

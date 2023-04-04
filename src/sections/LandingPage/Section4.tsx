@@ -1,19 +1,16 @@
 import { section4 } from "assets";
 import { Button, TPopups } from "components";
+import { usePopup } from "hooks";
 import Image from "next/image";
 import { RefObject } from "react";
 
 interface section4Props {
-  togglePopup: (type?: TPopups) => () => void;
-  popupOpened: TPopups | null;
   ref?: RefObject<HTMLDivElement>;
 }
 
-export const Section4: React.FC<section4Props> = ({
-  popupOpened,
-  togglePopup,
-  ...props
-}) => {
+export const Section4: React.FC<section4Props> = ({ ...props }) => {
+  const { popupOpened, togglePopup } = usePopup();
+
   return (
     <>
       <section className="bg-[#f6f6f6]">

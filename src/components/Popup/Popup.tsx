@@ -1,12 +1,14 @@
+import { CreateRoomForm } from "collections";
 import { EmptyPopup, LoginPopup, SignUpPopup } from "collections/PopupContent";
 import React, { RefObject } from "react";
 
-export type TPopups = "login" | "signUp" | "null";
+export type TPopups = "login" | "signUp" | "null" | "createRoom";
 
 const popups = {
   null: EmptyPopup,
   login: LoginPopup,
   signUp: SignUpPopup,
+  createRoom: CreateRoomForm,
 };
 
 interface PopupProps {

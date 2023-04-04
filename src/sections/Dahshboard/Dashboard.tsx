@@ -1,4 +1,5 @@
-import React, { RefObject, useState } from "react";
+import { useRouter } from "next/router";
+import React, { RefObject, useEffect, useState } from "react";
 import { firebaseApi } from "services";
 interface DashboardProps {
   ref?: RefObject<HTMLDivElement>;
@@ -10,6 +11,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
   const [successfulRoomCreation, setSuccessfulRoomCreation] =
     useState<boolean>(false);
   const [error, setError] = useState<string | null>();
+  const [rooms, setRooms] = useState<string[]>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    firebaseApi.GET.allRooms(setRooms);
+  }, []);
+
+  console.log(rooms);
 
   const handleJoinRoom = async () => {
     const res = await firebaseApi.POST.createRoom(createRoom);
@@ -17,6 +26,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
       setJoinRoom("");
     } else {
       alert(res.error.message);
+    }
+  };
+
+  const handleGoToRoom = (path: string) => () => {
+    if (router.pathname === "/chats") {
+      router.push(`chats/${path}`);
+    } else {
+      router.push(path);
     }
   };
 
@@ -38,10 +55,25 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
   };
 
   return (
-    <section
-      className="w-full h-full bg-veryDarkGrey/90 pt-[76px] overflow-hidden flex flex-col items-center justify-center"
-      {...props}
-    >
+    <section className="dashboard" {...props}>
+      <div className="dashboard-info">
+        <h1 className="dashboard-greeting">Let&apos;s get started!</h1>
+        <h3 className="dashboard-greeting-info">
+          Click on a room to join the conversation.
+        </h3>
+        <div className="dashboard-rooms-container">
+          {rooms.map((room, i) => (
+            <div
+              key={i}
+              className="dashboard-room "
+              onClick={handleGoToRoom(room)}
+            >
+              {room.slice(0, 2).toUpperCase()}
+              <div className="dashboard-room-tooltip">{room}</div>
+            </div>
+          ))}
+        </div>
+      </div>
       <form
         className="flex flex-col bg-transparent text-white w-[190px]"
         onSubmit={(e) => handleCreateRoomSubmit(e)}

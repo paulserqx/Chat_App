@@ -1,0 +1,25 @@
+.dashboard {
+    @apply w-full h-full bg-veryDarkGrey/90  overflow-hidden flex flex-col items-center justify-center
+}
+.dashboard-greeting {
+    @apply text-[25px] text-white text-center mb-[6px]
+}
+.dashboard-greeting-info{
+    @apply text-[18px] text-white mb-[20px] text-center
+}
+.dashboard-info {
+    @apply w-full px-[20px]
+}
+.dashboard-rooms-container {
+    @apply flex flex-wrap w-full justify-center
+}
+.dashboard-room {
+    @apply w-12 h-12 flex items-center justify-center bg-white rounded-full mr-[10px] mb-[5px] cursor-pointer hover:rounded-2xl
+}
+.dashboard-room:hover .dashboard-room-tooltip{
+@apply flex
+}
+
+.dashboard-room-tooltip {
+    @apply hidden absolute top-[-80%] z-10 p-2 whitespace-nowrap bg-white rounded-lg border border-veryDarkGrey/90
+}

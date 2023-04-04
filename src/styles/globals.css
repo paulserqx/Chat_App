@@ -4,6 +4,7 @@
 
 @import url('./landing.css');
 @import url('./forms.css');
+@import url('./dashboard.css');
 
 @layer components {
   .button {

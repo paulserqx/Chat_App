@@ -32,7 +32,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
       {...props}
     >
       <div className="flex w-full overflow-auto flex-col justify-between pl-[15px]">
-        <div className="w-[46px] ">
+        <div>
           {rooms.map((room, i) => {
             const Icon = icons[room.icon];
             return (
@@ -40,12 +40,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
                 key={i}
                 className={
                   slug === room.name
-                    ? "active-room room-img-tail room-img"
-                    : "room-img-tail room-img"
+                    ? "active-room room-img-tail"
+                    : "sidebar-room room-img-tail"
                 }
                 onClick={handleGoToRoom(room.name)}
               >
-                <Icon size={17} />
+                <Icon size={25} fill="black" />
               </div>
             );
           })}

@@ -10,7 +10,7 @@ export const Explore: React.FC<ExploreProps> = ({ ...props }) => {
   return (
     <div className="explore">
       <Link href={"/chats"}>
-        <RiCompass3Fill className="explore-icon" />
+        <RiCompass3Fill size={30} className="explore-icon" />
       </Link>
     </div>
   );

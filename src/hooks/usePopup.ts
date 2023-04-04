@@ -6,7 +6,7 @@ export const usePopup = () => {
 
   const togglePopup = (type?: TPopups) => () => {
     setPopupOpened(type || "null");
-    document.body.style.overflow = type ? "hidden" : "auto";
+    document.body.style.overflow = type !== "null" ? "hidden" : "auto";
   };
 
   return {

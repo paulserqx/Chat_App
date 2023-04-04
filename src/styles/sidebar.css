@@ -1,0 +1,29 @@
+.sidebar-room {
+    @apply w-[46px] h-[46px]  bg-white rounded-full mr-[10px] mb-[5px] cursor-pointer hover:rounded-2xl
+}
+.room-img-tail {
+    @apply  mt-[15px] flex items-center justify-center text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:absolute before:-left-[20px] before:rounded-full before:hover:h-[20px] last-of-type:mb-[15px]
+}
+.active-room {
+    @apply rounded-[18px] before:h-[40px] before:hover:h-[40px] bg-white h-[46px] w-[46px] 
+  }
+.room-img:hover .room-tooltip{
+    @apply opacity-100
+}
+.room-tooltip {
+    @apply opacity-0 absolute right-[-100%] p-2 whitespace-nowrap bg-veryDarkGrey z-50
+}.explore {
+    @apply sidebar-room room-img-tail !bg-grey hover:!bg-green-500 !p-0
+}
+.explore:hover .explore-icon {
+    @apply fill-white
+}
+.explore-icon {
+    @apply fill-green-500
+}
+.room-img, .room-img::before {
+    transition: all linear 0.1s;
+  }
+  .room-img:hover{
+    border-radius: 18px;
+  }

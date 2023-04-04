@@ -5,6 +5,7 @@
 @import url('./landing.css');
 @import url('./forms.css');
 @import url('./dashboard.css');
+@import url('./sidebar.css');
 
 @layer components {
   .button {
@@ -13,32 +14,8 @@
   .button-blue {
     @apply button bg-blue-600/80 text-white hover:text-white
   }
-  .room-img:hover .room-tooltip{
-    @apply opacity-100
-  }
-  .room-tooltip {
-    @apply opacity-0 absolute right-[-100%] p-2 whitespace-nowrap bg-veryDarkGrey z-50
-  }
-  .explore {
-    @apply bg-grey room-img-tail room-img p-2 bg-gradient-to-r from-transparent to-transparent hover:bg-green-500
-  }
-  .explore:hover .explore-icon {
-    @apply fill-white
-  }
-  .explore-icon {
-    @apply fill-green-500 w-[26px] h-[30px]
-  }
-  .room-img {
-    @apply w-[46px]
-  }
-  .room-img-tail {
-    @apply  cursor-pointer mt-[15px] flex p-[15px] rounded-full items-center justify-center bg-gradient-to-r from-blue-600 to-fuchsia-500 text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:absolute before:-left-[20px] before:rounded-full before:hover:h-[20px] last-of-type:mb-[15px]
-  }
   .status-bg {
     @apply absolute hidden cursor-pointer w-full h-full bg-black/50 items-center justify-center top-0 rounded-full text-[10px] text-white font-bold
-  }
-  .active-room {
-    @apply rounded-[18px] before:h-[40px] before:hover:h-[40px]
   }
   .dropdown-menu {
     @apply translate-x-[40%]  absolute z-50 rounded-lg flex flex-col w-[280px]
@@ -49,7 +26,6 @@
   .dropdown-menu-closed {
     @apply translate-y-[200px] transition-[transform] duration-[400ms] 
   }
-
   .submit-button {
     @apply border-[2px] border-white p-[7px] rounded-lg
   }
@@ -91,12 +67,7 @@
 .message:hover .message-options-div{
   display: flex;
 }
-.room-img, .room-img::before {
-  transition: all linear 0.1s;
-}
-.room-img:hover{
-  border-radius: 18px;
-}
+
 .status-dropdown:hover .status-bg{
 display: flex;
 }

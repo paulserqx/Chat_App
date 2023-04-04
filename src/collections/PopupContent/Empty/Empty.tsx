@@ -1,13 +1,9 @@
 import React, { RefObject, useState } from "react";
 
 interface EmptyPopupProps {
-  closePopup: () => () => void;
   ref?: RefObject<HTMLDivElement>;
 }
 
-export const EmptyPopup: React.FC<EmptyPopupProps> = ({
-  closePopup,
-  ...props
-}) => {
+export const EmptyPopup: React.FC<EmptyPopupProps> = ({ ...props }) => {
   return null;
 };

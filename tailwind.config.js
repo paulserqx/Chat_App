@@ -16,7 +16,8 @@ module.exports = {
       },
       animation: {
         popupOpen: 'popupOpen 0.4s ease-out',
-        clouds: 'clouds 120s cubic-bezier(.38,.78,1,.81) infinite',
+        popupClose: 'popupClose 0.4s ease-out',
+        clouds: 'clouds 60s cubic-bezier(.38,.78,1,.81) infinite',
         loading: 'loading 1s cubic-bezier(.62,1,.59,.44) infinite'
       },
       keyframes: {
@@ -24,6 +25,12 @@ module.exports = {
           "0%": { transform: 'translateY(-100vh)' 
           },
          "100%": { transform: 'translateY(0vh)' 
+          },
+        },
+        popupClose: {
+          "0%": { transform: 'translateY(0vh)' 
+          },
+         "100%": { transform: 'translateY(100vh)' 
           },
         },
         loading: {

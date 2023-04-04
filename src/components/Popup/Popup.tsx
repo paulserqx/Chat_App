@@ -22,20 +22,20 @@ export const Popup: React.FC<PopupProps> = ({
 }) => {
   const CurrentPopup = popups[popupType];
 
-  return popupType === "null" ? (
-    <CurrentPopup closePopup={closePopup} />
-  ) : (
+  return (
     <>
       <div
         {...props}
         onClick={closePopup()}
         className={
-          popupType
+          popupType !== "null"
             ? "z-10 flex items-center fixed justify-center bg-slate-900 opacity-[0.9]  w-full h-full"
             : "hidden"
         }
       />
-      <CurrentPopup closePopup={closePopup} />
+      <div className={"form-container"}>
+        <CurrentPopup />
+      </div>
     </>
   );
 };

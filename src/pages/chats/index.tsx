@@ -14,6 +14,7 @@ export default function Dashboard({ ...props }) {
       alert(error.message);
     } finally {
       router.push("/");
+      document.body.style.overflow = "auto";
     }
   };
 

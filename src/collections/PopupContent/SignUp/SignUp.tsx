@@ -6,14 +6,10 @@ import { transformErrorMessage } from "utils";
 import { FaDiscord } from "react-icons/fa";
 
 interface SignUpProps {
-  closePopup: () => () => void;
   ref?: RefObject<HTMLDivElement>;
 }
 
-export const SignUpPopup: React.FC<SignUpProps> = ({
-  closePopup,
-  ...props
-}) => {
+export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [rePassword, setRePassword] = useState<string>("");
@@ -37,72 +33,67 @@ export const SignUpPopup: React.FC<SignUpProps> = ({
   };
 
   return (
-    <div
-      {...props}
-      className="z-20 flex items-center justify-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
-    >
-      <form onSubmit={handleSignUp} className="form">
-        <div className="form-demo-info">
-          <FaDiscord size={50} className="hidden md:block md:mb-[20px]" />
-          <h1 className="text-[18px] mb-1 md:mb-6">Hint!</h1>
-          <span className="md:mb-1 text-center">
-            Get your demo account, when you try to Login.
-          </span>
-        </div>
-        <div className="or-marker md:hidden">
-          <span className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-[10px] rounded-full bg-white">
-            or
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <h1 className="form-banner-h mb-[20px]">Let&apos;s get started!</h1>
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            className="input"
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Type Your Email..."
-          />
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            className="input"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Type Your Password..."
-          />
-          <label htmlFor="rePassword" className="form-label">
-            Repeat Password
-          </label>
-          <input
-            className="input"
-            type="password"
-            id="rePassword"
-            value={rePassword}
-            onChange={(e) => setRePassword(e.target.value)}
-            placeholder="Confirm Password..."
-          />
-          {isLoading ? (
-            <div className="flex items-center justify-center mt-[10px]">
-              <Loader />
-            </div>
-          ) : (
-            <button
-              type="submit"
-              className="p-2 py-[15px] border-2 rounded-[10px] bg-black/90 text-white mt-[20px]"
-            >
-              Sign Up
-            </button>
-          )}
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSignUp} className="form">
+      <div className="form-demo-info">
+        <FaDiscord size={50} className="hidden md:block md:mb-[20px]" />
+        <h1 className="text-[18px] mb-1 md:mb-6">Hint!</h1>
+        <span className="md:mb-1 text-center">
+          Get your demo account, when you try to Login.
+        </span>
+      </div>
+      <div className="or-marker md:hidden">
+        <span className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-[10px] rounded-full bg-white">
+          or
+        </span>
+      </div>
+      <div className="flex flex-col">
+        <h1 className="form-banner-h mb-[20px]">Let&apos;s get started!</h1>
+        <label htmlFor="email" className="form-label">
+          Email
+        </label>
+        <input
+          className="input"
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Type Your Email..."
+        />
+        <label htmlFor="password" className="form-label">
+          Password
+        </label>
+        <input
+          className="input"
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Type Your Password..."
+        />
+        <label htmlFor="rePassword" className="form-label">
+          Repeat Password
+        </label>
+        <input
+          className="input"
+          type="password"
+          id="rePassword"
+          value={rePassword}
+          onChange={(e) => setRePassword(e.target.value)}
+          placeholder="Confirm Password..."
+        />
+        {isLoading ? (
+          <div className="flex items-center justify-center mt-[10px]">
+            <Loader />
+          </div>
+        ) : (
+          <button
+            type="submit"
+            className="p-2 py-[15px] border-2 rounded-[10px] bg-black/90 text-white mt-[20px]"
+          >
+            Sign Up
+          </button>
+        )}
+      </div>
+    </form>
   );
 };

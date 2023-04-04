@@ -1,14 +1,16 @@
+import { icons } from "collections";
 import { Popup } from "components";
 import { usePopup } from "hooks";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
-import { firebaseApi } from "services";
+import { firebaseApi, IRoom } from "services";
+
 interface DashboardProps {
   ref?: RefObject<HTMLDivElement>;
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
-  const [rooms, setRooms] = useState<string[]>([]);
+  const [rooms, setRooms] = useState<IRoom[]>([]);
 
   const router = useRouter();
   const { popupOpened, togglePopup } = usePopup();
@@ -16,8 +18,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
   useEffect(() => {
     firebaseApi.GET.allRooms(setRooms);
   }, []);
-
-  console.log(rooms);
 
   // const handleJoinRoom = async () => {
   //   const res = await firebaseApi.POST.createRoom(createRoom);
@@ -40,7 +40,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
     <>
       {popupOpened && (
         <div className="fixed z-50 left-0 w-full">
-          <Popup closePopup={togglePopup} popupType={popupOpened} />
+          <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
         </div>
       )}
       <section className="dashboard" {...props}>
@@ -50,16 +50,19 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
             Click on a room to join the conversation.
           </h3>
           <div className="dashboard-rooms-container">
-            {rooms.map((room, i) => (
-              <div
-                key={i}
-                className="dashboard-room "
-                onClick={handleGoToRoom(room)}
-              >
-                {room.slice(0, 2).toUpperCase()}
-                <div className="dashboard-room-tooltip">{room}</div>
-              </div>
-            ))}
+            {rooms.map((room, i) => {
+              const Icon = icons[room.icon];
+              return (
+                <div
+                  key={i}
+                  className="dashboard-room "
+                  onClick={handleGoToRoom(room.name)}
+                >
+                  <Icon size={20} />
+                  <div className="dashboard-room-tooltip">{room.name}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="dashboard-or-marker" />

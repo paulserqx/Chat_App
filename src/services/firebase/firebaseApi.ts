@@ -29,6 +29,7 @@ import {
   IEmailAndPasswordSignIn,
   GetAllRoomsResponse,
   IMessage,
+  IRoom,
 } from "./types";
 import { Statuses } from "types";
 import { EmojiClickData } from "emoji-picker-react/dist/types/exposedTypes";
@@ -70,7 +71,10 @@ const getUserStatus = async (
   });
 };
 
-const createRoom = async (roomName: string): Promise<void | ErrorResponse> => {
+const createRoom = async (
+  roomName: string,
+  icon: string
+): Promise<void | ErrorResponse> => {
   try {
     const doesExist = (await get(child(dbRef, `rooms/${roomName}`))).exists();
 
@@ -78,6 +82,7 @@ const createRoom = async (roomName: string): Promise<void | ErrorResponse> => {
 
     await set(ref(db, "rooms/" + roomName), {
       name: roomName,
+      icon,
     });
   } catch (error: any) {
     const FirbaseError: TError = error;
@@ -138,13 +143,18 @@ const getMessages = async (
 };
 
 const getAllRooms = async (
-  setter: React.Dispatch<React.SetStateAction<string[]>>
+  setter: React.Dispatch<React.SetStateAction<IRoom[]>>
 ) => {
   const roomsRef = ref(db, "rooms/");
   onValue(roomsRef, (rooms) => {
     if (!rooms.val()) return;
     const result: GetAllRoomsResponse = rooms.val();
-    setter(Object.values(result).map((room) => room.name));
+    setter(
+      Object.values(result).map((room) => ({
+        name: room.name,
+        icon: room.icon,
+      }))
+    );
   });
 };
 

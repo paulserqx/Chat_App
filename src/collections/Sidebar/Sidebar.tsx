@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
-import { firebaseApi } from "services";
-import { CurrentUserProfile } from "collections";
+import { firebaseApi, IRoom } from "services";
+import { CurrentUserProfile, icons } from "collections";
 import { Explore } from "components";
 
 interface SidebarProps {
@@ -9,7 +9,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
-  const [rooms, setRooms] = useState<string[]>([]);
+  const [rooms, setRooms] = useState<IRoom[]>([]);
   const router = useRouter();
 
   const slug = router.query.slug ? router.query.slug[0] : "";
@@ -33,19 +33,22 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
     >
       <div className="flex w-full overflow-auto flex-col justify-between pl-[15px]">
         <div className="w-[46px] ">
-          {rooms.map((room, i) => (
-            <div
-              key={i}
-              className={
-                slug === room
-                  ? "active-room room-img-tail room-img"
-                  : "room-img-tail room-img"
-              }
-              onClick={handleGoToRoom(room)}
-            >
-              {room.slice(0, 2).toUpperCase()}
-            </div>
-          ))}
+          {rooms.map((room, i) => {
+            const Icon = icons[room.icon];
+            return (
+              <div
+                key={i}
+                className={
+                  slug === room.name
+                    ? "active-room room-img-tail room-img"
+                    : "room-img-tail room-img"
+                }
+                onClick={handleGoToRoom(room.name)}
+              >
+                <Icon size={17} />
+              </div>
+            );
+          })}
           <Explore />
         </div>
       </div>

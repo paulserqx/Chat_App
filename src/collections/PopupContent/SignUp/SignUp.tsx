@@ -60,7 +60,9 @@ export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
         </span>
       </div>
       <div className="flex flex-col">
-        <h1 className="form-banner-h mb-[20px]">Let&apos;s get started!</h1>
+        <h1 className="form-banner-h mb-[20px]">
+          Let&apos;s get you started today!
+        </h1>
         <label htmlFor="email" className="form-label">
           Email
         </label>

@@ -10,10 +10,11 @@ export type TError = FirebaseError;
 
 export interface IRoom {
   name: string;
+  icon: string;
 }
 
 export type GetAllRoomsResponse = {
-  [key: string]: { name: string };
+  [key: string]: { name: string; icon: string };
 };
 
 export interface IMessage {

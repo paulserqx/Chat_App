@@ -1,4 +1,4 @@
-import { CreateRoomForm } from "collections";
+import { CreateRoomForm } from "collections/Forms";
 import { EmptyPopup, LoginPopup, SignUpPopup } from "collections/PopupContent";
 import React, { RefObject } from "react";
 
@@ -22,13 +22,13 @@ export const Popup: React.FC<PopupProps> = ({
   closePopup,
   ...props
 }) => {
-  const CurrentPopup = popups[popupType];
+  const CurrentPopup = popups[popupType || "null"];
 
   return (
     <>
       <div
         {...props}
-        onClick={closePopup()}
+        onClick={closePopup("null")}
         className={
           popupType !== "null"
             ? "z-10 flex items-center fixed justify-center bg-slate-900 opacity-[0.9]  w-full h-full"

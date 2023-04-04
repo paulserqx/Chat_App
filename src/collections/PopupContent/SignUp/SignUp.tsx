@@ -14,11 +14,21 @@ export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
   const [password, setPassword] = useState<string>("");
   const [rePassword, setRePassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
 
   const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
     setIsLoading(true);
+    setError(null);
+
+    if (password !== rePassword) {
+      setIsLoading(false);
+      setError("Please confirm your password");
+      return;
+    }
+
     const result = await firebaseApi.POST.signUp.withPassword(e, {
       email,
       password,
@@ -28,12 +38,15 @@ export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
       router.push("/chats");
     } else {
       const message = transformErrorMessage(result.error.message);
+      console.log(message);
+      const error = FirebaseErrors[message];
+      setError(error);
     }
     setIsLoading(false);
   };
 
   return (
-    <form onSubmit={handleSignUp} className="form">
+    <form onSubmit={(e) => handleSignUp(e)} className="form">
       <div className="form-demo-info">
         <FaDiscord size={50} className="hidden md:block md:mb-[20px]" />
         <h1 className="text-[18px] mb-1 md:mb-6">Hint!</h1>
@@ -81,6 +94,7 @@ export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
           onChange={(e) => setRePassword(e.target.value)}
           placeholder="Confirm Password..."
         />
+        {error && <span className="form-error">{error}</span>}
         {isLoading ? (
           <div className="flex items-center justify-center mt-[10px]">
             <Loader />

@@ -1,6 +1,9 @@
 .form-container {
     @apply z-20 flex items-center justify-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
 }
+.form-error {
+    @apply  text-red-500 mt-[5px]
+}
 .input {
     @apply appearance-none p-[5px] outline-none mb-[5px] !bg-transparent font-medium
 }

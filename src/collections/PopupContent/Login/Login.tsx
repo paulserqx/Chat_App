@@ -14,11 +14,13 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
     setIsLoading(true);
+    setError(null);
     const result = await firebaseApi.POST.signIn.withPassword(e, {
       email,
       password,
@@ -29,6 +31,7 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
     } else {
       const message = transformErrorMessage(result.error.message);
       const error = FirebaseErrors[message];
+      setError(error);
     }
     setIsLoading(false);
   };
@@ -74,6 +77,7 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Type Your Password..."
         />
+        {error && <span className="form-error">{error}</span>}
         {isLoading ? (
           <div className="flex items-center justify-center mt-[10px]">
             <Loader />

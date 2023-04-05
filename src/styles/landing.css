@@ -9,8 +9,8 @@
     @apply md:text-[20px] text-white lg:text-center md:text-left 
 }
 
-.navigation {
-    @apply w-full flex items-center justify-between lg:px-40 py-10 md:px-[40px] px-[20px]
+.navigation-landing {
+    @apply w-full flex items-center justify-between lg:px-40 py-[20px] md:px-[40px] px-[20px]
 }   
 
 .section {

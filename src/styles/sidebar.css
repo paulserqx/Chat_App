@@ -27,3 +27,10 @@
   .room-img:hover{
     border-radius: 18px;
   }
+
+.sidebar-container {
+    @apply flex flex-col justify-between w-[5.5rem] h-[-webkit-fill-available] bg-darkGrey
+}
+.sidebar-container-closed {
+    @apply sidebar-container !hidden
+}

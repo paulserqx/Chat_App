@@ -7,7 +7,7 @@ interface NavigationProps {
 
 export const Navigation: React.FC<NavigationProps> = ({ ...props }) => {
   return (
-    <nav className="navigation" {...props}>
+    <nav className="navigation-landing" {...props}>
       <Logo />
       <Button text="Open Discord" />
     </nav>

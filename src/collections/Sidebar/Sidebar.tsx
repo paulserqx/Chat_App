@@ -5,10 +5,14 @@ import { CurrentUserProfile, icons } from "collections";
 import { Explore } from "components";
 
 interface SidebarProps {
+  sidebarOpened: boolean;
   ref?: RefObject<HTMLDivElement>;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
+export const Sidebar: React.FC<SidebarProps> = ({
+  sidebarOpened,
+  ...props
+}) => {
   const [rooms, setRooms] = useState<IRoom[]>([]);
   const router = useRouter();
 
@@ -28,7 +32,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
 
   return (
     <div
-      className="flex-col justify-between flex w-[5.5rem] h-[-webkit-fill-available] bg-darkGrey"
+      className={
+        sidebarOpened ? "sidebar-container" : "sidebar-container-closed"
+      }
       {...props}
     >
       <div className="flex w-full overflow-auto flex-col justify-between pl-[15px]">

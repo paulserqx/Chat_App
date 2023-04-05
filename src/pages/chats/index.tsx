@@ -1,8 +1,10 @@
 import { Sidebar } from "collections";
 import { Button } from "components";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { Dashboard as _Dashboard } from "sections";
 import { firebaseApi } from "services";
+import { IoMenuSharp } from "react-icons/io5";
 
 export default function Dashboard({ ...props }) {
   const router = useRouter();
@@ -18,13 +20,20 @@ export default function Dashboard({ ...props }) {
     }
   };
 
+  const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);
+
   return (
     <>
       <div className="flex h-[100vh] overflow-hidden">
-        <Sidebar />
+        <Sidebar sidebarOpened={sidebarOpened} />
         <section className="w-full h-full">
-          <nav className="bg-grey flex absolute z-10 justify-between w-full py-[20px] px-[40px]">
-            <div></div>
+          <nav className="navigation">
+            <div
+              className="md:hidden cursor-pointer"
+              onClick={() => setSidebarOpened(!sidebarOpened)}
+            >
+              <IoMenuSharp size={30} fill="white" />
+            </div>
             <button onClick={handleSignOut}>
               <Button text={"Sign Out"} />
             </button>

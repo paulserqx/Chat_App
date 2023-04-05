@@ -82,7 +82,7 @@ export const CreateRoomForm: React.FC<CreateRoomFormProps> = ({ ...props }) => {
       setError("The Room name should be at least 2 characters long");
       return;
     }
-    const res = await firebaseApi.POST.createRoom(createRoom, icon);
+    const res = await firebaseApi.POST.room.create(createRoom, icon);
     if (!res) {
       setCreateRoom("");
       setSuccessfulRoomCreation(true);

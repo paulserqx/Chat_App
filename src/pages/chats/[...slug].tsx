@@ -1,12 +1,13 @@
 import { Sidebar } from "collections";
 import { Button } from "components";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiHash } from "react-icons/bi";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { IoMenuSharp } from "react-icons/io5";
 import { Dashboard as _Dashboard, Messages } from "sections";
 import { firebaseApi } from "services";
+import { RxCross1 } from "react-icons/rx";
 
 export default function ChatRoom() {
   const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);
@@ -24,6 +25,16 @@ export default function ChatRoom() {
     }
   };
 
+  useEffect(() => {
+    const widthWatcher = () => {
+      const bodyWidth = window.innerWidth;
+      if (bodyWidth > 768) {
+        setSidebarOpened(true);
+      }
+    };
+    window.onresize = widthWatcher;
+  }, []);
+
   return (
     <>
       <div className="flex h-[100vh] overflow-hidden">
@@ -34,7 +45,11 @@ export default function ChatRoom() {
               className="md:hidden cursor-pointer"
               onClick={() => setSidebarOpened(!sidebarOpened)}
             >
-              <IoMenuSharp size={30} fill="white" />
+              {sidebarOpened ? (
+                <RxCross1 size={30} fill="white" color="white" />
+              ) : (
+                <IoMenuSharp size={30} fill="white" />
+              )}
             </div>
             <div className="pl-[20px ] flex items-center text-white">
               <BiHash size={20} className="bottom-[-1.5px]" />

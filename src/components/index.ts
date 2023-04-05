@@ -5,3 +5,4 @@ export * from "./Loader";
 export * from "./Message";
 export * from "./CurrentStatus";
 export * from "./MessageOptions";
+export * from "./NewUserAnouncement";

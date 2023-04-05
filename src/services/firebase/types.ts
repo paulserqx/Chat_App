@@ -11,10 +11,19 @@ export type TError = FirebaseError;
 export interface IRoom {
   name: string;
   icon: string;
+  members: {
+    [key: string]: { user: string };
+  };
 }
 
 export type GetAllRoomsResponse = {
-  [key: string]: { name: string; icon: string };
+  [key: string]: {
+    name: string;
+    icon: string;
+    members: {
+      [key: string]: { user: string };
+    };
+  };
 };
 
 export interface IMessage {
@@ -25,4 +34,5 @@ export interface IMessage {
   key: string;
   timePosted: number;
   edited: boolean;
+  greeting: boolean;
 }

@@ -71,6 +71,20 @@ const getUserStatus = async (
   });
 };
 
+const joinRoom = async (roomName: string) => {
+  const roomMembersRef = ref(db, `rooms/${roomName}/members`);
+  const newMember = push(roomMembersRef);
+  const key = newMember.key;
+  await set(newMember, {
+    user: auth.currentUser?.uid,
+  });
+  await sendMessage(
+    roomName,
+    `${auth.currentUser?.displayName} just joined ${roomName}`,
+    true
+  );
+};
+
 const createRoom = async (
   roomName: string,
   icon: string
@@ -83,7 +97,11 @@ const createRoom = async (
     await set(ref(db, "rooms/" + roomName), {
       name: roomName,
       icon,
+      members: {
+        member: "",
+      },
     });
+    await joinRoom(roomName);
   } catch (error: any) {
     const FirbaseError: TError = error;
     return {
@@ -96,20 +114,20 @@ const createRoom = async (
 const sendMessage = async (
   roomName: string,
   message: string,
-  user: string,
-  profileImg: string
+  greeting = false
 ): Promise<void | ErrorResponse> => {
   try {
     const roomRef = ref(db, `messages/${roomName}`);
     const newMessage = push(roomRef);
     await set(newMessage, {
       key: newMessage.key,
-      author: user,
+      author: auth.currentUser?.displayName || "Unknown User",
       uid: auth.currentUser?.uid,
       message,
-      profileImg,
+      profileImg: auth.currentUser?.photoURL || "no img",
       edited: false,
       timePosted: Date.now(),
+      greeting,
       emojis: [],
     });
   } catch (error: any) {
@@ -153,6 +171,7 @@ const getAllRooms = async (
       Object.values(result).map((room) => ({
         name: room.name,
         icon: room.icon,
+        members: room.members,
       }))
     );
   });
@@ -365,7 +384,10 @@ export const firebaseApi = {
     signUp: {
       withPassword: createUserWithPassword,
     },
-    createRoom,
+    room: {
+      join: joinRoom,
+      create: createRoom,
+    },
     message: {
       send: sendMessage,
       edit: editMessage,

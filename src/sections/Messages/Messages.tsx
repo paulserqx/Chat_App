@@ -1,4 +1,4 @@
-import { Button, Message } from "components";
+import { Button, Message, NewUserAnouncement } from "components";
 import { useUser } from "hooks";
 import { useRouter } from "next/router";
 import { BiHash } from "react-icons/bi";
@@ -18,13 +18,7 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
 
   const handleSubmitMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await firebaseApi.POST.message.send(
-      slug,
-      message,
-      user?.displayName || "Unknown User",
-      user?.photoURL || ""
-    );
-
+    const res = await firebaseApi.POST.message.send(slug, message);
     setMessage("");
   };
 
@@ -37,12 +31,18 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   return (
     // <section className="w-full h-full flex  justify-between bg-grey" {...props}>
     <div className="flex flex-col h-full bg-darkGrey/95">
-      <div className="overflow-auto h-full pr-[10px]">
-        {chat.map((msg) => (
-          <div key={msg.key}>
-            <Message message={msg} />
-          </div>
-        ))}
+      <div className="overflow-auto h-full pr-[10px] pt-[90px]">
+        {chat.map((msg) =>
+          msg.greeting ? (
+            <div key={msg.key}>
+              <NewUserAnouncement message={msg} />
+            </div>
+          ) : (
+            <div key={msg.key}>
+              <Message message={msg} />
+            </div>
+          )
+        )}
       </div>
       <div className="w-full flex">
         <form onSubmit={(e) => handleSubmitMessage(e)} className="w-full">

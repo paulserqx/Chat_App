@@ -1,6 +1,6 @@
 import { icons } from "collections";
 import { Popup } from "components";
-import { usePopup } from "hooks";
+import { usePopup, useUser } from "hooks";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
 import { firebaseApi, IRoom } from "services";
@@ -13,26 +13,22 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
   const [rooms, setRooms] = useState<IRoom[]>([]);
 
   const router = useRouter();
+  const { user } = useUser();
   const { popupOpened, togglePopup } = usePopup();
 
   useEffect(() => {
     firebaseApi.GET.allRooms(setRooms);
   }, []);
 
-  // const handleJoinRoom = async () => {
-  //   const res = await firebaseApi.POST.createRoom(createRoom);
-  //   if (!res) {
-  //     setJoinRoom("");
-  //   } else {
-  //     alert(res.error.message);
-  //   }
-  // };
-
-  const handleGoToRoom = (path: string) => () => {
+  const handleGoToRoom = (roomName: string, userJoined: boolean) => () => {
+    if (!userJoined) {
+      firebaseApi.POST.room.join(roomName);
+      console.log("joining");
+    }
     if (router.pathname === "/chats") {
-      router.push(`chats/${path}`);
+      router.push(`chats/${roomName}`);
     } else {
-      router.push(path);
+      router.push(roomName);
     }
   };
 
@@ -52,11 +48,17 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
           <div className="dashboard-rooms-container">
             {rooms.map((room, i) => {
               const Icon = icons[room.icon];
+              const userHasJoined = Object.values(room.members)
+                .map((el) => el.user)
+                .indexOf(user?.uid || "");
               return (
                 <div
                   key={i}
                   className="dashboard-room "
-                  onClick={handleGoToRoom(room.name)}
+                  onClick={handleGoToRoom(
+                    room.name,
+                    userHasJoined >= 0 ? true : false
+                  )}
                 >
                   <Icon size={20} />
                   <div className="dashboard-room-tooltip">{room.name}</div>

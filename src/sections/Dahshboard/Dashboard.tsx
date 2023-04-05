@@ -4,6 +4,7 @@ import { usePopup, useUser } from "hooks";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
 import { firebaseApi, IRoom } from "services";
+import { hasUserJoined } from "utils";
 
 interface DashboardProps {
   ref?: RefObject<HTMLDivElement>;
@@ -23,7 +24,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
   const handleGoToRoom = (roomName: string, userJoined: boolean) => () => {
     if (!userJoined) {
       firebaseApi.POST.room.join(roomName);
-      console.log("joining");
     }
     if (router.pathname === "/chats") {
       router.push(`chats/${roomName}`);
@@ -48,17 +48,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
           <div className="dashboard-rooms-container">
             {rooms.map((room, i) => {
               const Icon = icons[room.icon];
-              const userHasJoined = Object.values(room.members)
-                .map((el) => el.user)
-                .indexOf(user?.uid || "");
+              const userHasJoined = hasUserJoined(room, user);
               return (
                 <div
                   key={i}
                   className="dashboard-room "
-                  onClick={handleGoToRoom(
-                    room.name,
-                    userHasJoined >= 0 ? true : false
-                  )}
+                  onClick={handleGoToRoom(room.name, userHasJoined)}
                 >
                   <Icon size={20} />
                   <div className="dashboard-room-tooltip">{room.name}</div>

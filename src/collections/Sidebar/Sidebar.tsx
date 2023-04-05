@@ -3,6 +3,8 @@ import React, { RefObject, useEffect, useState } from "react";
 import { firebaseApi, IRoom } from "services";
 import { CurrentUserProfile, icons } from "collections";
 import { Explore } from "components";
+import { useUser } from "hooks";
+import { hasUserJoined } from "utils";
 
 interface SidebarProps {
   sidebarOpened: boolean;
@@ -15,6 +17,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const [rooms, setRooms] = useState<IRoom[]>([]);
   const router = useRouter();
+  const { user } = useUser();
 
   const slug = router.query.slug ? router.query.slug[0] : "";
 
@@ -41,18 +44,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div>
           {rooms.map((room, i) => {
             const Icon = icons[room.icon];
+            const userJoined = hasUserJoined(room, user);
             return (
-              <div
-                key={i}
-                className={
-                  slug === room.name
-                    ? "active-room room-img-tail"
-                    : "sidebar-room room-img-tail"
-                }
-                onClick={handleGoToRoom(room.name)}
-              >
-                <Icon size={25} fill="black" />
-              </div>
+              userJoined && (
+                <div
+                  key={i}
+                  className={
+                    slug === room.name
+                      ? "active-room room-img-tail"
+                      : "sidebar-room room-img-tail"
+                  }
+                  onClick={handleGoToRoom(room.name)}
+                >
+                  <Icon size={25} fill="black" />
+                </div>
+              )
             );
           })}
           <Explore />

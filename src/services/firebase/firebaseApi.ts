@@ -30,6 +30,7 @@ import {
   GetAllRoomsResponse,
   IMessage,
   IRoom,
+  GetRoomResponse,
 } from "./types";
 import { Statuses } from "types";
 import { EmojiClickData } from "emoji-picker-react/dist/types/exposedTypes";
@@ -54,6 +55,9 @@ const changeStatus = async (status: string) => {
   const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
   set(usersPathRef, {
     status,
+    name: auth.currentUser?.displayName || "Anonymous User",
+    uid: auth.currentUser?.uid,
+    memberSince: auth.currentUser?.metadata.creationTime,
   });
 };
 
@@ -68,6 +72,15 @@ const getUserStatus = async (
       const value = status.val().status;
       setter(value);
     }
+  });
+};
+
+const getUserInfo = async (uid: string) => {
+  const userRef = ref(db, `users/${uid}`);
+  onValue(userRef, (info) => {
+    if (!info.val()) return;
+    console.log(auth.currentUser?.uid);
+    console.log(info.val());
   });
 };
 
@@ -177,6 +190,19 @@ const getAllRooms = async (
   });
 };
 
+const getRoom = async (
+  room: string,
+  setter: React.Dispatch<React.SetStateAction<string[]>>
+) => {
+  const roomRef = ref(db, `rooms/${room}/members`);
+  onValue(roomRef, (room) => {
+    if (!room.val()) return;
+    const result: GetRoomResponse = room.val();
+    const data = Object.values(result).map((user) => user.user);
+    setter(data.filter((el) => el !== undefined));
+  });
+};
+
 const createUserWithPassword = async (
   e: React.FormEvent,
   { email, password, username }: IEmailAndPasswordSignIn
@@ -186,6 +212,7 @@ const createUserWithPassword = async (
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     await setAdditionUserInfo(username || "Anonymous User");
+    await changeStatus("online");
     return {
       type: "data",
       response: res,
@@ -210,6 +237,7 @@ const setAdditionUserInfo = async (username: string) => {
 const signInWithGoogle = async (): Promise<ErrorResponse | DataResponse> => {
   try {
     const res = await signInWithPopup(auth, provider);
+    await changeStatus("online");
     return {
       type: "data",
       response: res,
@@ -401,8 +429,12 @@ export const firebaseApi = {
   GET: {
     allRooms: getAllRooms,
     messages: getMessages,
-    user: getUserStatus,
+    user: {
+      status: getUserStatus,
+      info: getUserInfo,
+    },
     emojis: getEmojis,
+    room: getRoom,
   },
   DELETE: {
     emoji: removeEmoji,

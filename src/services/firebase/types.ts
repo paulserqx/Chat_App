@@ -26,6 +26,12 @@ export type GetAllRoomsResponse = {
   };
 };
 
+export type GetRoomResponse = {
+  [key: string]: {
+    user: string;
+  };
+};
+
 export interface IMessage {
   author: string;
   message: string;

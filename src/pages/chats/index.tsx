@@ -30,6 +30,7 @@ export default function Dashboard({ ...props }) {
       }
     };
     window.onresize = widthWatcher;
+    widthWatcher();
   }, []);
 
   const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);

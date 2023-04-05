@@ -29,7 +29,6 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   }, [slug]);
 
   return (
-    // <section className="w-full h-full flex  justify-between bg-grey" {...props}>
     <div className="flex flex-col h-full bg-darkGrey/95">
       <div className="overflow-auto h-full pr-[10px] pt-[90px]">
         {chat.map((msg) =>
@@ -57,7 +56,5 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
         </form>
       </div>
     </div>
-    // <div>People </div>
-    // </section>
   );
 };

@@ -1,28 +1,27 @@
-import { Sidebar } from "collections";
-import { Button } from "components";
+import { RoomMembers, Sidebar } from "collections";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BiHash } from "react-icons/bi";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { IoMenuSharp } from "react-icons/io5";
 import { Dashboard as _Dashboard, Messages } from "sections";
-import { firebaseApi } from "services";
 import { RxCross1 } from "react-icons/rx";
 
 export default function ChatRoom() {
   const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);
+  const [roomMembersOpened, setRoomMembersOpened] = useState<boolean>(false);
 
   const router = useRouter();
   const slug = router.query.slug ? router.query.slug[0] : "";
 
-  const handleSignOut = async () => {
-    try {
-      const response = await firebaseApi.POST.signOut();
-    } catch (error: any) {
-      alert(error.message);
-    } finally {
-      router.push("/");
-    }
+  const handleToggleSidebar = () => {
+    setSidebarOpened(!sidebarOpened);
+    setRoomMembersOpened(false);
+  };
+
+  const handleMembersSidebar = () => {
+    setRoomMembersOpened(!roomMembersOpened);
+    setSidebarOpened(false);
   };
 
   useEffect(() => {
@@ -33,6 +32,7 @@ export default function ChatRoom() {
       }
     };
     window.onresize = widthWatcher;
+    widthWatcher();
   }, []);
 
   return (
@@ -43,7 +43,7 @@ export default function ChatRoom() {
           <nav className="navigation">
             <div
               className="md:hidden cursor-pointer"
-              onClick={() => setSidebarOpened(!sidebarOpened)}
+              onClick={handleToggleSidebar}
             >
               {sidebarOpened ? (
                 <RxCross1 size={30} fill="white" color="white" />
@@ -51,16 +51,17 @@ export default function ChatRoom() {
                 <IoMenuSharp size={30} fill="white" />
               )}
             </div>
-            <div className="pl-[20px ] flex items-center text-white">
-              <BiHash size={20} className="bottom-[-1.5px]" />
+            <div className="flex items-center text-white text-[18px]">
+              <BiHash size={20} className="bottom-[-1.5px] pr-[2px]" />
               {slug}
             </div>
-            <button onClick={handleSignOut}>
+            <button onClick={handleMembersSidebar}>
               <BsFillPeopleFill size={25} fill="white" />
             </button>
           </nav>
           <Messages />
         </section>
+        <RoomMembers membersSideOpened={roomMembersOpened} slug={slug} />
       </div>
     </>
   );

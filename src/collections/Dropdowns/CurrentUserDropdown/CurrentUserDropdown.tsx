@@ -21,7 +21,7 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
   const [status, setStatus] = useState<Statuses>("online");
 
   useEffect(() => {
-    firebaseApi.GET.user(setStatus);
+    firebaseApi.GET.user.status(setStatus);
   }, []);
 
   if (!user) return <div></div>;

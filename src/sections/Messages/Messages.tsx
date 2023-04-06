@@ -43,7 +43,7 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
           )
         )}
       </div>
-      <div className="w-full flex">
+      <div className="w-full flex md:pl-[10px]">
         <form onSubmit={(e) => handleSubmitMessage(e)} className="w-full">
           <input
             className="w-full"

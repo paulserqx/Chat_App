@@ -12,7 +12,7 @@ export const NewUserAnouncement: React.FC<NewUserAnouncementProps> = ({
   ...props
 }) => {
   return (
-    <div className="flex items-center p-[10px] text-white/80 text-[12px]">
+    <div className="flex items-center p-[10px] text-white/80 text-[12px] md:pl-[20px]">
       {message.message} <GiPartyPopper className="ml-[3px]" size={20} />
     </div>
   );

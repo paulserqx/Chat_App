@@ -34,7 +34,7 @@
     @apply text-[12px] text-red-500 mb-[10px] w-full break-words
   }
   .message {
-    @apply flex items-center p-[10px] 
+    @apply flex items-center p-[10px] md:pl-[20px]
   }
   .message-options-div {
     @apply hidden left-0 absolute bg-black/10 w-full h-full 
@@ -63,7 +63,7 @@
   }
 
   .navigation {
-    @apply bg-grey flex absolute z-10 justify-between w-full p-[20px] md:pr-[95px]
+    @apply bg-grey flex absolute z-10 justify-between w-full p-[20px] md:pr-[95px] md:pl-[30px]
   }
 
   .popup-background {

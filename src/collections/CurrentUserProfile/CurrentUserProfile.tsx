@@ -55,14 +55,7 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
               {statuses[status].icon}
             </div>
           </div>
-          {/* <div className="text-[15px] text-white flex flex-col text-ellipsis ">
-            <span className="font-medium">
-              {shortenDisplayName(displayName || "")}
-            </span>
-            <span className="opacity-40">#{uid.slice(0, 4)}</span>
-          </div> */}
         </div>
-        {/* <IoSettingsSharp fill="white" opacity={0.8} size="20px" /> */}
       </div>
     </div>
   );

@@ -59,6 +59,7 @@ const changeStatus = async (status: string) => {
     name: auth.currentUser?.displayName || "Anonymous User",
     uid: auth.currentUser?.uid,
     memberSince: auth.currentUser?.metadata.creationTime,
+    profileImg: auth.currentUser?.photoURL || defaultUser.src,
   });
 };
 
@@ -145,7 +146,7 @@ const sendMessage = async (
       author: auth.currentUser?.displayName || "Unknown User",
       uid: auth.currentUser?.uid,
       message,
-      profileImg: auth.currentUser?.photoURL || "no img",
+      profileImg: auth.currentUser?.photoURL || defaultUser.src,
       edited: false,
       timePosted: Date.now(),
       greeting,

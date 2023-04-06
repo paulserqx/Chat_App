@@ -61,7 +61,11 @@ export default function ChatRoom() {
           </nav>
           <Messages />
         </section>
-        <RoomMembers membersSideOpened={roomMembersOpened} slug={slug} />
+        <RoomMembers
+          setRoomMembers={setRoomMembersOpened}
+          membersSideOpened={roomMembersOpened}
+          slug={slug}
+        />
       </div>
     </>
   );

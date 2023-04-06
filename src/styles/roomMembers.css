@@ -1,0 +1,9 @@
+.room-members-container {
+    @apply flex flex-col bg-grey text-white w-[200px] h-full absolute right-0 top-0 z-[60] transition-all duration-500 py-[20px] rounded-l-[20px]
+}
+.room-status-type {
+    @apply flex justify-center items-center mb-[10px]
+}
+.room-member{
+    @apply flex items-center cursor-pointer p-[4px] px-[10px] hover:bg-slate-600 hover:rounded-md hover:transition-[background-color] duration-300 justify-between mt-[5px]
+}

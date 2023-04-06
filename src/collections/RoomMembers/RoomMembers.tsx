@@ -1,15 +1,18 @@
 import React, { RefObject, useEffect, useState } from "react";
 import { IUserInfo, firebaseApi } from "services";
 import { RoomMember } from "./RoomMember";
+import { statuses } from "utils";
 
 interface RoomMembersProps {
   membersSideOpened: boolean;
+  setRoomMembers: React.Dispatch<React.SetStateAction<boolean>>;
   slug: string;
   ref?: RefObject<HTMLDivElement>;
 }
 
 export const RoomMembers: React.FC<RoomMembersProps> = ({
   membersSideOpened,
+  setRoomMembers,
   slug,
   ...props
 }) => {
@@ -31,40 +34,26 @@ export const RoomMembers: React.FC<RoomMembersProps> = ({
   }, []);
 
   return (
-    <div className={membersSideOpened ? "flex flex-col" : "hidden"}>
-      {/* Filtering members and rendering by status */}
-      Online
-      {members
-        .filter((member) => member.status === "online")
-        .map((member) => (
-          <div key={"online room Member" + member.uid}>
+    <>
+      <div
+        className={membersSideOpened ? "popup-background" : "hidden"}
+        onClick={() => setRoomMembers(false)}
+      />
+      <div
+        className={
+          membersSideOpened
+            ? "room-members-container"
+            : "room-members-container !right-[-100%]"
+        }
+      >
+        {/* Filtering members and rendering by status */}
+        <h1 className="room-status-type">Members</h1>
+        {members.map((member) => (
+          <div key={"room Member" + member.uid}>
             <RoomMember member={member} />
           </div>
         ))}
-      Idle
-      {members
-        .filter((member) => member.status === "idle")
-        .map((member) => (
-          <div key={"idle room Member" + member.uid}>
-            <RoomMember member={member} />
-          </div>
-        ))}
-      Do Not Disturb
-      {members
-        .filter((member) => member.status === "do-not-disturb")
-        .map((member) => (
-          <div key={"do-not-disturn room Member" + member.uid}>
-            <RoomMember member={member} />
-          </div>
-        ))}
-      Offline
-      {members
-        .filter((member) => member.status === "invisible")
-        .map((member) => (
-          <div key={"offline room Member" + member.uid}>
-            <RoomMember member={member} />
-          </div>
-        ))}
-    </div>
+      </div>
+    </>
   );
 };

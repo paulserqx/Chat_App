@@ -6,6 +6,7 @@
 @import url('./forms.css');
 @import url('./dashboard.css');
 @import url('./sidebar.css');
+@import url('./roomMembers.css');
 
 @layer components {
   .button {
@@ -63,6 +64,10 @@
 
   .navigation {
     @apply bg-grey flex absolute z-10 justify-between w-full p-[20px]
+  }
+
+  .popup-background {
+    @apply fixed top-0 left-0 w-[100vw] h-[100vh] bg-black/60 z-[50]
   }
 }
 .edit:hover .edit-tooltip {

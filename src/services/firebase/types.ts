@@ -38,6 +38,7 @@ export interface IUserInfo {
   name: string;
   status: Statuses;
   uid: string;
+  profileImg: string;
 }
 
 export interface IMessage {

@@ -1,5 +1,5 @@
 import React, { RefObject, useEffect, useState } from "react";
-import { firebaseApi } from "services";
+import { IUserInfo, firebaseApi } from "services";
 
 interface RoomMembersProps {
   membersSideOpened: boolean;
@@ -12,17 +12,20 @@ export const RoomMembers: React.FC<RoomMembersProps> = ({
   slug,
   ...props
 }) => {
-  const [members, setMembers] = useState<string[]>([]);
-  console.log(members);
-  useEffect(() => {
-    members.map((uid) => {
-      const user = firebaseApi.GET.user.info(uid);
-      console.log(user);
-    });
-  }, [members]);
+  const [membersUidList, setMembersUidList] = useState<string[]>([]);
+  const [members, setMembers] = useState<IUserInfo[]>([]);
 
   useEffect(() => {
-    firebaseApi.GET.room(slug, setMembers);
+    membersUidList.map(async (uid) => {
+      // Fetching user info from the uids
+      await firebaseApi.GET.user.info(uid, setMembers);
+    });
+  }, [membersUidList]);
+
+  useEffect(() => {
+    // Collecting uids for the current room
+    firebaseApi.GET.room(slug, setMembersUidList);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <div className={membersSideOpened ? "flex" : "hidden"}>members</div>;

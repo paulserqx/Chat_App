@@ -28,7 +28,6 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
 
   if (!user) return null;
   const { photoURL, displayName, metadata, uid } = user;
-  console.log(photoURL);
 
   return (
     <div className="bg-[#232428] w-full p-[10px] ">

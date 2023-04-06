@@ -1,4 +1,5 @@
 import { FirebaseError } from "firebase/app";
+import { Statuses } from "types";
 
 export interface IEmailAndPasswordSignIn {
   email: string;
@@ -31,6 +32,13 @@ export type GetRoomResponse = {
     user: string;
   };
 };
+
+export interface IUserInfo {
+  memberSince: string;
+  name: string;
+  status: Statuses;
+  uid: string;
+}
 
 export interface IMessage {
   author: string;

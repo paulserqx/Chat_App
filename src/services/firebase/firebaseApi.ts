@@ -31,6 +31,7 @@ import {
   IMessage,
   IRoom,
   GetRoomResponse,
+  IUserInfo,
 } from "./types";
 import { Statuses } from "types";
 import { EmojiClickData } from "emoji-picker-react/dist/types/exposedTypes";
@@ -75,12 +76,15 @@ const getUserStatus = async (
   });
 };
 
-const getUserInfo = async (uid: string) => {
+const getUserInfo = async (
+  uid: string,
+  setter: React.Dispatch<React.SetStateAction<IUserInfo[]>>
+) => {
   const userRef = ref(db, `users/${uid}`);
   onValue(userRef, (info) => {
     if (!info.val()) return;
-    console.log(auth.currentUser?.uid);
-    console.log(info.val());
+    const userInfo = info.val();
+    setter((prevState) => [...prevState, userInfo]);
   });
 };
 

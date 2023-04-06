@@ -1,17 +1,17 @@
+import { useRouter } from "next/router";
 import React, { RefObject } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { firebaseApi } from "services";
 
 interface GoogleBtnProps {
+  handleGoogleSignIn: () => void;
   ref?: RefObject<HTMLButtonElement>;
 }
 
-export const GoogleBtn: React.FC<GoogleBtnProps> = ({ ...props }) => {
-  const handleGoogleSignIn = async () => {
-    const res = await firebaseApi.POST.signIn.withGoogle();
-    console.log(res);
-  };
-
+export const GoogleBtn: React.FC<GoogleBtnProps> = ({
+  handleGoogleSignIn,
+  ...props
+}) => {
   return (
     <button
       {...props}

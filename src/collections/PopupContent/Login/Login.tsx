@@ -18,9 +18,29 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
 
   const router = useRouter();
 
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    const res = await firebaseApi.POST.signIn.withGoogle();
+
+    if (res.type === "data") {
+      router.push("/chats");
+    } else {
+      const message = transformErrorMessage(res.error.message);
+      console.log(res);
+      const error = FirebaseErrors[message];
+      console.log(error);
+      setError(error);
+    }
+
+    setIsLoading(false);
+  };
+
   const handleLoginSubmit = async (e: React.FormEvent) => {
     setIsLoading(true);
     setError(null);
+
     const result = await firebaseApi.POST.signIn.withPassword(e, {
       email,
       password,
@@ -29,12 +49,16 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
     if (result.type === "data") {
       router.push("/chats");
     } else {
+      console.log("error");
       const message = transformErrorMessage(result.error.message);
       const error = FirebaseErrors[message];
       setError(error);
     }
+
     setIsLoading(false);
   };
+
+  console.log(error);
 
   return (
     <form onSubmit={handleLoginSubmit} className="form">
@@ -49,7 +73,7 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
         <span className="form-banner-span">
           Continiue with Google or enter your details.
         </span>
-        <GoogleBtn />
+        <GoogleBtn handleGoogleSignIn={handleGoogleSignIn} />
         <div className="or-marker">
           <span className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-[10px] rounded-full bg-white">
             or

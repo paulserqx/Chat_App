@@ -11,6 +11,7 @@ interface SignUpProps {
 
 export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
   const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [rePassword, setRePassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -73,6 +74,17 @@ export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Type Your Email..."
+        />
+        <label htmlFor="email" className="form-label">
+          Username
+        </label>
+        <input
+          className="input"
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Type Your username..."
         />
         <label htmlFor="password" className="form-label">
           Password

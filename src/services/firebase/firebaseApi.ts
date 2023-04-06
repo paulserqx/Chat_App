@@ -84,7 +84,11 @@ const getUserInfo = async (
   onValue(userRef, (info) => {
     if (!info.val()) return;
     const userInfo = info.val();
-    setter((prevState) => [...prevState, userInfo]);
+    setter((prevState) => {
+      const removedOldInfo = prevState.filter((el) => el.uid !== uid);
+      console.log(removedOldInfo);
+      return [...removedOldInfo, userInfo];
+    });
   });
 };
 

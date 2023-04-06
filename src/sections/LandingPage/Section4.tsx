@@ -1,5 +1,5 @@
 import { section4 } from "assets";
-import { Button, TPopups } from "components";
+import { Button, Popup, TPopups } from "components";
 import { usePopup } from "hooks";
 import Image from "next/image";
 import { RefObject } from "react";
@@ -34,12 +34,14 @@ export const Section4: React.FC<section4Props> = ({ ...props }) => {
           </div>
         </div>
       </section>
+      <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
+
       <section className="bg-white">
         <div className="rdy-to-start">
           <h4 className="rdy-to-start-h4">Ready to start your journey?</h4>
           <div
             onClick={togglePopup("login")}
-            className="flex flex-col sm:max-w-[50%] w-full"
+            className="text-[20px] flex w-full justify-center"
           >
             <Button blueTheme text="Login" />
           </div>
@@ -48,7 +50,7 @@ export const Section4: React.FC<section4Props> = ({ ...props }) => {
           </span>
           <div
             onClick={togglePopup("signUp")}
-            className="flex flex-col sm:max-w-[50%] w-full"
+            className="text-[20px] flex w-[200px] justify-center"
           >
             <Button blueTheme text="Sign Up" />
           </div>

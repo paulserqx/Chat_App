@@ -31,7 +31,7 @@ export const Popup: React.FC<PopupProps> = ({
         onClick={closePopup("null")}
         className={
           popupType !== "null"
-            ? "z-10 flex items-center fixed justify-center bg-slate-900 opacity-[0.9]  w-full h-full"
+            ? "z-10 flex items-center fixed justify-center bg-slate-900 opacity-[0.9]  w-full h-full top-0 left-0"
             : "hidden"
         }
       />

@@ -58,7 +58,7 @@ export default function Dashboard({ ...props }) {
             </div>
             <h1 className="hidden md:flex text-white text-[20px]">
               <BiHash size={25} fill="white" className="top-[-1px] pr-[2px]" />
-              Chat Rooms
+              Explore
             </h1>
             <button onClick={handleSignOut}>
               <Button text={"Sign Out"} />

@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
 import { firebaseApi, IRoom } from "services";
 import { hasUserJoined } from "utils";
+import { exploreBackground } from "assets";
+import Image from "next/image";
 
 interface DashboardProps {
   ref?: RefObject<HTMLDivElement>;
@@ -40,10 +42,31 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
         </div>
       )}
       <section className="dashboard" {...props}>
+        <div className="w-full h-[40vw] top-0 max-h-[400px] flex items-center justify-center flex-col">
+          <h1 className="dashboard-greeting z-[10]">Explore Rooms</h1>
+          <span className="z-[10] my-[10px] text-white md:my-[20px] md:text-[20px]">
+            Or
+          </span>
+          <button
+            onClick={togglePopup("createRoom")}
+            className="create-room-button z-[10]"
+            type="button"
+          >
+            Create A New Room
+          </button>
+          <Image
+            className="pointer-events-none"
+            src={exploreBackground}
+            alt="explore-background"
+            fill
+            style={{
+              objectFit: "cover",
+            }}
+          />
+        </div>
         <div className="dashboard-info">
-          <h1 className="dashboard-greeting">Let&apos;s get started!</h1>
           <h3 className="dashboard-greeting-info">
-            Click on a room to join the conversation.
+            Click on a room to join the conversation!
           </h3>
           <div className="dashboard-rooms-container">
             {rooms.map((room, i) => {
@@ -62,15 +85,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
             })}
           </div>
         </div>
-        <div className="dashboard-or-marker" />
-
-        <button
-          onClick={togglePopup("createRoom")}
-          className="create-room-button"
-          type="button"
-        >
-          Create A New Room
-        </button>
+        {/* <div className="dashboard-or-marker" /> */}
       </section>
     </>
   );

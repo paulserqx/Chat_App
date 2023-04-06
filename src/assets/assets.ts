@@ -6,6 +6,7 @@ import section2 from "../../public/svgs/section2.svg";
 import section3 from "../../public/svgs/section3.svg";
 import section4 from "../../public/svgs/section4.svg";
 import defaultUser from "../../public/imgs/default_user.jpg";
+import exploreBackground from "../../public/svgs/dashboard-banner.svg";
 
 export {
   clouds,
@@ -16,4 +17,5 @@ export {
   section2,
   section3,
   section4,
+  exploreBackground,
 };

@@ -1,14 +1,14 @@
 .dashboard {
-    @apply w-full h-full bg-darkGrey/90  overflow-hidden flex flex-col items-center justify-center
+    @apply w-full h-full bg-darkGrey/90  overflow-hidden flex flex-col items-center justify-start pt-[70px] md:pt-[65px]
 }
 .dashboard-greeting {
-    @apply text-[25px] text-white text-center mb-[6px]
+    @apply text-[25px] text-white text-center md:text-[35px]
 }
 .dashboard-greeting-info{
     @apply text-[18px] text-white mb-[20px] text-center
 }
 .dashboard-info {
-    @apply w-full px-[20px]
+    @apply w-full px-[20px] mt-[20px]
 }
 .dashboard-rooms-container {
     @apply flex flex-wrap w-full justify-center
@@ -28,7 +28,7 @@
 }
 
 .create-room-button {
-    @apply text-white py-[10px] border-white border-[2px] px-[30px] rounded-lg
+    @apply text-white py-[10px] border-white border-[2px] px-[30px] rounded-lg md:text-[25px]
 }
 
 .create-room-icon-container {

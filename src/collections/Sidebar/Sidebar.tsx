@@ -8,11 +8,13 @@ import { hasUserJoined } from "utils";
 
 interface SidebarProps {
   sidebarOpened: boolean;
+  setSidebarOpened: React.Dispatch<React.SetStateAction<boolean>>;
   ref?: RefObject<HTMLDivElement>;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   sidebarOpened,
+  setSidebarOpened,
   ...props
 }) => {
   const [rooms, setRooms] = useState<IRoom[]>([]);
@@ -34,37 +36,43 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div
-      className={
-        sidebarOpened ? "sidebar-container" : "sidebar-container-closed"
-      }
-      {...props}
-    >
-      <div className="flex w-full overflow-auto flex-col justify-between pl-[15px]">
-        <div>
-          {rooms.map((room, i) => {
-            const Icon = icons[room.icon];
-            const userJoined = hasUserJoined(room, user);
-            return (
-              userJoined && (
-                <div
-                  key={i}
-                  className={
-                    slug === room.name
-                      ? "active-room room-img-tail"
-                      : "sidebar-room room-img-tail"
-                  }
-                  onClick={handleGoToRoom(room.name)}
-                >
-                  <Icon size={25} fill="black" />
-                </div>
-              )
-            );
-          })}
-          <Explore />
+    <>
+      <div
+        className={sidebarOpened ? "popup-background" : "hidden"}
+        onClick={() => setSidebarOpened(false)}
+      />
+      <div
+        className={
+          sidebarOpened ? "sidebar-container" : "sidebar-container-closed"
+        }
+        {...props}
+      >
+        <div className="flex w-full overflow-auto flex-col justify-between pl-[15px]">
+          <div>
+            {rooms.map((room, i) => {
+              const Icon = icons[room.icon];
+              const userJoined = hasUserJoined(room, user);
+              return (
+                userJoined && (
+                  <div
+                    key={i}
+                    className={
+                      slug === room.name
+                        ? "active-room room-img-tail"
+                        : "sidebar-room room-img-tail"
+                    }
+                    onClick={handleGoToRoom(room.name)}
+                  >
+                    <Icon size={25} fill="black" />
+                  </div>
+                )
+              );
+            })}
+            <Explore />
+          </div>
         </div>
+        <CurrentUserProfile />
       </div>
-      <CurrentUserProfile />
-    </div>
+    </>
   );
 };

@@ -29,8 +29,8 @@
   }
 
 .sidebar-container {
-    @apply flex flex-col justify-between w-[5.5rem] h-[-webkit-fill-available] bg-darkGrey
+    @apply flex flex-col justify-between w-[75px] h-[-webkit-fill-available] bg-darkGrey left-[0] absolute z-[60] transition-all duration-300
 }
 .sidebar-container-closed {
-    @apply sidebar-container !hidden
+    @apply sidebar-container !left-[-100%]
 }

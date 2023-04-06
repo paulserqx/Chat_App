@@ -38,7 +38,10 @@ export default function ChatRoom() {
   return (
     <>
       <div className="flex h-[100vh] overflow-hidden">
-        <Sidebar sidebarOpened={sidebarOpened} />
+        <Sidebar
+          sidebarOpened={sidebarOpened}
+          setSidebarOpened={setSidebarOpened}
+        />
         <section className="flex flex-col w-full h-full">
           <nav className="navigation">
             <div

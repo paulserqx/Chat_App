@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
 import { firebaseApi, IRoom } from "services";
 import { hasUserJoined } from "utils";
-import { exploreBackground } from "assets";
+import { exploreBackground, stars } from "assets";
 import Image from "next/image";
 
 interface DashboardProps {
@@ -62,6 +62,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
             style={{
               objectFit: "cover",
             }}
+          />
+          <Image
+            className="pointer-events-none absolute left-10 top-10 animate-starsLeft"
+            src={stars}
+            alt="stars-background"
+          />
+          <Image
+            className="pointer-events-none absolute left-[-100px] top-[40%] animate-starsLeft"
+            src={stars}
+            alt="stars-background"
+          />
+          <Image
+            className="pointer-events-none absolute bottom-0 right-0 animate-starsRight"
+            src={stars}
+            alt="stars-background"
           />
         </div>
         <div className="dashboard-info">

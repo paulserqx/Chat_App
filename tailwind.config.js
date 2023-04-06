@@ -18,7 +18,9 @@ module.exports = {
         popupOpen: 'popupOpen 0.4s ease-out',
         popupClose: 'popupClose 0.4s ease-out',
         clouds: 'clouds 60s cubic-bezier(.38,.78,1,.81) infinite',
-        loading: 'loading 1s cubic-bezier(.62,1,.59,.44) infinite'
+        loading: 'loading 1s cubic-bezier(.62,1,.59,.44) infinite',
+        starsRight: 'stars_right 50s linear infinite',
+        starsLeft: 'stars_left 50s linear infinite'
       },
       keyframes: {
         popupOpen: {
@@ -44,6 +46,16 @@ module.exports = {
         clouds: {
           '0%': {transform: 'translateX(0%) scale(1.7)'},
           '100%': {transform: 'translateX(100%) scale(2.2)'},
+        },
+        stars_right: {
+          '0%': {transform: 'translateX(0%)'},
+          '50%': {transform: 'translateX(-100%) translateY(-50%)'},
+          '100%': {transform: 'translateX(-200%)'},
+        },
+        stars_left: {
+          '0%': {transform: 'translateX(0%)'},
+          '50%': {transform: 'translateX(100%) translateY(50%)'},
+          '100%': {transform: 'translateX(200%)'},
         }
       }
     },

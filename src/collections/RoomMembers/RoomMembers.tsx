@@ -47,7 +47,7 @@ export const RoomMembers: React.FC<RoomMembersProps> = ({
         }
       >
         {/* Filtering members and rendering by status */}
-        <h1 className="room-status-type">Members</h1>
+        <h1 className="room-status-type">Room Members</h1>
         {members.map((member) => (
           <div key={"room Member" + member.uid}>
             <RoomMember member={member} />

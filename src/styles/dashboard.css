@@ -1,5 +1,5 @@
 .dashboard {
-    @apply w-full h-full bg-veryDarkGrey/90  overflow-hidden flex flex-col items-center justify-center
+    @apply w-full h-full bg-darkGrey/90  overflow-hidden flex flex-col items-center justify-center
 }
 .dashboard-greeting {
     @apply text-[25px] text-white text-center mb-[6px]

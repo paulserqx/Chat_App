@@ -27,6 +27,8 @@ export default function Dashboard({ ...props }) {
       const bodyWidth = window.innerWidth;
       if (bodyWidth > 768) {
         setSidebarOpened(true);
+      } else {
+        setSidebarOpened(false);
       }
     };
     window.onresize = widthWatcher;
@@ -38,8 +40,11 @@ export default function Dashboard({ ...props }) {
   return (
     <>
       <div className="flex h-[100vh] overflow-hidden">
-        <Sidebar sidebarOpened={sidebarOpened} />
-        <section className="w-full h-full">
+        <Sidebar
+          sidebarOpened={sidebarOpened}
+          setSidebarOpened={setSidebarOpened}
+        />
+        <section className="w-full h-full md:pl-[75px]">
           <nav className="navigation">
             <div
               className="md:hidden cursor-pointer"

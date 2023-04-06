@@ -29,6 +29,10 @@ export default function ChatRoom() {
       const bodyWidth = window.innerWidth;
       if (bodyWidth > 768) {
         setSidebarOpened(true);
+        setRoomMembersOpened(true);
+      } else {
+        setSidebarOpened(false);
+        setRoomMembersOpened(false);
       }
     };
     window.onresize = widthWatcher;
@@ -42,8 +46,8 @@ export default function ChatRoom() {
           sidebarOpened={sidebarOpened}
           setSidebarOpened={setSidebarOpened}
         />
-        <section className="flex flex-col w-full h-full">
-          <nav className="navigation">
+        <section className="flex flex-col w-full h-full md:pl-[75px] md:pr-[200px]">
+          <nav className="navigation md:pr-[200px]">
             <div
               className="md:hidden cursor-pointer"
               onClick={handleToggleSidebar}

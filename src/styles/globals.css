@@ -63,11 +63,11 @@
   }
 
   .navigation {
-    @apply bg-grey flex absolute z-10 justify-between w-full p-[20px]
+    @apply bg-grey flex absolute z-10 justify-between w-full p-[20px] md:pr-[95px]
   }
 
   .popup-background {
-    @apply fixed top-0 left-0 w-[100vw] h-[100vh] bg-black/60 z-[50]
+    @apply fixed top-0 left-0 w-[100vw] h-[100vh] bg-black/60 z-[50] md:!hidden
   }
 }
 .edit:hover .edit-tooltip {
@@ -92,6 +92,9 @@ display: flex;
 }
 html, body {
   height: 100%;
+}
+body {
+  @apply bg-black
 }
 body {
   line-height: 1;

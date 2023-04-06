@@ -34,22 +34,26 @@ export const Section4: React.FC<section4Props> = ({ ...props }) => {
           </div>
         </div>
       </section>
-      <div className="rdy-to-start">
-        <h4 className="rdy-to-start-h4">Ready to start your journey?</h4>
-        <div
-          onClick={togglePopup("login")}
-          className="flex flex-col sm:max-w-[50%] w-full"
-        >
-          <Button blueTheme text="Login" />
+      <section className="bg-white">
+        <div className="rdy-to-start">
+          <h4 className="rdy-to-start-h4">Ready to start your journey?</h4>
+          <div
+            onClick={togglePopup("login")}
+            className="flex flex-col sm:max-w-[50%] w-full"
+          >
+            <Button blueTheme text="Login" />
+          </div>
+          <span className="my-[10px] text-center text-[15px] font-bold ">
+            Or
+          </span>
+          <div
+            onClick={togglePopup("signUp")}
+            className="flex flex-col sm:max-w-[50%] w-full"
+          >
+            <Button blueTheme text="Sign Up" />
+          </div>
         </div>
-        <span className="my-[10px] text-center text-[15px] font-bold ">Or</span>
-        <div
-          onClick={togglePopup("signUp")}
-          className="flex flex-col sm:max-w-[50%] w-full"
-        >
-          <Button blueTheme text="Sign Up" />
-        </div>
-      </div>
+      </section>
     </>
   );
 };

@@ -24,15 +24,23 @@ export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
     setIsLoading(true);
     setError(null);
 
+    console.log(username);
+
     if (password !== rePassword) {
       setIsLoading(false);
       setError("Please confirm your password");
+      return;
+    }
+    if (username.length <= 2) {
+      setIsLoading(false);
+      setError("Username shoud be at least 2 characters");
       return;
     }
 
     const result = await firebaseApi.POST.signUp.withPassword(e, {
       email,
       password,
+      username,
     });
 
     if (result.type === "data") {

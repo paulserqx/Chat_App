@@ -19,13 +19,7 @@ export const RoomMembers: React.FC<RoomMembersProps> = ({
   const [membersUidList, setMembersUidList] = useState<string[]>([]);
   const [members, setMembers] = useState<IUserInfo[]>([]);
 
-  useEffect(() => {
-    setMembers([]);
-    membersUidList.map(async (uid) => {
-      // Fetching user info from the uids
-      await firebaseApi.GET.user.info(uid, setMembers);
-    });
-  }, [membersUidList]);
+  console.log(membersUidList);
 
   useEffect(() => {
     // Collecting uids for the current room
@@ -34,6 +28,14 @@ export const RoomMembers: React.FC<RoomMembersProps> = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
+
+  useEffect(() => {
+    setMembers([]);
+    membersUidList.map(async (uid) => {
+      // Fetching user info from the uids
+      await firebaseApi.GET.user.info(uid, setMembers);
+    });
+  }, [membersUidList]);
 
   return (
     <>

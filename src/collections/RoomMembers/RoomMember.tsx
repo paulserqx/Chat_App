@@ -11,9 +11,9 @@ interface RoomMemberProps {
 export const RoomMember: React.FC<RoomMemberProps> = ({ member }) => {
   return (
     <div className="room-member">
-      <div className="rounded-full pr-[3px] ">
+      <div className="rounded-full !basis-[40px] flex pr-[3px] shrink-0">
         <Image
-          className="rounded-full"
+          className="rounded-full "
           src={member.profileImg}
           width={40}
           height={40}
@@ -23,7 +23,7 @@ export const RoomMember: React.FC<RoomMemberProps> = ({ member }) => {
           {statuses[member.status].icon}
         </div>
       </div>
-      {member.name}
+      <h1 className="pl-[10px] break-keep">{member.name}</h1>
     </div>
   );
 };

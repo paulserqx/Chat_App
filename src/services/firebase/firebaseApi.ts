@@ -52,11 +52,11 @@ interface DataResponse<T = UserCredential> {
 const db = getDatabase();
 const dbRef = ref(db);
 
-const changeStatus = async (status: string) => {
+const changeStatus = async (status: string, username: string) => {
   const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
   set(usersPathRef, {
     status,
-    name: auth.currentUser?.displayName || "Anonymous User",
+    name: username,
     uid: auth.currentUser?.uid,
     memberSince: auth.currentUser?.metadata.creationTime,
     profileImg: auth.currentUser?.photoURL || defaultUser.src,
@@ -220,8 +220,8 @@ const createUserWithPassword = async (
 
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    await setAdditionUserInfo(username || "Anonymous User");
-    await changeStatus("online");
+    await setAdditionUserInfo(username);
+    await changeStatus("online", username);
     return {
       type: "data",
       response: res,
@@ -246,7 +246,10 @@ const setAdditionUserInfo = async (username: string) => {
 const signInWithGoogle = async (): Promise<ErrorResponse | DataResponse> => {
   try {
     const res = await signInWithPopup(auth, provider);
-    await changeStatus("online");
+    await changeStatus(
+      "online",
+      auth.currentUser?.displayName || "Anonymous User"
+    );
     return {
       type: "data",
       response: res,

@@ -4,7 +4,7 @@ import { Statuses } from "types";
 export interface IEmailAndPasswordSignIn {
   email: string;
   password: string;
-  username?: string;
+  username: string;
 }
 
 export type TError = FirebaseError;

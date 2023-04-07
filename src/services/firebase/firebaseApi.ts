@@ -71,12 +71,10 @@ const getUserStatus = async (
 ) => {
   const statusRef = ref(db, `users/${auth.currentUser?.uid}`);
   onValue(statusRef, (status) => {
-    console.log(auth.currentUser?.uid, "start");
     if (status.val() === null) {
       setter("online");
     } else {
       const value = status.val().status;
-      console.log(value);
       setter(value);
     }
   });
@@ -92,7 +90,6 @@ const getUserInfo = async (
     const userInfo = info.val();
     setter((prevState) => {
       const removedOldInfo = prevState.filter((el) => el.uid !== uid);
-      console.log(removedOldInfo);
       return [...removedOldInfo, userInfo];
     });
   });

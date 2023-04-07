@@ -1,11 +1,18 @@
-import { EditMessageForm, EmojiPicker, IEmoji, IEmojiInfo } from "collections";
+import {
+  EditMessageForm,
+  EmojiPicker,
+  IEmoji,
+  IEmojiInfo,
+  avatars,
+} from "collections";
+import { Loader } from "components/Loader";
 import { MessageOptions } from "components/MessageOptions";
 import { Emoji, EmojiStyle } from "emoji-picker-react";
 import { useUser } from "hooks";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
-import { IMessage, formatTime, firebaseApi } from "services";
+import { IMessage, formatTime, firebaseApi, IUserInfo } from "services";
 
 interface MessageProps {
   message: IMessage;
@@ -17,18 +24,23 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [emojiPicker, setEmojiPicker] = useState<boolean>(false);
   const [emojis, setEmojis] = useState<IEmoji[]>([]);
+  const [userInfo, setUserInfo] = useState<IUserInfo[]>([]);
 
   const router = useRouter();
   const { user } = useUser();
-  const slug = router.query.slug!![0];
+  const slug = router.query.slug ? router.query.slug[0] : "";
 
   useEffect(() => {
     const getEmojis = async () => {
+      setUserInfo([]);
       await firebaseApi.GET.emojis(slug, message, setEmojis);
+      await firebaseApi.GET.user.info(message.uid, setUserInfo);
     };
     getEmojis();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(userInfo);
 
   const handleSubmitEditMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,13 +83,17 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
         emojiPicker={emojiPicker}
         setEditMessage={setEditedMessage}
       />
-      <Image
-        className="rounded-full mr-[10px]"
-        src={message.profileImg}
-        width={40}
-        height={40}
-        alt={`${message.author}'s img`}
-      />
+      {userInfo[0] ? (
+        <Image
+          className="rounded-full mr-[10px]"
+          src={avatars[userInfo[0].profileImg] || userInfo[0].profileImg}
+          width={40}
+          height={40}
+          alt={`${userInfo[0].name}'s img`}
+        />
+      ) : (
+        <Loader />
+      )}
       <div className="flex flex-col">
         <div className="flex mb-[3px]">
           <h4 className="text-[13px] mr-[5px] text-green-600 ">

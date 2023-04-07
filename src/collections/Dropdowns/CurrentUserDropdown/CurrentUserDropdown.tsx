@@ -33,7 +33,7 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
         <div className="w-full rounded-t-lg h-[60px] bg-gradient-to-tr from-cyan-400 to-purple-300 " />
         <div className="status-dropdown rounded-full w-fit left-[15px] absolute top-[15px] z-20 border-[6px] border-[#232428]">
           <Image
-            src={avatars[userInfo.profileImg].src}
+            src={avatars[userInfo.profileImg] || userInfo.profileImg}
             width={80}
             height={80}
             className="rounded-full"

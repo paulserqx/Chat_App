@@ -28,6 +28,7 @@ import { SiRubyonrails } from "react-icons/si";
 import { IoIosFitness } from "react-icons/io";
 import { IconType } from "react-icons/lib";
 import { IoPlanet } from "react-icons/io5";
+import { TPopups } from "components";
 
 export const icons: {
   [key: string]: IconType;
@@ -55,6 +56,7 @@ export const icons: {
 };
 
 interface CreateRoomFormProps {
+  closePopup: (type?: TPopups) => () => void;
   ref?: RefObject<HTMLFormElement>;
 }
 

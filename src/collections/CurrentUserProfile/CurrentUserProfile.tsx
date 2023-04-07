@@ -1,9 +1,11 @@
 import { CurrentUserDropdown } from "collections/Dropdowns";
+import { avatars } from "collections/Forms";
+import { Loader } from "components";
 import { useUser } from "hooks";
 import Image from "next/image";
 import React, { RefObject, useEffect, useState } from "react";
 import { IoSettingsSharp } from "react-icons/io5";
-import { firebaseApi } from "services";
+import { IUserInfo, firebaseApi } from "services";
 import { Statuses } from "types";
 import { shortenDisplayName, statuses } from "utils";
 
@@ -16,18 +18,17 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
 }) => {
   const { user } = useUser();
   const [openCurrentUser, setOpenCurrentUser] = useState<boolean>(false);
+  const [userInfo, setUserInfo] = useState<IUserInfo[]>([]);
   const [status, setStatus] = useState<Statuses>("online");
 
   useEffect(() => {
     firebaseApi.GET.user.status(setStatus);
+    firebaseApi.GET.user.info(user?.uid || "user", setUserInfo);
   }, [user]);
 
   const handleOpenCurrentUser = () => {
     setOpenCurrentUser(!openCurrentUser);
   };
-
-  if (!user) return null;
-  const { photoURL, displayName, metadata, uid } = user;
 
   return (
     <div className="bg-[#232428] w-full p-[10px] ">
@@ -38,19 +39,23 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
         />
       )}
       <div className="flex justify-center items-center">
-        <CurrentUserDropdown opened={openCurrentUser} />
+        <CurrentUserDropdown opened={openCurrentUser} userInfo={userInfo[0]} />
         <div
           onClick={handleOpenCurrentUser}
           className="flex items-center cursor-pointer p-[4px] hover:bg-slate-600 hover:rounded-md hover:transition-[background-color] duration-300"
         >
           <div className="rounded-full pr-[3px] ">
-            <Image
-              className="rounded-full"
-              src={photoURL || ""}
-              width={40}
-              height={40}
-              alt={`${displayName}'s Image`}
-            />
+            {userInfo[0] ? (
+              <Image
+                className="rounded-full"
+                src={avatars[userInfo[0].profileImg] || userInfo[0].profileImg}
+                width={40}
+                height={40}
+                alt={`${userInfo[0].name}'s Image`}
+              />
+            ) : (
+              <Loader />
+            )}
             <div className="absolute bottom-0 right-0 z-20 translate-x-[4px] translate-y-[4px] p-[3px] rounded-full bg-[#232428]">
               {statuses[status].icon}
             </div>

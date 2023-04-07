@@ -15,17 +15,19 @@ import {
   tiger,
   dino,
 } from "assets";
-import { useUser } from "hooks";
+import { TPopups } from "components";
+import { usePopup, useUser } from "hooks";
 import Image from "next/image";
 import React, { RefObject, useEffect, useRef, useState } from "react";
 import { IUserInfo, firebaseApi } from "services";
 
 interface EditProfileFormProps {
+  closePopup: (type?: TPopups) => () => void;
   ref?: RefObject<HTMLFormElement>;
 }
 
-const avatars: {
-  [key: string]: string;
+export const avatars: {
+  [key: string]: any;
 } = {
   dragon: dragon,
   bat: bat,
@@ -45,9 +47,11 @@ const avatars: {
 };
 
 export const EditProfileForm: React.FC<EditProfileFormProps> = ({
+  closePopup,
   ...props
 }) => {
   const [userInfo, setUserInfo] = useState<IUserInfo[]>([]);
+  const [avatarChanged, setAvatarChanged] = useState<boolean>(false);
 
   useEffect(() => {
     firebaseApi.GET.user.info(uid, setUserInfo);
@@ -55,27 +59,40 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleChangeAvatar = (avatar: string) => async () => {
+    setAvatarChanged(false);
+    await firebaseApi.POST.update.avatar(avatar);
+    setAvatarChanged(true);
+  };
+
   const { user } = useUser();
   if (!user) return null;
-
-  console.log(userInfo);
 
   const { uid } = user;
 
   return userInfo[0] ? (
-    <form
-      className="edit-profile-form"
-      // onSubmit={(e) => handleCreateRoomSubmit(e)}
-    >
+    <form className="edit-profile-form" onSubmit={(e) => e.preventDefault()}>
       <div className="edit-profile-avatar">
-        <span className="block text-center py-[10px]">Choose An Avatar</span>
+        <span className="block text-center pt-[10px] pb-[5px]">
+          Choose An Avatar
+        </span>
+        {avatarChanged && (
+          <span className="block text-center text-green-500 text-[13px] pb-[5px]">
+            Avatar changed succesfully to {userInfo[0].profileImg}
+          </span>
+        )}
         <div className="avatars">
           {Object.keys(avatars).map((avatar) => (
-            <div key={avatar} className="avatar">
+            <div
+              key={avatar}
+              className="avatar"
+              onClick={handleChangeAvatar(avatar)}
+            >
               <Image
-                className="rounded-[5px]"
-                src={avatars[avatar]}
-                alt={"dragon"}
+                className="rounded-[5px] overflow-hidden"
+                src={avatars[avatar].src}
+                alt={`${avatar} img`}
+                fill
                 style={{
                   objectFit: "cover",
                 }}
@@ -85,8 +102,9 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
         </div>
       </div>
       <button
-        type="submit"
-        className="my-[15px] text-center w-full text-white block"
+        onClick={closePopup("null")}
+        type="button"
+        className="my-[15px] text-center w-full text-white block "
       >
         Cancel
       </button>

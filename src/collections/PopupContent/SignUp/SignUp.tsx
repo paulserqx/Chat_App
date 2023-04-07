@@ -1,4 +1,4 @@
-import { Loader } from "components";
+import { Loader, TPopups } from "components";
 import { useRouter } from "next/router";
 import React, { RefObject, useState } from "react";
 import { firebaseApi, FirebaseErrors } from "services/firebase";
@@ -6,6 +6,7 @@ import { transformErrorMessage } from "utils";
 import { FaDiscord } from "react-icons/fa";
 
 interface SignUpProps {
+  closePopup: (type?: TPopups) => () => void;
   ref?: RefObject<HTMLDivElement>;
 }
 

@@ -54,12 +54,15 @@ const dbRef = ref(db);
 
 const changeStatus = async (status: string, username: string) => {
   const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
-  set(usersPathRef, {
+  update(usersPathRef, {
     status,
-    name: username,
-    uid: auth.currentUser?.uid,
-    memberSince: auth.currentUser?.metadata.creationTime,
-    profileImg: auth.currentUser?.photoURL || defaultUser.src,
+  });
+};
+
+const changeUserAvatar = async (avatar: string) => {
+  const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
+  update(usersPathRef, {
+    profileImg: avatar,
   });
 };
 
@@ -68,10 +71,12 @@ const getUserStatus = async (
 ) => {
   const statusRef = ref(db, `users/${auth.currentUser?.uid}`);
   onValue(statusRef, (status) => {
+    console.log(auth.currentUser?.uid, "start");
     if (status.val() === null) {
       setter("online");
     } else {
       const value = status.val().status;
+      console.log(value);
       setter(value);
     }
   });
@@ -217,7 +222,7 @@ const createUserWithPassword = async (
   { email, password, username }: IEmailAndPasswordSignIn
 ): Promise<ErrorResponse | DataResponse> => {
   e.preventDefault();
-
+  //
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     await setAdditionUserInfo(username || "Anonymous User");
@@ -240,6 +245,14 @@ const setAdditionUserInfo = async (username: string) => {
   updateProfile(auth.currentUser, {
     displayName: username,
     photoURL: defaultUser.src,
+  });
+  const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
+  set(usersPathRef, {
+    status: "online",
+    name: username,
+    uid: auth.currentUser?.uid,
+    memberSince: auth.currentUser?.metadata.creationTime,
+    profileImg: auth.currentUser?.photoURL || defaultUser.src,
   });
 };
 
@@ -308,7 +321,7 @@ const editMessage = async (
 ) => {
   const messageRef = ref(db, `messages/${room}/${prevMessage.key}`);
   update(messageRef, {
-    ...prevMessage,
+    // ...prevMessage,
     message: newMessage,
     edited: true,
   });
@@ -432,7 +445,10 @@ export const firebaseApi = {
       send: sendMessage,
       edit: editMessage,
     },
-    changeStatus,
+    update: {
+      status: changeStatus,
+      avatar: changeUserAvatar,
+    },
     emoji: {
       add: addEmoji,
       react: reactWithEmoji,

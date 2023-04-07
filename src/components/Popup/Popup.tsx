@@ -42,7 +42,7 @@ export const Popup: React.FC<PopupProps> = ({
         }
       />
       <div className={"form-container"}>
-        <CurrentPopup />
+        <CurrentPopup closePopup={closePopup} />
       </div>
     </>
   );

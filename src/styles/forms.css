@@ -68,13 +68,13 @@
     @apply form flex-col !pt-5
 }
 .avatars {
-    @apply flex pt-[10px] h-[250px] overflow-auto flex-wrap justify-between pr-[5px] md:h-[70vh]
+    @apply flex pt-[10px] h-[250px] overflow-auto flex-wrap justify-between pr-[5px] md:h-[70vh] 
 }
 .avatar {
-    @apply flex basis-[30%] mb-[10px] max-h-[120px] cursor-pointer md:max-h-[200px]
+    @apply flex basis-[33%] mb-[5px] h-full max-h-[100px] cursor-pointer md:max-h-[150px] border-[5px] hover:border-blue-500 rounded-[5px] bg-blue-500 overflow-hidden transition-all
 }
 .edit-profile-form {
-    @apply animate-popupOpen rounded-[18px] bg-grey overflow-hidden w-[70vw] md:w-[500px]
+    @apply animate-popupOpen rounded-[18px] bg-grey overflow-hidden w-[70vw] md:w-[450px]
 }
 .edit-profile-avatar {
     @apply bg-white pl-[10px] pr-[5px]

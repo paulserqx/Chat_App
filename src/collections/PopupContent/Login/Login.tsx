@@ -1,4 +1,4 @@
-import { GoogleBtn, Loader } from "components";
+import { GoogleBtn, Loader, TPopups } from "components";
 import { FirebaseError } from "firebase/app";
 import { FaDiscord } from "react-icons/fa";
 import { useRouter } from "next/router";
@@ -7,6 +7,7 @@ import { firebaseApi, FirebaseErrors } from "services/firebase";
 import { transformErrorMessage } from "utils";
 
 interface LoginProps {
+  closePopup: (type?: TPopups) => () => void;
   ref?: RefObject<HTMLDivElement>;
 }
 

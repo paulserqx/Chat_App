@@ -220,8 +220,8 @@ const createUserWithPassword = async (
 
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    await setAdditionUserInfo(username);
-    await changeStatus("online", username);
+    await setAdditionUserInfo(username || "Anonymous User");
+    await changeStatus("online", username || "Anonymous User");
     return {
       type: "data",
       response: res,

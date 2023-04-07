@@ -79,7 +79,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
             alt="stars-background"
           />
           <Image
-            className="pointer-events-none absolute bottom-0 right-[-100px] animate-starsRight"
+            className="pointer-events-none absolute bottom-[40%] right-[-200px] animate-starsRight"
             src={stars}
             alt="stars-background"
           />

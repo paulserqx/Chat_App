@@ -19,8 +19,6 @@ export const RoomMembers: React.FC<RoomMembersProps> = ({
   const [membersUidList, setMembersUidList] = useState<string[]>([]);
   const [members, setMembers] = useState<IUserInfo[]>([]);
 
-  console.log(membersUidList);
-
   useEffect(() => {
     // Collecting uids for the current room
     setMembersUidList([]);

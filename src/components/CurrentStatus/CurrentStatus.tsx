@@ -27,8 +27,10 @@ export const CurrentStatus: React.FC<CurrentStatusProps> = ({
       <RiArrowDropDownLine fontSize={30} className=" -rotate-90" />
 
       {/* on hover status menu */}
-      <div className="statusMenu cursor-default absolute hidden right-[-85%] ">
-        <div className="opacity-0 bg-transparent">here</div>
+      <div className="statusMenu cursor-default absolute hidden right-[-40%] top-[-200px] flex-col-reverse md:flex-row md:right-[-85%] md:top-[unset]">
+        <div className="opacity-0 bg-transparent h-[60px] md:h-[unset]">
+          here
+        </div>
         <ul className="px-[15px] py-[5px] rounded-lg bg-veryDarkGrey">
           <li
             onClick={changeStatus("online")}

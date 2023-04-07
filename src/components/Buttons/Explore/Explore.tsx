@@ -11,7 +11,6 @@ export const Explore: React.FC<ExploreProps> = ({ ...props }) => {
   const router = useRouter();
   const slug = router.pathname;
   const isInExplore = slug === "/chats" ? true : false;
-  console.log(isInExplore);
   return (
     <div className={isInExplore ? "explore-active" : "explore"}>
       <Link href={"/chats"}>

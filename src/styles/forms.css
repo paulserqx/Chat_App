@@ -1,5 +1,5 @@
 .form-container {
-    @apply z-20 flex items-center justify-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
+    @apply z-[120] flex items-center justify-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
 }
 .form-error {
     @apply  text-red-500 mt-[5px] text-[15px]

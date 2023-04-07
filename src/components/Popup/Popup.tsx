@@ -1,14 +1,20 @@
-import { CreateRoomForm } from "collections/Forms";
+import { CreateRoomForm, EditProfileForm } from "collections/Forms";
 import { EmptyPopup, LoginPopup, SignUpPopup } from "collections/PopupContent";
 import React, { RefObject } from "react";
 
-export type TPopups = "login" | "signUp" | "null" | "createRoom";
+export type TPopups =
+  | "login"
+  | "signUp"
+  | "null"
+  | "createRoom"
+  | "editProfile";
 
 const popups = {
   null: EmptyPopup,
   login: LoginPopup,
   signUp: SignUpPopup,
   createRoom: CreateRoomForm,
+  editProfile: EditProfileForm,
 };
 
 interface PopupProps {
@@ -31,7 +37,7 @@ export const Popup: React.FC<PopupProps> = ({
         onClick={closePopup("null")}
         className={
           popupType !== "null"
-            ? "z-10 flex items-center fixed justify-center bg-slate-900 opacity-[0.9]  w-full h-full top-0 left-0"
+            ? "z-[110] flex items-center fixed justify-center bg-slate-900 opacity-[0.9]  w-full h-full top-0 left-0"
             : "hidden"
         }
       />

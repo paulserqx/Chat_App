@@ -67,3 +67,15 @@
 .sign-up-form {
     @apply form flex-col !pt-5
 }
+.avatars {
+    @apply flex pt-[10px] h-[250px] overflow-auto flex-wrap justify-between pr-[5px] md:h-[70vh]
+}
+.avatar {
+    @apply flex basis-[30%] mb-[10px] max-h-[120px] cursor-pointer md:max-h-[200px]
+}
+.edit-profile-form {
+    @apply animate-popupOpen rounded-[18px] bg-grey overflow-hidden w-[70vw] md:w-[500px]
+}
+.edit-profile-avatar {
+    @apply bg-white pl-[10px] pr-[5px]
+}

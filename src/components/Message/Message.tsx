@@ -40,8 +40,6 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(userInfo);
-
   const handleSubmitEditMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     await firebaseApi.POST.message.edit(message, slug, editedMessage);

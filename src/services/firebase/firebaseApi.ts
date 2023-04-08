@@ -268,6 +268,15 @@ const signInWithGoogle = async (): Promise<ErrorResponse | DataResponse> => {
       "online",
       auth.currentUser?.displayName || "Anonymous User"
     );
+    const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
+    set(usersPathRef, {
+      status: "online",
+      banner: banner_ai,
+      name: auth.currentUser?.displayName,
+      uid: auth.currentUser?.uid,
+      memberSince: auth.currentUser?.metadata.creationTime,
+      profileImg: auth.currentUser?.photoURL || defaultUser.src,
+    });
     return {
       type: "data",
       response: res,

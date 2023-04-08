@@ -56,9 +56,9 @@
   }
 
 .profile-banner {
-    @apply w-full rounded-t-lg h-[90px] bg-gradient-to-tr from-cyan-400 to-purple-300 flex justify-center text-center cursor-pointer
+    @apply w-full rounded-t-lg h-[90px]  flex justify-center text-center cursor-pointer bg-[#232428] bottom-[-1px]
 }
 
 .profile-banner:hover .banner-text {
-    @apply flex justify-center items-center pl-[80px] 
+    @apply flex justify-center items-center pl-[80px]  
 }

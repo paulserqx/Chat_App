@@ -1,4 +1,4 @@
-import { avatars } from "collections/Forms";
+import { avatars, banners } from "collections/Forms";
 import { CurrentStatus, Loader, Popup } from "components";
 import { usePopup } from "hooks";
 import Image from "next/image";
@@ -31,7 +31,15 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
         }
       >
         <div className="profile-banner" onClick={togglePopup("editBanner")}>
-          {/* <Image/> */}
+          <Image
+            src={banners[userInfo.banner] || userInfo.banner}
+            fill
+            style={{
+              objectFit: "cover",
+            }}
+            className="rounded-t-lg"
+            alt={`${userInfo.uid}'s Image`}
+          />
           <span className="banner-text hidden w-full h-full bg-black/50  text-white rounded-t-lg">
             CHANGE BANNER
           </span>

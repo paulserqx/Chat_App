@@ -29,9 +29,8 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
       router.push("/chats");
     } else {
       const message = transformErrorMessage(res.error.message);
-      console.log(res);
       const error = FirebaseErrors[message];
-      console.log(error);
+      console.error(error);
       setError(error);
     }
 
@@ -58,8 +57,6 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
 
     setIsLoading(false);
   };
-
-  console.log(error);
 
   return (
     <form onSubmit={handleLoginSubmit} className="form">

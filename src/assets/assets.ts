@@ -25,6 +25,7 @@ import tiger from "../../public/svgs/avatar-tiger.svg";
 import dino from "../../public/svgs/avatar-dino.svg";
 import banner_dragon from "../../public/imgs/banner-dragon.jpg";
 import banner_deer from "../../public/imgs/banner-deer.jpg";
+import viking from "../../public/imgs/avatar_viking.jpg";
 import banner_forest_animals from "../../public/imgs/banner-forest-animals.jpg";
 import banner_forest from "../../public/imgs/banner-forest.jpg";
 import banner_ocean1 from "../../public/imgs/banner-ocean1.jpg";
@@ -39,6 +40,7 @@ import banner_tech_reality from "../../public/imgs/banner-tech-reality.jpg";
 export {
   clouds,
   hero1,
+  viking,
   hero2,
   defaultUser,
   section1,

@@ -23,6 +23,18 @@ import octopus from "../../public/svgs/avatar-octopus.svg";
 import tears from "../../public/svgs/avatar-tears.svg";
 import tiger from "../../public/svgs/avatar-tiger.svg";
 import dino from "../../public/svgs/avatar-dino.svg";
+import banner_dragon from "../../public/imgs/banner-dragon.jpg";
+import banner_deer from "../../public/imgs/banner-deer.jpg";
+import banner_forest_animals from "../../public/imgs/banner-forest-animals.jpg";
+import banner_forest from "../../public/imgs/banner-forest.jpg";
+import banner_ocean1 from "../../public/imgs/banner-ocean1.jpg";
+import banner_ocean2 from "../../public/imgs/banner-ocean2.jpg";
+import banner_samurai from "../../public/imgs/banner-samurai.jpg";
+import banner_samurai2 from "../../public/imgs/banner-samurai2.jpg";
+import banner_astro from "../../public/imgs/banner-astro.jpg";
+import banner_bison from "../../public/imgs/banner-bison.jpg";
+import banner_ai from "../../public/imgs/banner-ai.jpg";
+import banner_tech_reality from "../../public/imgs/banner-tech-reality.jpg";
 
 export {
   clouds,
@@ -50,4 +62,16 @@ export {
   tears,
   tiger,
   dino,
+  banner_deer,
+  banner_dragon,
+  banner_forest,
+  banner_forest_animals,
+  banner_ocean1,
+  banner_ocean2,
+  banner_samurai,
+  banner_samurai2,
+  banner_ai,
+  banner_astro,
+  banner_bison,
+  banner_tech_reality,
 };

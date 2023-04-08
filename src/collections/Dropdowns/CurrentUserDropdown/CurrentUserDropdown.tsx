@@ -30,8 +30,13 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
             : "dropdown-menu-closed dropdown-menu" + " z-40"
         }
       >
-        <div className="w-full rounded-t-lg h-[70px] bg-gradient-to-tr from-cyan-400 to-purple-300 " />
-        <div className="status-dropdown rounded-full w-fit left-[15px] absolute top-[25px] z-20 border-[6px] border-[#232428]">
+        <div className="profile-banner" onClick={togglePopup("editBanner")}>
+          {/* <Image/> */}
+          <span className="banner-text hidden w-full h-full bg-black/50  text-white rounded-t-lg">
+            CHANGE BANNER
+          </span>
+        </div>
+        <div className="status-dropdown rounded-full w-fit left-[15px] absolute top-[45px] z-20 border-[6px] border-[#232428]">
           <Image
             src={avatars[userInfo.profileImg] || userInfo.profileImg}
             width={80}

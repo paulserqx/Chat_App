@@ -1,4 +1,8 @@
-import { CreateRoomForm, EditProfileAvatar } from "collections/Forms";
+import {
+  CreateRoomForm,
+  EditProfileAvatar,
+  EditProfileBanner,
+} from "collections/Forms";
 import { EmptyPopup, LoginPopup, SignUpPopup } from "collections/PopupContent";
 import React, { RefObject } from "react";
 
@@ -7,7 +11,8 @@ export type TPopups =
   | "signUp"
   | "null"
   | "createRoom"
-  | "editProfile";
+  | "editProfile"
+  | "editBanner";
 
 const popups = {
   null: EmptyPopup,
@@ -15,6 +20,7 @@ const popups = {
   signUp: SignUpPopup,
   createRoom: CreateRoomForm,
   editProfile: EditProfileAvatar,
+  editBanner: EditProfileBanner,
 };
 
 interface PopupProps {

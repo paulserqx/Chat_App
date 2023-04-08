@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import { defaultUser } from "assets";
+import { banner_ai, defaultUser } from "assets";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -63,6 +63,13 @@ const changeUserAvatar = async (avatar: string) => {
   const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
   update(usersPathRef, {
     profileImg: avatar,
+  });
+};
+
+const changeUserBanner = async (banner: string) => {
+  const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
+  update(usersPathRef, {
+    banner: banner,
   });
 };
 
@@ -246,6 +253,7 @@ const setAdditionUserInfo = async (username: string) => {
   const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
   set(usersPathRef, {
     status: "online",
+    banner: banner_ai,
     name: username,
     uid: auth.currentUser?.uid,
     memberSince: auth.currentUser?.metadata.creationTime,
@@ -445,6 +453,7 @@ export const firebaseApi = {
     update: {
       status: changeStatus,
       avatar: changeUserAvatar,
+      banner: changeUserBanner,
     },
     emoji: {
       add: addEmoji,

@@ -54,3 +54,11 @@
   .status-bg {
     @apply absolute hidden cursor-pointer w-full h-full bg-black/70 items-center justify-center top-0 rounded-full text-[8px] text-white font-bold
   }
+
+.profile-banner {
+    @apply w-full rounded-t-lg h-[90px] bg-gradient-to-tr from-cyan-400 to-purple-300 flex justify-center text-center cursor-pointer
+}
+
+.profile-banner:hover .banner-text {
+    @apply flex justify-center items-center pl-[80px] 
+}

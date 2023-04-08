@@ -79,3 +79,7 @@
 .edit-profile-avatar {
     @apply bg-white pl-[10px] pr-[5px]
 }
+
+.banner {
+    @apply flex basis-[50%] mb-[5px] h-full max-h-[100px] cursor-pointer md:max-h-[150px] border-[5px] hover:border-blue-500 rounded-[5px] bg-blue-500 overflow-hidden transition-all
+}

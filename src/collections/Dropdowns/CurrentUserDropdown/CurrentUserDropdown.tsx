@@ -34,6 +34,7 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
           <Image
             src={banners[userInfo.banner] || userInfo.banner}
             fill
+            sizes="290px"
             style={{
               objectFit: "cover",
             }}

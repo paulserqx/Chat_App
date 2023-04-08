@@ -37,17 +37,29 @@ export const EmojiPicker: React.FC<EmojiPickerProps> = ({
   };
 
   return (
-    <div className="emoji-picker absolute right-[0] top-0 z-50">
-      <Picker
-        emojiStyle={EmojiStyle.GOOGLE}
-        lazyLoadEmojis
-        width={"20rem"}
-        height={"30rem"}
-        searchPlaceHolder={"Search for emoji"}
-        skinTonesDisabled
-        theme={Theme.DARK}
-        onEmojiClick={handleEmojiClick}
-      />
-    </div>
+    <>
+      <div className="emoji-picker md:hidden">
+        <Picker
+          emojiStyle={EmojiStyle.GOOGLE}
+          lazyLoadEmojis
+          width={"100vw"}
+          searchPlaceHolder={"Search for emoji"}
+          skinTonesDisabled
+          theme={Theme.DARK}
+          onEmojiClick={handleEmojiClick}
+        />
+      </div>
+      <div className="emoji-picker hidden md:block">
+        <Picker
+          emojiStyle={EmojiStyle.GOOGLE}
+          lazyLoadEmojis
+          width={"300px"}
+          searchPlaceHolder={"Search for emoji"}
+          skinTonesDisabled
+          theme={Theme.DARK}
+          onEmojiClick={handleEmojiClick}
+        />
+      </div>
+    </>
   );
 };

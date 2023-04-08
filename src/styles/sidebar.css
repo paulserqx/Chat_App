@@ -2,16 +2,19 @@
     @apply w-[46px] h-[46px] bg-white rounded-full mr-[10px] mb-[5px] cursor-pointer hover:rounded-2xl md:w-[56px] md:h-[56px]
 }
 .room-img-tail {
-    @apply  mt-[15px] flex items-center justify-center text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:absolute before:-left-[20px] before:rounded-full before:hover:h-[20px] last-of-type:mb-[15px]
+    @apply mt-[15px] flex items-center justify-center text-white before:content-[''] before:w-[10px] before:h-[10px] before:bg-white before:absolute before:-left-[20px] before:rounded-full before:hover:h-[20px] last-of-type:mb-[15px]
 }
 .active-room {
-    @apply rounded-[18px] before:h-[40px] before:hover:h-[40px] bg-white h-[46px] w-[46px]  md:w-[56px] md:h-[56px]
+    @apply cursor-pointer rounded-[18px] before:h-[40px] before:hover:h-[40px] bg-white h-[46px] w-[46px]  md:w-[56px] md:h-[56px]
   }
 .room-img:hover .room-tooltip{
     @apply opacity-100
 }
+.room-img-tail:hover .room-tooltip {
+    @apply opacity-100
+}
 .room-tooltip {
-    @apply opacity-0 absolute right-[-100%] p-2 whitespace-nowrap bg-veryDarkGrey z-50
+    @apply opacity-0 absolute left-[120%] p-2 whitespace-nowrap bg-white z-50 text-veryDarkGrey rounded-lg inline-block
 }.explore {
     @apply w-[46px] h-[46px] rounded-full mr-[10px] mb-[5px] cursor-pointer hover:rounded-2xl room-img-tail bg-grey hover:!bg-green-500 !p-0 md:w-[56px] md:h-[56px]
 }

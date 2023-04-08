@@ -16,7 +16,7 @@ export const transformErrorMessage = (msg: string) => {
 export const hasUserJoined = (room: IRoom, user: User | null) => {
   const userHasJoined = Object.values(room.members)
     .map((el) => el.user)
-    .indexOf(user?.uid || "omromronsfnan");
+    .indexOf(user?.uid || "!not joined!");
 
   return userHasJoined >= 0 ? true : false;
 };

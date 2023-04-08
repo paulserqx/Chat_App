@@ -86,6 +86,8 @@ export const EditProfileBanner: React.FC<EditProfileFormProps> = ({
                 className="rounded-[5px] overflow-hidden"
                 src={banners[banner].src}
                 alt={`${banner} img`}
+                sizes="(max-width: 768px) 210px,
+                150px"
                 fill
                 style={{
                   objectFit: "cover",

@@ -47,8 +47,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         }
         {...props}
       >
-        <div className="flex w-full overflow-auto flex-col justify-between pl-[15px]">
-          <div>
+        <div className="flex w-full flex-col justify-between pl-[15px] overflow-auto">
+          <div className="flex flex-col">
             {rooms.map((room, i) => {
               const Icon = icons[room.icon];
               const userJoined = hasUserJoined(room, user);

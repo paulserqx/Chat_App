@@ -30,8 +30,8 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
             : "dropdown-menu-closed dropdown-menu" + " z-40"
         }
       >
-        <div className="w-full rounded-t-lg h-[60px] bg-gradient-to-tr from-cyan-400 to-purple-300 " />
-        <div className="status-dropdown rounded-full w-fit left-[15px] absolute top-[15px] z-20 border-[6px] border-[#232428]">
+        <div className="w-full rounded-t-lg h-[70px] bg-gradient-to-tr from-cyan-400 to-purple-300 " />
+        <div className="status-dropdown rounded-full w-fit left-[15px] absolute top-[25px] z-20 border-[6px] border-[#232428]">
           <Image
             src={avatars[userInfo.profileImg] || userInfo.profileImg}
             width={80}
@@ -43,7 +43,7 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
             {statuses[userInfo.status].icon}
           </div>
           <div className="status-bg" onClick={togglePopup("editProfile")}>
-            VIEW PROFILE
+            CHANGE AVATAR
           </div>
         </div>
         <div className="pt-[60px] pb-[20px] px-[10px] shadow-button rounded-b-lg bg-[#232428]">

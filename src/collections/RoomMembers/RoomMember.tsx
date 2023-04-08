@@ -11,7 +11,6 @@ interface RoomMemberProps {
 }
 
 export const RoomMember: React.FC<RoomMemberProps> = ({ member }) => {
-  console.log(member);
   return (
     <div className="room-member">
       <div className="rounded-full !basis-[40px] flex pr-[3px] shrink-0">

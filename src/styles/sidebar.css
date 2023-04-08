@@ -35,7 +35,7 @@
   }
 
 .sidebar-container {
-    @apply flex flex-col justify-between w-[75px] h-[-webkit-fill-available] bg-darkGrey left-[0] absolute z-[60] transition-all duration-300 md:w-[85px]
+    @apply flex flex-col justify-between w-[75px] h-[-webkit-fill-available] bg-darkGrey left-[0] absolute z-[70] transition-all duration-300 md:w-[85px]
 }
 .sidebar-container-closed {
     @apply sidebar-container !left-[-100%]
@@ -52,5 +52,5 @@
   }
 
   .status-bg {
-    @apply absolute hidden cursor-pointer w-full h-full bg-black/50 items-center justify-center top-0 rounded-full text-[10px] text-white font-bold
+    @apply absolute hidden cursor-pointer w-full h-full bg-black/70 items-center justify-center top-0 rounded-full text-[8px] text-white font-bold
   }

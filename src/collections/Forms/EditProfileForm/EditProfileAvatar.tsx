@@ -15,7 +15,7 @@ import {
   tiger,
   dino,
 } from "assets";
-import { TPopups } from "components";
+import { Loader, TPopups } from "components";
 import { usePopup, useUser } from "hooks";
 import Image from "next/image";
 import React, { RefObject, useEffect, useRef, useState } from "react";
@@ -46,7 +46,7 @@ export const avatars: {
   dino: dino,
 };
 
-export const EditProfileForm: React.FC<EditProfileFormProps> = ({
+export const EditProfileAvatar: React.FC<EditProfileFormProps> = ({
   closePopup,
   ...props
 }) => {
@@ -110,6 +110,8 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
       </button>
     </form>
   ) : (
-    <form className="edit-profile-form"></form>
+    <form className="edit-profile-form justify-center items-center flex py-[25px]">
+      <Loader />
+    </form>
   );
 };

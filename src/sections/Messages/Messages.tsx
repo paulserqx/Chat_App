@@ -1,4 +1,4 @@
-import { Button, Message, NewUserAnouncement } from "components";
+import { Button, Message, NewUserAnouncement, RoomInfo } from "components";
 import { useUser } from "hooks";
 import { useRouter } from "next/router";
 import { BiHash } from "react-icons/bi";
@@ -31,6 +31,7 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   return (
     <div className="flex flex-col h-full bg-darkGrey/95">
       <div className="overflow-auto h-full pr-[10px] pt-[90px]">
+        <RoomInfo room={slug} />
         {chat.map((msg) =>
           msg.greeting ? (
             <div key={msg.key}>

@@ -6,3 +6,4 @@ export * from "./Message";
 export * from "./CurrentStatus";
 export * from "./MessageOptions";
 export * from "./NewUserAnouncement";
+export * from "./RoomInfo";

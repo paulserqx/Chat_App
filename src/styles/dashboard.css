@@ -11,7 +11,7 @@
     @apply w-full px-[20px] mt-[20px]
 }
 .dashboard-rooms-container {
-    @apply flex flex-wrap w-full justify-center
+    @apply flex flex-wrap w-full justify-center max-w-[80vw] m-auto
 }
 .dashboard-room {
     @apply w-12 h-12 flex items-center justify-center bg-white rounded-full mr-[10px] mb-[5px] cursor-pointer hover:rounded-2xl
@@ -53,4 +53,19 @@
 
 .room-icon-choice {
     @apply mr-auto mb-[5px] cursor-pointer hover:border-black
+}
+
+.room-info-container {
+    @apply w-[90%] flex flex-col items-center justify-center text-white m-auto md:w-[60%] mb-[30px]
+}
+.room-info-heading {
+    @apply text-[30px] text-center mb-[5px]
+}
+
+.room-info-paragraph {
+    @apply text-[15px] text-white/60 text-center mb-[15px]
+}
+
+.room-info-block {
+    @apply p-[20px] pr-[40px] flex items-center w-full bg-veryDarkGrey/50 mb-[8px] rounded-lg hover:bg-veryDarkGrey/20 cursor-default transition-all
 }

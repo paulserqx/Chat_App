@@ -6,7 +6,7 @@
 }
 
 .hero-p {
-    @apply md:text-[20px] text-white lg:text-center md:text-left 
+    @apply md:text-[20px] text-white lg:text-center md:text-left leading-6
 }
 
 .navigation-landing {

@@ -283,6 +283,7 @@ const signInWithGoogle = async (): Promise<ErrorResponse | DataResponse> => {
     };
   } catch (error: any) {
     const FirbaseError: TError = error;
+    console.error(error);
     return {
       type: "error",
       error: FirbaseError,

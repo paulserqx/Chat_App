@@ -2,7 +2,7 @@ import { Navigation } from "collections";
 import { Button, Popup, TPopups } from "components";
 import Image from "next/image";
 import React, { RefObject } from "react";
-import { clouds, hero1, hero2 } from "assets";
+import { clouds, hero1, hero2, stars } from "assets";
 import { usePopup } from "hooks";
 
 interface LandingPageHeroProps {
@@ -28,6 +28,16 @@ export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
         src={clouds}
         alt={"cloudsImg"}
         className={`left-[-2560px] animate-clouds absolute bottom-[80px] scale-[1.7] pointer-events-none hidden`}
+      />
+      <Image
+        src={stars}
+        alt={"stars"}
+        className="absolute top-[10%] right-[-50%] animate-starsRight md:right-[-10%]"
+      />
+      <Image
+        src={stars}
+        alt={"stars"}
+        className="absolute top-[50%] left-[-50%] md:left-[-10%] animate-starsLeft"
       />
       <Image
         src={hero1}

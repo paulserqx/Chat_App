@@ -1,7 +1,7 @@
 import React, { RefObject, useEffect, useState } from "react";
 import { IUserInfo, firebaseApi } from "services";
 import { RoomMember } from "./RoomMember";
-import { statuses } from "utils";
+import { sortMembers, statuses } from "utils";
 
 interface RoomMembersProps {
   membersSideOpened: boolean;
@@ -35,6 +35,15 @@ export const RoomMembers: React.FC<RoomMembersProps> = ({
     });
   }, [membersUidList]);
 
+  const onlineMembers = members.filter((member) => member.status === "online");
+  const idleMembers = members.filter((member) => member.status === "idle");
+  const dontDisturbMembers = members.filter(
+    (member) => member.status === "do-not-disturb"
+  );
+  const offlineMembers = members.filter(
+    (member) => member.status === "invisible"
+  );
+
   return (
     <>
       <div
@@ -50,11 +59,54 @@ export const RoomMembers: React.FC<RoomMembersProps> = ({
       >
         {/* Filtering members and rendering by status */}
         <h1 className="room-status-type">Room Members</h1>
-        {members.map((member) => (
-          <div key={"room Member" + member.uid}>
-            <RoomMember member={member} />
+        {onlineMembers.length >= 1 && (
+          <div>
+            <span className="room-member-type">
+              Online - {onlineMembers.length}
+            </span>
+            {onlineMembers.map((member) => (
+              <div key={"OnlineMember" + member.uid}>
+                <RoomMember member={member} />
+              </div>
+            ))}
           </div>
-        ))}
+        )}
+        {idleMembers.length >= 1 && (
+          <div>
+            <span className="room-member-type">
+              Idle - {idleMembers.length}
+            </span>
+            {idleMembers.map((member) => (
+              <div key={"IdleMember" + member.uid}>
+                <RoomMember member={member} />
+              </div>
+            ))}
+          </div>
+        )}
+        {dontDisturbMembers.length >= 1 && (
+          <div>
+            <span className="room-member-type">
+              Do Not Disturb - {dontDisturbMembers.length}
+            </span>
+            {dontDisturbMembers.map((member) => (
+              <div key={"DNDMember" + member.uid}>
+                <RoomMember member={member} />
+              </div>
+            ))}
+          </div>
+        )}
+        {offlineMembers.length >= 1 && (
+          <div>
+            <span className="room-member-type">
+              Offline - {offlineMembers.length}
+            </span>
+            {offlineMembers.map((member) => (
+              <div key={"offlineMember" + member.uid}>
+                <RoomMember member={member} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

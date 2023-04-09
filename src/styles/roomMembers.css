@@ -2,8 +2,12 @@
     @apply flex flex-col bg-grey text-white w-[200px] h-full absolute right-0 top-0 z-[60] transition-all duration-500 py-[20px]  border-[2px] border-darkGrey overflow-auto
 }
 .room-status-type {
-    @apply flex justify-center items-center mb-[10px]
+    @apply flex justify-center items-center mb-[10px] text-[22px]
 }
 .room-member{
     @apply flex items-center cursor-pointer p-[8px] px-[10px] hover:bg-slate-600 hover:rounded-md hover:transition-[background-color] duration-300 mt-[5px]
+}
+
+.room-member-type {
+    @apply block text-center text-[20px] mb-[7px] mt-[7px] border-b-[2px] mx-[10px] pb-[5px] border-white/40
 }

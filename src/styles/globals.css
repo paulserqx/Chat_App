@@ -44,7 +44,7 @@
     @apply hidden absolute p-[5px] px-[10px] bg-black text-white/90 top-[-25px] left-[50%] translate-x-[-50%] rounded-lg whitespace-nowrap text-[12px] 
   }
 .emoji-picker {
-  @apply absolute right-[50%] translate-x-[50%] top-0 z-50 max-h-[450px] overflow-auto md:translate-x-0 md:left-[unset] md:right-0 
+  @apply fixed right-[50%] translate-x-[50%] bottom-0 z-50 max-h-[450px] overflow-auto md:translate-x-0 md:left-[unset] md:right-[200px] md:bottom-[25%]
 }
   .emoji {
     @apply mr-[5px] mb-[2px] flex text-white/60 cursor-pointer first-of-type:ml-0 p-[5px] bg-veryDarkGrey/70 rounded-md border-[1px] border-transparent hover:border-[1px] hover:border-white/40 transition-all

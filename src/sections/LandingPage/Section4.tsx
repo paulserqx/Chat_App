@@ -1,4 +1,4 @@
-import { section4 } from "assets";
+import { section4, stars } from "assets";
 import { Button, Popup, TPopups } from "components";
 import { usePopup } from "hooks";
 import Image from "next/image";
@@ -38,7 +38,14 @@ export const Section4: React.FC<section4Props> = ({ ...props }) => {
 
       <section className="bg-white">
         <div className="rdy-to-start">
-          <h4 className="rdy-to-start-h4">Ready to start your journey?</h4>
+          <h4 className="rdy-to-start-h4">
+            Ready to start your journey?{" "}
+            <Image
+              src={stars}
+              alt="stars"
+              className="absolute top-[-25px] md:top-[-55px]"
+            />
+          </h4>
           <div
             onClick={togglePopup("login")}
             className="text-[20px] flex w-full justify-center"

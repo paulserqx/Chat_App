@@ -93,7 +93,7 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
       {userInfo[0] ? (
         <Image
           onClick={togglePopup("userInfo")}
-          className="rounded-full mr-[10px]"
+          className="rounded-full mr-[10px] cursor-pointer hover:scale-[1.15] transtion-all"
           src={avatars[userInfo[0].profileImg] || userInfo[0].profileImg}
           width={40}
           height={40}
@@ -104,7 +104,10 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
       )}
       <div className="flex flex-col">
         <div className="flex mb-[3px]">
-          <h4 className="text-[13px] mr-[5px] text-green-600 ">
+          <h4
+            onClick={togglePopup("userInfo")}
+            className="text-[13px] pb-[5px] border-b-[1px] border-transparent mr-[5px] text-green-600 cursor-pointer hover:scale-[1.05] transtion-all"
+          >
             {message.author}
           </h4>
           <span className="text-[13px] text-white opacity-70">

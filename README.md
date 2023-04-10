@@ -24,6 +24,7 @@ The project was built using
 - Create your own chat room and style it with a room image
 - Profile customisation - change your avatar and banner
 - Send, Edit and Delete Messages in the chat rooms
+- Real Time chat message updates
 - React with Emojis
 
 ## How to use

@@ -29,7 +29,7 @@
     @apply hidden left-0 absolute bg-black/10 w-full h-full 
   }
   .message-options {
-    @apply absolute top-[-15%] right-[20px] border-[1px] border-[veryDarkGrey] flex items-center rounded-md bg-veryDarkGrey/80
+    @apply absolute top-[-15%] right-[40px] border-[1px] border-[veryDarkGrey] flex items-center rounded-md bg-veryDarkGrey/80
   }
   .message-hovered {
     @apply bg-black/10 message
@@ -59,6 +59,19 @@
 
   .popup-background {
     @apply fixed top-0 left-0 w-[100vw] h-[100vh] bg-black/60 z-[50] md:!hidden
+  }
+
+  .edit {
+    @apply transition-all
+  }
+  .edit:hover .yellow-icon {
+    @apply fill-yellow-500
+  }
+  .edit:hover .blue-icon {
+    @apply fill-blue-500
+  }
+  .edit:hover .red-icon {
+    @apply fill-red-500
   }
 }
 .edit:hover .edit-tooltip {

@@ -172,7 +172,7 @@ const sendMessage = async (
 
 const getMessages = async (
   roomName: string,
-  setter: React.Dispatch<React.SetStateAction<any[]>>
+  setter: React.Dispatch<React.SetStateAction<IMessage[]>>
 ) => {
   const roomMessagesRef = ref(db, `messages/${roomName}`);
   onValue(roomMessagesRef, (msgs) => {
@@ -185,6 +185,7 @@ const getMessages = async (
       if (msgs.key === roomName) {
         setter(Object.values(data));
       } else {
+        // console.log(Object.values(data));
         setter(Object.values(data[0]));
       }
     }
@@ -341,6 +342,11 @@ const editMessage = async (
   });
 };
 
+const deleteMessage = async (room: string, messageKey: string) => {
+  const messageRef = ref(db, `messages/${room}/${messageKey}`);
+  set(messageRef, null);
+};
+
 const addEmoji = async (
   message: IMessage,
   room: string,
@@ -481,5 +487,6 @@ export const firebaseApi = {
   },
   DELETE: {
     emoji: removeEmoji,
+    message: deleteMessage,
   },
 };

@@ -16,7 +16,7 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   const { user } = useUser();
 
   const router = useRouter();
-  const slug = router.query.slug ? router.query.slug[0] : "";
+  const slug = router.query.slug ? router.query.slug[0] : "23dsddas31";
 
   const scrollToLastMessage = () => {
     const height = chatRef.current?.scrollHeight || 0;

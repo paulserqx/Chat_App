@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
 import { FaRedditAlien, FaTrashAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
-import { RiUserAddLine } from "react-icons/ri";
+import { RiSearchEyeLine, RiUserAddLine } from "react-icons/ri";
 import { VscReactions } from "react-icons/vsc";
 import { FiChevronRight } from "react-icons/fi";
 
@@ -27,8 +27,8 @@ export const RoomInfo: React.FC<RoomInfoProps> = ({ room, ...props }) => {
         <FiChevronRight size={25} className="absolute right-[10px]" />
       </div>
       <div className="room-info-block">
-        <FaRedditAlien size={35} className="mr-[20px]" />
-        Talk to the room members about what interests you.
+        <RiSearchEyeLine size={35} className="mr-[20px]" />
+        Inspect the chat room members.
         <FiChevronRight size={25} className="absolute right-[10px]" />
       </div>
       <div className="room-info-block">

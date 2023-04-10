@@ -39,7 +39,7 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   return (
     <div className="flex flex-col h-full bg-darkGrey/95">
       <div ref={chatRef} className="overflow-auto h-full pr-[10px] pt-[90px]">
-        <RoomInfo room={slug} />
+        <RoomInfo scrollToLastMessage={scrollToLastMessage} room={slug} />
         {chat.map((msg) =>
           msg.greeting ? (
             <div key={msg.key}>

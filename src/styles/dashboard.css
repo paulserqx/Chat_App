@@ -67,7 +67,7 @@
 }
 
 .room-info-block {
-    @apply p-[20px] pr-[40px] flex items-center w-full bg-veryDarkGrey/50 mb-[8px] rounded-lg hover:bg-veryDarkGrey/20 cursor-default transition-all
+    @apply p-[20px] pr-[40px] flex items-center w-full bg-veryDarkGrey/50 mb-[8px] rounded-lg hover:bg-veryDarkGrey/20 cursor-pointer transition-all
 }
 
 .messenger {

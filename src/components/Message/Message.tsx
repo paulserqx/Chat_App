@@ -7,8 +7,9 @@ import {
 } from "collections";
 import { Loader } from "components/Loader";
 import { MessageOptions } from "components/MessageOptions";
+import { Popup } from "components/Popup";
 import { Emoji, EmojiStyle } from "emoji-picker-react";
-import { useUser } from "hooks";
+import { usePopup, useUser } from "hooks";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
@@ -27,6 +28,7 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
   const [userInfo, setUserInfo] = useState<IUserInfo[]>([]);
 
   const router = useRouter();
+  const { popupOpened, togglePopup } = usePopup();
   const { user } = useUser();
   const slug = router.query.slug ? router.query.slug[0] : "";
 
@@ -64,6 +66,13 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
       {...props}
       className={edit || emojiPicker ? "message-hovered" : "message"}
     >
+      {togglePopup && (
+        <Popup
+          closePopup={togglePopup}
+          userInfo={userInfo[0]}
+          popupType={popupOpened || "null"}
+        />
+      )}
       {emojiPicker && (
         <>
           <div
@@ -83,6 +92,7 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
       />
       {userInfo[0] ? (
         <Image
+          onClick={togglePopup("userInfo")}
           className="rounded-full mr-[10px]"
           src={avatars[userInfo[0].profileImg] || userInfo[0].profileImg}
           width={40}

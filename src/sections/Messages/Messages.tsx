@@ -36,10 +36,6 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
-  useEffect(() => {
-    scrollToLastMessage();
-  }, []);
-
   return (
     <div className="flex flex-col h-full bg-darkGrey/95">
       <div ref={chatRef} className="overflow-auto h-full pr-[10px] pt-[90px]">

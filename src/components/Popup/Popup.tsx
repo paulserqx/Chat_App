@@ -4,7 +4,9 @@ import {
   EditProfileBanner,
 } from "collections/Forms";
 import { EmptyPopup, LoginPopup, SignUpPopup } from "collections/PopupContent";
+import UserInfo from "collections/PopupContent/UserInfo/UserInfo";
 import React, { RefObject } from "react";
+import { IUserInfo } from "services";
 
 export type TPopups =
   | "login"
@@ -12,7 +14,8 @@ export type TPopups =
   | "null"
   | "createRoom"
   | "editProfile"
-  | "editBanner";
+  | "editBanner"
+  | "userInfo";
 
 const popups = {
   null: EmptyPopup,
@@ -21,16 +24,20 @@ const popups = {
   createRoom: CreateRoomForm,
   editProfile: EditProfileAvatar,
   editBanner: EditProfileBanner,
+  userInfo: UserInfo,
 };
 
 interface PopupProps {
   closePopup: (type?: TPopups) => () => void;
   popupType: TPopups;
+  userInfo?: IUserInfo;
   ref?: RefObject<HTMLDivElement>;
 }
 
 export const Popup: React.FC<PopupProps> = ({
   popupType,
+  userInfo,
+
   closePopup,
   ...props
 }) => {
@@ -48,7 +55,7 @@ export const Popup: React.FC<PopupProps> = ({
         }
       />
       <div className={"form-container"}>
-        <CurrentPopup closePopup={closePopup} />
+        <CurrentPopup closePopup={closePopup} userInfo={userInfo} />
       </div>
     </>
   );

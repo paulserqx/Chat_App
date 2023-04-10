@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head key={"head"}>
-        <title>Chat App</title>
+        <title>Discord Clone</title>
       </Head>
       <main>
         <Component {...pageProps} />

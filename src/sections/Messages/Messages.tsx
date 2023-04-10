@@ -2,7 +2,7 @@ import { Button, Message, NewUserAnouncement, RoomInfo } from "components";
 import { useUser } from "hooks";
 import { useRouter } from "next/router";
 import { BiHash } from "react-icons/bi";
-import React, { RefObject, useState, useEffect } from "react";
+import React, { RefObject, useState, useEffect, useRef } from "react";
 import { firebaseApi, IMessage } from "services";
 interface MessagesProps {
   ref?: RefObject<HTMLDivElement>;
@@ -11,6 +11,7 @@ interface MessagesProps {
 export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   const [message, setMessage] = useState<string>("");
   const [chat, setChat] = useState<IMessage[]>([]);
+  const chatRef = useRef<HTMLDivElement | null>(null);
   const { user } = useUser();
 
   const router = useRouter();
@@ -28,9 +29,15 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
+  useEffect(() => {
+    // scrolling to the last message on a new room entry and on a message submit
+    const height = chatRef.current?.scrollHeight || 0;
+    chatRef.current?.scroll(0, height);
+  }, [chat]);
+
   return (
     <div className="flex flex-col h-full bg-darkGrey/95">
-      <div className="overflow-auto h-full pr-[10px] pt-[90px]">
+      <div ref={chatRef} className="overflow-auto h-full pr-[10px] pt-[90px]">
         <RoomInfo room={slug} />
         {chat.map((msg) =>
           msg.greeting ? (

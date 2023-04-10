@@ -1,8 +1,11 @@
-### Discord App Clone
+# Discord App Clone
 
 ## Live Preview at https://chat-app-nikolaicholakov25.vercel.app/
 
-# Demo Account - user@gmail.com / 123123
+## Demo Account
+
+email: user@gmail.com
+password: 123123
 
 ## About the Project
 

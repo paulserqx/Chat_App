@@ -48,11 +48,11 @@
     @apply opacity-0 absolute top-[-1px] w-[105%] h-[105%] bg-white/80 flex items-center justify-center -z-10 text-[10px] font-bold transition-opacity cursor-pointer duration-300
 }
 .room-icons-container {
-    @apply flex flex-wrap my-[10px] overflow-auto h-[120px] transition-all duration-1000
+    @apply flex flex-wrap my-[10px] overflow-auto h-[120px] transition-all duration-500 items-start
 }
 
 .room-icon-choice {
-    @apply mr-auto mb-[5px] cursor-pointer hover:border-black
+    @apply mr-[4px] mb-[5px] cursor-pointer hover:border-black
 }
 
 .room-info-container {

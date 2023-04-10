@@ -12,13 +12,13 @@ export const Explore: React.FC<ExploreProps> = ({ ...props }) => {
   const slug = router.pathname;
   const isInExplore = slug === "/chats" ? true : false;
   return (
-    <div className={isInExplore ? "explore-active" : "explore"}>
-      <Link href={"/chats"}>
+    <Link href={"/chats"}>
+      <div className={isInExplore ? "explore-active" : "explore"}>
         <RiCompass3Fill
           size={30}
           className={isInExplore ? "explore-icon-active" : "explore-icon"}
         />
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };

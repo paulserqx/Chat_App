@@ -96,12 +96,14 @@ export const CreateRoomForm: React.FC<CreateRoomFormProps> = ({ ...props }) => {
 
   return (
     <form
-      className="form pt-[60px]"
+      className="form pt-[60px] md:max-w-[500px] md:pt-[20px]"
       onSubmit={(e) => handleCreateRoomSubmit(e)}
     >
       <div className="form-demo-info">
         <FaDiscord size={50} className="hidden md:block md:mb-[20px]" />
-        <h1 className="text-[18px] mb-1 md:mb-6">Create your own room!</h1>
+        <h1 className="text-[18px] mb-1 md:mb-6 text-center">
+          Create your own room!
+        </h1>
       </div>
       <div>
         <div className="create-room-icon-container">

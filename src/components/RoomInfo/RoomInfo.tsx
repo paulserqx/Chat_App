@@ -43,7 +43,7 @@ export const RoomInfo: React.FC<RoomInfoProps> = ({
       </div>
       <div className="room-info-block" onClick={scrollToLastMessage}>
         <MdEdit size={30} className="mr-[20px]" />
-        Edit your messages as you wish.
+        Edit your messages if you made a mistake.
         <FiChevronRight size={25} className="absolute right-[10px]" />
       </div>
       <div className="room-info-block" onClick={scrollToLastMessage}>

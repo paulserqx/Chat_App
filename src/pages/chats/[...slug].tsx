@@ -6,6 +6,8 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import { IoMenuSharp } from "react-icons/io5";
 import { Dashboard as _Dashboard, Messages } from "sections";
 import { RxCross1 } from "react-icons/rx";
+import { firebaseApi } from "services";
+import { Button } from "components";
 
 export default function ChatRoom() {
   const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);
@@ -13,6 +15,17 @@ export default function ChatRoom() {
 
   const router = useRouter();
   const slug = router.query.slug ? router.query.slug[0] : "";
+
+  const handleSignOut = async () => {
+    try {
+      const response = await firebaseApi.POST.signOut();
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      router.push("/");
+      document.body.style.overflow = "auto";
+    }
+  };
 
   const handleToggleSidebar = () => {
     setSidebarOpened(!sidebarOpened);
@@ -62,7 +75,13 @@ export default function ChatRoom() {
               <BiHash size={20} className="bottom-[-1.5px] pr-[2px]" />
               {slug}
             </div>
-            <button onClick={handleMembersSidebar}>
+            <button
+              onClick={handleSignOut}
+              className="hidden md:block mr-[100px]"
+            >
+              <Button text={"Sign Out"} />
+            </button>
+            <button onClick={handleMembersSidebar} className="md:hidden">
               <BsFillPeopleFill size={25} fill="white" />
             </button>
           </nav>

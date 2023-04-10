@@ -1,4 +1,5 @@
-import { Button, Logo } from "components";
+import { Button, Logo, Popup } from "components";
+import { usePopup } from "hooks";
 import React, { RefObject } from "react";
 
 interface NavigationProps {
@@ -6,10 +7,15 @@ interface NavigationProps {
 }
 
 export const Navigation: React.FC<NavigationProps> = ({ ...props }) => {
+  const { popupOpened, togglePopup } = usePopup();
+
   return (
     <nav className="navigation-landing" {...props}>
       <Logo />
-      <Button text="Open Discord" />
+      <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
+      <div onClick={togglePopup("login")}>
+        <Button text="Open Discord" />
+      </div>
     </nav>
   );
 };

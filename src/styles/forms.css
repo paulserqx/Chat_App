@@ -25,7 +25,7 @@
     @apply text-[20px] whitespace-nowrap font-medium mb-[10px] text-center
 }
 .form-banner-span {
-    @apply text-[12px] text-grey/90 mb-[20px]
+    @apply text-[12px] text-grey/90 mb-[20px] text-center
 }
 .form-demo-info {
     position: absolute;

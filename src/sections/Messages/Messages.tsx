@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { BiHash } from "react-icons/bi";
 import React, { RefObject, useState, useEffect, useRef } from "react";
 import { firebaseApi, IMessage } from "services";
+
 interface MessagesProps {
   ref?: RefObject<HTMLDivElement>;
 }
@@ -51,12 +52,12 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
           )
         )}
       </div>
-      <div className="w-full flex md:pl-[10px]">
+      <div className="w-[-webkit-fill-available] flex md:pl-[10px] mx-[10px] mb-[5px]">
         <form onSubmit={(e) => handleSubmitMessage(e)} className="w-full">
           <input
-            className="w-full"
+            className="messenger"
             type="text"
-            placeholder={`Message #${slug} server`}
+            placeholder={`Message #${slug}`}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />

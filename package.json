@@ -22,6 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
+    "react-slide-fade-in": "^1.0.9",
     "sharp": "^0.32.0",
     "typescript": "5.0.2"
   },

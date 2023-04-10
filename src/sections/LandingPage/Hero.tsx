@@ -4,6 +4,8 @@ import Image from "next/image";
 import React, { RefObject } from "react";
 import { clouds, hero1, hero2, stars } from "assets";
 import { usePopup } from "hooks";
+import FadeAnimation from "components/FadeAnimation/FadeAnimation";
+import { FadeIn } from "react-slide-fade-in";
 
 interface LandingPageHeroProps {
   ref?: RefObject<HTMLDivElement>;
@@ -49,29 +51,45 @@ export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
         alt={"hero2Img"}
         className="md:absolute bottom-0 -right-[15rem] pointer-events-none md:block hidden"
       />
-      <Navigation />
-      <div className="hero-container">
-        <h1 className="hero-banner-text">IMAGINE A PLACE...</h1>
-        <p className="hero-p">
-          ...where you can belong to a school club, a gaming group, or a
-          worldwide art community. Where just you and a handful of friends can
-          spend time together. A place that makes it easy to talk every day and
-          hang out more often.
-        </p>
-        <div className="mt-[80px] flex items-center justify-between w-full">
-          <div className="text-[20px] flex w-full justify-center">
-            {buttons.map((button) => (
-              <button
-                className="first:mr-[30px]"
-                onClick={togglePopup(button === "Login" ? "login" : "signUp")}
-                key={button}
-              >
-                <Button text={button} />
-              </button>
-            ))}
+      <FadeIn
+        from="top"
+        positionOffset={0}
+        triggerOffset={0}
+        delayInMilliseconds={400}
+        durationInMilliseconds={400}
+      >
+        <Navigation />
+      </FadeIn>
+      <FadeIn
+        from="top"
+        positionOffset={0}
+        triggerOffset={0}
+        delayInMilliseconds={400}
+        durationInMilliseconds={400}
+      >
+        <div className="hero-container">
+          <h1 className="hero-banner-text">IMAGINE A PLACE...</h1>
+          <p className="hero-p">
+            ...where you can belong to a school club, a gaming group, or a
+            worldwide art community. Where just you and a handful of friends can
+            spend time together. A place that makes it easy to talk every day
+            and hang out more often.
+          </p>
+          <div className="mt-[80px] flex items-center justify-between w-full">
+            <div className="text-[20px] flex w-full justify-center">
+              {buttons.map((button) => (
+                <button
+                  className="first:mr-[30px]"
+                  onClick={togglePopup(button === "Login" ? "login" : "signUp")}
+                  key={button}
+                >
+                  <Button text={button} />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </FadeIn>
     </section>
   );
 };

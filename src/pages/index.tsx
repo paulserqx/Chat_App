@@ -1,5 +1,3 @@
-import { Popup, TPopups } from "components";
-import { useState } from "react";
 import {
   LandingPageHero,
   Section1,

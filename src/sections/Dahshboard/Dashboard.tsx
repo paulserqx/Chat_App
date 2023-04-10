@@ -37,7 +37,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
   return (
     <>
       {popupOpened && (
-        <div className="fixed z-50 left-0 w-full">
+        <div className="fixed z-90 left-0 w-full">
           <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
         </div>
       )}

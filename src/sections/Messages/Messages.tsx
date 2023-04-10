@@ -18,10 +18,16 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   const router = useRouter();
   const slug = router.query.slug ? router.query.slug[0] : "";
 
+  const scrollToLastMessage = () => {
+    const height = chatRef.current?.scrollHeight || 0;
+    chatRef.current?.scroll(0, height);
+  };
+
   const handleSubmitMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await firebaseApi.POST.message.send(slug, message);
     setMessage("");
+    scrollToLastMessage();
   };
 
   useEffect(() => {
@@ -31,10 +37,8 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   }, [slug]);
 
   useEffect(() => {
-    // scrolling to the last message on a new room entry and on a message submit
-    const height = chatRef.current?.scrollHeight || 0;
-    chatRef.current?.scroll(0, height);
-  }, [chat]);
+    scrollToLastMessage();
+  }, []);
 
   return (
     <div className="flex flex-col h-full bg-darkGrey/95">

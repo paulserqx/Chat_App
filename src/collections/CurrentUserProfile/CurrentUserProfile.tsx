@@ -27,6 +27,9 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log("userInfo", userInfo);
+  console.log("user", user);
+
   const handleOpenCurrentUser = () => {
     setOpenCurrentUser(!openCurrentUser);
   };

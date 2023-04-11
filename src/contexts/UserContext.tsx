@@ -7,18 +7,21 @@ interface UserContextProviderProps {
 }
 
 interface UserContextProps {
-  user: null | User;
+  // user: null | User;
+  user: IUserInfo | null;
   changeStatus: (status: string) => () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextProps>({
-  user: auth.currentUser,
+  user: null,
   changeStatus: () => async () => {},
 });
 
 export const UserContextProvider: React.FC<UserContextProviderProps> = ({
   children,
 }) => {
+  const [userInfo, setUserInfo] = useState<IUserInfo[]>([]);
+
   const changeStatus = (status: string) => async () => {
     await firebaseApi.POST.update.status(
       status,
@@ -26,8 +29,16 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({
     );
   };
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        firebaseApi.GET.user.info(user.uid, setUserInfo);
+      } else return;
+    });
+  }, []);
+
   return (
-    <UserContext.Provider value={{ changeStatus, user: auth.currentUser }}>
+    <UserContext.Provider value={{ changeStatus, user: userInfo[0] }}>
       {children}
     </UserContext.Provider>
   );

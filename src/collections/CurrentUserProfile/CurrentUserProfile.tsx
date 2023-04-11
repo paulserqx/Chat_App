@@ -25,7 +25,7 @@ export const CurrentUserProfile: React.FC<CurrentUserProfileProps> = ({
     firebaseApi.GET.user.status(setStatus);
     firebaseApi.GET.user.info(user?.uid || "user", setUserInfo);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   const handleOpenCurrentUser = () => {
     setOpenCurrentUser(!openCurrentUser);

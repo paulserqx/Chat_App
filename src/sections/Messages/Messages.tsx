@@ -1,5 +1,5 @@
 import { Button, Message, NewUserAnouncement, RoomInfo } from "components";
-import { useUser } from "hooks";
+import { useUser } from "contexts";
 import { useRouter } from "next/router";
 import { BiHash } from "react-icons/bi";
 import React, { RefObject, useState, useEffect, useRef } from "react";

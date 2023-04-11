@@ -3,7 +3,7 @@ import { Button, Popup, TPopups } from "components";
 import Image from "next/image";
 import React, { RefObject } from "react";
 import { clouds, hero1, hero2, stars } from "assets";
-import { usePopup } from "hooks";
+import { usePopup } from "contexts";
 import FadeAnimation from "components/FadeAnimation/FadeAnimation";
 import { FadeIn } from "react-slide-fade-in";
 

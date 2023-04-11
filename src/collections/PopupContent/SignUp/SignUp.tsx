@@ -10,7 +10,10 @@ interface SignUpProps {
   ref?: RefObject<HTMLDivElement>;
 }
 
-export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
+export const SignUpPopup: React.FC<SignUpProps> = ({
+  closePopup,
+  ...props
+}) => {
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -24,8 +27,6 @@ export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-
-    console.log(username);
 
     if (password !== rePassword) {
       setIsLoading(false);
@@ -46,6 +47,7 @@ export const SignUpPopup: React.FC<SignUpProps> = ({ ...props }) => {
 
     if (result.type === "data") {
       router.push("/chats");
+      closePopup("null")();
     } else {
       const message = transformErrorMessage(result.error.message);
       console.log(message);

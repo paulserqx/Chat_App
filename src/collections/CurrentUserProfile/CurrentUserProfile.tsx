@@ -1,7 +1,7 @@
 import { CurrentUserDropdown } from "collections/Dropdowns";
 import { avatars } from "collections/Forms";
 import { Loader } from "components";
-import { useUser } from "hooks";
+import { useUser } from "contexts";
 import Image from "next/image";
 import React, { RefObject, useEffect, useState } from "react";
 import { IoSettingsSharp } from "react-icons/io5";

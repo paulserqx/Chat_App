@@ -3,7 +3,7 @@ import React, { RefObject, useEffect, useState } from "react";
 import { firebaseApi, IRoom } from "services";
 import { CurrentUserProfile, icons } from "collections";
 import { Explore } from "components";
-import { useUser } from "hooks";
+import { useUser } from "contexts";
 import { hasUserJoined } from "utils";
 
 interface SidebarProps {

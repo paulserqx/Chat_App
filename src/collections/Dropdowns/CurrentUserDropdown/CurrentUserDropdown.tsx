@@ -1,8 +1,8 @@
 import { avatars, banners } from "collections/Forms";
 import { CurrentStatus, Loader, Popup } from "components";
-import { usePopup } from "hooks";
+import { usePopup } from "contexts";
 import Image from "next/image";
-import React, { RefObject, useEffect, useState } from "react";
+import React, { RefObject } from "react";
 import { IUserInfo } from "services";
 import { statuses } from "utils";
 
@@ -19,7 +19,6 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
   ...props
 }) => {
   const { popupOpened, togglePopup } = usePopup();
-
   return userInfo ? (
     <>
       <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />

@@ -16,7 +16,7 @@ import {
   dino,
 } from "assets";
 import { Loader, TPopups } from "components";
-import { usePopup, useUser } from "hooks";
+import { useUser } from "contexts";
 import Image from "next/image";
 import React, { RefObject, useEffect, useRef, useState } from "react";
 import { IUserInfo, firebaseApi } from "services";

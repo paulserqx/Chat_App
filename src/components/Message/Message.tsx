@@ -9,7 +9,7 @@ import { Loader } from "components/Loader";
 import { MessageOptions } from "components/MessageOptions";
 import { Popup } from "components/Popup";
 import { Emoji, EmojiStyle } from "emoji-picker-react";
-import { usePopup, useUser } from "hooks";
+import { usePopup, useUser } from "contexts";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";

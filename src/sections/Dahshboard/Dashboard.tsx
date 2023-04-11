@@ -1,6 +1,6 @@
 import { icons } from "collections";
 import { Popup } from "components";
-import { usePopup, useUser } from "hooks";
+import { usePopup, useUser } from "contexts";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
 import { firebaseApi, IRoom } from "services";

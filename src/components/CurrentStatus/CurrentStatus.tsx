@@ -3,7 +3,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoMoon } from "react-icons/io5";
 import { MdDoDisturbOn } from "react-icons/md";
 import { BsFillRecordCircleFill } from "react-icons/bs";
-import { useUser } from "hooks";
+import { useUser } from "contexts";
 import { statuses } from "utils";
 import { Statuses } from "types";
 

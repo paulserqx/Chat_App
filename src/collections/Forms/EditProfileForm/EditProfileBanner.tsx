@@ -13,7 +13,7 @@ import {
   banner_tech_reality,
 } from "assets";
 import { Loader, TPopups } from "components";
-import { useUser } from "hooks";
+import { useUser } from "contexts";
 import Image from "next/image";
 import React, { RefObject, useEffect, useState } from "react";
 import { IUserInfo, firebaseApi } from "services";

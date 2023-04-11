@@ -1,5 +1,5 @@
 import { Button, Logo, Popup } from "components";
-import { usePopup } from "hooks";
+import { usePopup } from "contexts";
 import React, { RefObject } from "react";
 
 interface NavigationProps {

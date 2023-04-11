@@ -1,7 +1,7 @@
 import { section4, stars } from "assets";
 import { Button, Popup, TPopups } from "components";
 import FadeAnimation from "components/FadeAnimation/FadeAnimation";
-import { usePopup } from "hooks";
+import { usePopup } from "contexts";
 import Image from "next/image";
 import { RefObject } from "react";
 

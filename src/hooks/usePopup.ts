@@ -1,16 +1,16 @@
-import { TPopups } from "components";
-import { useState } from "react";
+// import { TPopups } from "components";
+// import { useState } from "react";
 
-export const usePopup = () => {
-  const [popupOpened, setPopupOpened] = useState<TPopups>("null");
+// export const usePopup = () => {
+//   const [popupOpened, setPopupOpened] = useState<TPopups>("null");
 
-  const togglePopup = (type?: TPopups) => () => {
-    setPopupOpened(type || "null");
-    document.body.style.overflow = type !== "null" ? "hidden" : "auto";
-  };
+//   const togglePopup = (type?: TPopups) => () => {
+//     setPopupOpened(type || "null");
+//     document.body.style.overflow = type !== "null" ? "hidden" : "auto";
+//   };
 
-  return {
-    togglePopup,
-    popupOpened,
-  };
-};
+//   return {
+//     togglePopup,
+//     popupOpened,
+//   };
+// };

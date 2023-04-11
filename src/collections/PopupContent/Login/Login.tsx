@@ -11,7 +11,7 @@ interface LoginProps {
   ref?: RefObject<HTMLDivElement>;
 }
 
-export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
+export const LoginPopup: React.FC<LoginProps> = ({ closePopup, ...props }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,6 +27,7 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
 
     if (res.type === "data") {
       router.push("/chats");
+      closePopup("null")();
     } else {
       const message = transformErrorMessage(res.error.message);
       const error = FirebaseErrors[message];
@@ -48,6 +49,7 @@ export const LoginPopup: React.FC<LoginProps> = ({ ...props }) => {
 
     if (result.type === "data") {
       router.push("/chats");
+      closePopup("null")();
     } else {
       console.log("error");
       const message = transformErrorMessage(result.error.message);

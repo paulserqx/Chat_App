@@ -1,24 +1,26 @@
-import { User } from "firebase/auth";
-import { createContext, useContext, useState } from "react";
-import { auth, firebaseApi } from "services";
+import { User, onAuthStateChanged } from "firebase/auth";
+import { createContext, useContext, useEffect, useState } from "react";
+import { IUserInfo, auth, firebaseApi } from "services";
 
 interface UserContextProviderProps {
   children: any;
 }
 
 interface UserContextProps {
-  user: User | null;
+  user: IUserInfo | null | User;
   changeStatus: (status: string) => () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextProps>({
-  user: null,
+  user: auth.currentUser,
   changeStatus: () => async () => {},
 });
 
 export const UserContextProvider: React.FC<UserContextProviderProps> = ({
   children,
 }) => {
+  const [user, setUser] = useState<IUserInfo[]>([]);
+
   const changeStatus = (status: string) => async () => {
     await firebaseApi.POST.update.status(
       status,

@@ -1,5 +1,6 @@
 import { avatars } from "collections/Forms";
-import { Loader } from "components";
+import { Loader, Popup } from "components";
+import { usePopup } from "contexts";
 import Image from "next/image";
 import { RefObject } from "react";
 import { IUserInfo } from "services";
@@ -11,8 +12,15 @@ interface RoomMemberProps {
 }
 
 export const RoomMember: React.FC<RoomMemberProps> = ({ member }) => {
+  const { popupOpened, togglePopup, changeUserInfo } = usePopup();
   return (
-    <div className="room-member">
+    <div
+      className="room-member"
+      onClick={() => {
+        changeUserInfo(member)();
+        togglePopup("userInfo")();
+      }}
+    >
       <div className="rounded-full !basis-[40px] flex pr-[3px] shrink-0">
         {member ? (
           <Image

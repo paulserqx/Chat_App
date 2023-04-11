@@ -28,7 +28,7 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
   const [userInfo, setUserInfo] = useState<IUserInfo[]>([]);
 
   const router = useRouter();
-  const { popupOpened, togglePopup } = usePopup();
+  const { popupOpened, togglePopup, changeUserInfo } = usePopup();
   const { user } = useUser();
   const slug = router.query.slug ? router.query.slug[0] : "";
 
@@ -67,11 +67,7 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
       className={edit || emojiPicker ? "message-hovered" : "message"}
     >
       {togglePopup && (
-        <Popup
-          closePopup={togglePopup}
-          userInfo={userInfo[0]}
-          popupType={popupOpened || "null"}
-        />
+        <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
       )}
       {emojiPicker && (
         <>
@@ -92,7 +88,10 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
       />
       {userInfo[0] ? (
         <Image
-          onClick={togglePopup("userInfo")}
+          onClick={() => {
+            togglePopup("userInfo")();
+            changeUserInfo(userInfo[0])();
+          }}
           className="rounded-full mr-[10px] cursor-pointer hover:scale-[1.15] transtion-all"
           src={avatars[userInfo[0].profileImg] || userInfo[0].profileImg}
           width={40}
@@ -105,7 +104,10 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
       <div className="flex flex-col">
         <div className="flex mb-[3px]">
           <h4
-            onClick={togglePopup("userInfo")}
+            onClick={() => {
+              togglePopup("userInfo")();
+              changeUserInfo(userInfo[0])();
+            }}
             className="text-[13px] pb-[5px] border-b-[1px] border-transparent mr-[5px] text-green-600 cursor-pointer hover:scale-[1.05] transtion-all"
           >
             {message.author}

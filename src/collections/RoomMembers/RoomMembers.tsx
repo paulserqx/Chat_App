@@ -2,6 +2,8 @@ import React, { RefObject, useEffect, useState } from "react";
 import { IUserInfo, firebaseApi } from "services";
 import { RoomMember } from "./RoomMember";
 import { sortMembers, statuses } from "utils";
+import { Popup } from "components";
+import { usePopup } from "contexts";
 
 interface RoomMembersProps {
   membersSideOpened: boolean;
@@ -18,7 +20,7 @@ export const RoomMembers: React.FC<RoomMembersProps> = ({
 }) => {
   const [membersUidList, setMembersUidList] = useState<string[]>([]);
   const [members, setMembers] = useState<IUserInfo[]>([]);
-
+  const { popupOpened, togglePopup } = usePopup();
   useEffect(() => {
     // Collecting uids for the current room
     setMembersUidList([]);

@@ -12,7 +12,7 @@ interface UserInfoProps {
 const UserInfo: React.FC<UserInfoProps> = ({ closePopup, userInfo }) => {
   if (!userInfo) return <Loader />;
   return (
-    <div className="!w-[300px] md:!w-[400px] ">
+    <div className="!w-[300px] md:!w-[400px]">
       <div className="profile-banner !cursor-default">
         <Image
           src={banners[userInfo.banner] || userInfo.banner}

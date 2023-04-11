@@ -5,6 +5,7 @@ import {
 } from "collections/Forms";
 import { EmptyPopup, LoginPopup, SignUpPopup } from "collections/PopupContent";
 import UserInfo from "collections/PopupContent/UserInfo/UserInfo";
+import { usePopup } from "contexts";
 import React, { RefObject } from "react";
 import { IUserInfo } from "services";
 
@@ -30,18 +31,17 @@ const popups = {
 interface PopupProps {
   closePopup: (type?: TPopups) => () => void;
   popupType: TPopups;
-  userInfo?: IUserInfo;
   ref?: RefObject<HTMLDivElement>;
 }
 
 export const Popup: React.FC<PopupProps> = ({
   popupType,
-  userInfo,
 
   closePopup,
   ...props
 }) => {
   const CurrentPopup = popups[popupType || "null"];
+  const { userInfo } = usePopup();
 
   return (
     <>

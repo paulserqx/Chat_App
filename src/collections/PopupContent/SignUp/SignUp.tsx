@@ -75,35 +75,35 @@ export const SignUpPopup: React.FC<SignUpProps> = ({
         <h1 className="form-banner-h mb-[20px]">
           Let&apos;s get you started today!
         </h1>
-        <label htmlFor="email" className="form-label">
+        <label htmlFor="signup-email" className="form-label">
           Email
         </label>
         <input
           className="input"
           type="email"
-          id="email"
+          id="signup-email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Type Your Email..."
         />
-        <label htmlFor="email" className="form-label">
+        <label htmlFor="signup-username" className="form-label">
           Username
         </label>
         <input
           className="input"
           type="text"
-          id="username"
+          id="signup-username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Type Your username..."
         />
-        <label htmlFor="password" className="form-label">
+        <label htmlFor="signup-password" className="form-label">
           Password
         </label>
         <input
           className="input"
           type="password"
-          id="password"
+          id="signup-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Type Your Password..."

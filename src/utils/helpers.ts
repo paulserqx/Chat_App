@@ -13,10 +13,10 @@ export const transformErrorMessage = (msg: string) => {
   return msg.split("/")[1].slice(0, -2);
 };
 
-export const hasUserJoined = (room: IRoom, user: User | null) => {
+export const hasUserJoined = (room: IRoom, userId: string) => {
   const userHasJoined = Object.values(room.members)
     .map((el) => el.user)
-    .indexOf(user?.uid || "!not joined!");
+    .indexOf(userId || "!not joined!");
 
   return userHasJoined >= 0 ? true : false;
 };

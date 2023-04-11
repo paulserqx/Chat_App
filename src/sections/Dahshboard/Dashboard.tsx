@@ -91,7 +91,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
           <div className="dashboard-rooms-container">
             {rooms.map((room, i) => {
               const Icon = icons[room.icon];
-              const userHasJoined = hasUserJoined(room, user);
+              const userHasJoined = hasUserJoined(room, user?.uid || "!user!");
               return (
                 <div
                   key={i}

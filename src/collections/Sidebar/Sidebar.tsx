@@ -51,7 +51,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div className="flex flex-col">
             {rooms.map((room, i) => {
               const Icon = icons[room.icon];
-              const userJoined = hasUserJoined(room, user);
+              const userJoined = hasUserJoined(room, user?.uid || "!user id!");
               return (
                 userJoined && (
                   <div

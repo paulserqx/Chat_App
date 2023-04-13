@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TPopups } from "components";
+import { useUser } from "contexts";
 import { IUserInfo } from "services/firebase";
 
 interface IPopupProps {

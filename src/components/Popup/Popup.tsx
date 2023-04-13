@@ -1,3 +1,4 @@
+import { PayloadAction } from "@reduxjs/toolkit";
 import {
   CreateRoomForm,
   EditProfileAvatar,
@@ -29,7 +30,7 @@ const popups = {
 };
 
 interface PopupProps {
-  closePopup: (type?: TPopups) => () => void;
+  closePopup: (type?: TPopups) => PayloadAction<TPopups>;
   popupType: TPopups;
   ref?: RefObject<HTMLDivElement>;
 }
@@ -47,7 +48,7 @@ export const Popup: React.FC<PopupProps> = ({
     <>
       <div
         {...props}
-        onClick={closePopup("null")}
+        onClick={() => closePopup("null")}
         className={
           popupType !== "null"
             ? "z-[110] flex items-center fixed justify-center bg-slate-900 opacity-[0.3]  w-full h-full top-0 left-0"
@@ -55,7 +56,7 @@ export const Popup: React.FC<PopupProps> = ({
         }
       />
       <div className={"form-container"}>
-        <CurrentPopup closePopup={closePopup} userInfo={userInfo} />
+        <CurrentPopup closePopup={() => closePopup} userInfo={userInfo} />
       </div>
     </>
   );

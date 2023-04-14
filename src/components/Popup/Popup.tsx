@@ -7,6 +7,7 @@ import {
 import { EmptyPopup, LoginPopup, SignUpPopup } from "collections/PopupContent";
 import UserInfo from "collections/PopupContent/UserInfo/UserInfo";
 import { usePopup } from "contexts";
+import { useAppSelector } from "hooks";
 import React, { RefObject } from "react";
 import { IUserInfo } from "services";
 
@@ -42,7 +43,7 @@ export const Popup: React.FC<PopupProps> = ({
   ...props
 }) => {
   const CurrentPopup = popups[popupType || "null"];
-  const { userInfo } = usePopup();
+  const { userInfo } = useAppSelector((state) => state.counter);
 
   return (
     <>

@@ -3,10 +3,11 @@ import { Popup } from "components";
 import { usePopup, useUser } from "contexts";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
-import { firebaseApi, IRoom } from "services";
+import { firebaseApi, IRoom, togglePopup } from "services";
 import { hasUserJoined } from "utils";
 import { exploreBackground, stars } from "assets";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "hooks";
 
 interface DashboardProps {
   ref?: RefObject<HTMLDivElement>;
@@ -17,7 +18,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
 
   const router = useRouter();
   const { user } = useUser();
-  const { popupOpened, togglePopup } = usePopup();
+  const dispatch = useAppDispatch();
+  const { popupOpened } = useAppSelector((state) => state.counter);
 
   useEffect(() => {
     firebaseApi.GET.allRooms(setRooms);
@@ -38,7 +40,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
     <>
       {popupOpened && (
         <div className="fixed z-[90] left-0 w-full">
-          <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
+          <Popup
+            closePopup={() => dispatch(togglePopup("null"))}
+            popupType={popupOpened || "null"}
+          />
         </div>
       )}
       <section className="dashboard" {...props}>
@@ -48,7 +53,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ ...props }) => {
             Or
           </span>
           <button
-            onClick={togglePopup("createRoom")}
+            onClick={() => dispatch(togglePopup("createRoom"))}
             className="create-room-button z-[10]"
             type="button"
           >

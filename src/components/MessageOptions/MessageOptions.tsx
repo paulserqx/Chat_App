@@ -2,11 +2,7 @@ import { useUser } from "contexts";
 import { useRouter } from "next/router";
 import React, { Dispatch, RefObject, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import {
-  MdOutlineAddReaction,
-  MdModeEditOutline,
-  MdOutlineReply,
-} from "react-icons/md";
+import { MdOutlineAddReaction, MdModeEditOutline } from "react-icons/md";
 import { IMessage, firebaseApi } from "services";
 
 interface MessageOptionsProps {
@@ -29,6 +25,7 @@ export const MessageOptions: React.FC<MessageOptionsProps> = ({
   ...props
 }) => {
   const { user } = useUser();
+
   const router = useRouter();
   const slug = router.query.slug ? router.query.slug[0] : "";
 

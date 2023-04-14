@@ -1,11 +1,11 @@
 import { Navigation } from "collections";
-import { Button, Popup, TPopups } from "components";
+import { Button, Popup } from "components";
 import Image from "next/image";
 import React, { RefObject } from "react";
 import { clouds, hero1, hero2, stars } from "assets";
-import { usePopup } from "contexts";
-import FadeAnimation from "components/FadeAnimation/FadeAnimation";
 import { FadeIn } from "react-slide-fade-in";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { togglePopup } from "services";
 
 interface LandingPageHeroProps {
   ref?: RefObject<HTMLDivElement>;
@@ -16,11 +16,15 @@ const buttons: string[] = ["Login", "Sign Up"];
 export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
   ...props
 }) => {
-  const { popupOpened, togglePopup } = usePopup();
+  const dispatch = useAppDispatch();
+  const { popupOpened, userInfo } = useAppSelector((state) => state.counter);
 
   return (
     <section className="w-full bg-heroBackground overflow-hidden" {...props}>
-      <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
+      <Popup
+        closePopup={() => dispatch(togglePopup("null"))}
+        popupType={popupOpened || "null"}
+      />
       <Image
         src={clouds}
         alt={"cloudsImg"}
@@ -80,7 +84,11 @@ export const LandingPageHero: React.FC<LandingPageHeroProps> = ({
               {buttons.map((button) => (
                 <button
                   className="first:mr-[30px]"
-                  onClick={togglePopup(button === "Login" ? "login" : "signUp")}
+                  onClick={() =>
+                    dispatch(
+                      togglePopup(button === "Login" ? "login" : "signUp")
+                    )
+                  }
                   key={button}
                 >
                   <Button text={button} />

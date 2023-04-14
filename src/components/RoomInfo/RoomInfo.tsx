@@ -1,8 +1,5 @@
-import { Emoji, EmojiStyle } from "emoji-picker-react";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import React, { RefObject, useEffect, useState } from "react";
-import { FaRedditAlien, FaTrashAlt } from "react-icons/fa";
+import React, { RefObject } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { RiSearchEyeLine, RiUserAddLine } from "react-icons/ri";
 import { VscReactions } from "react-icons/vsc";

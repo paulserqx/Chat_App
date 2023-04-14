@@ -1,4 +1,3 @@
-import { User } from "firebase/auth";
 import { IRoom, IUserInfo } from "services";
 
 export const shortenDisplayName = (name: string) => {

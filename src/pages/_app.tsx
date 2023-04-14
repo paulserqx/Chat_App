@@ -1,8 +1,9 @@
 import "styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { createContext } from "react";
-import { PopupContextProvider, UserContextProvider } from "contexts";
+import { Provider } from "react-redux";
+import { store } from "services";
+import { UserContextProvider } from "contexts";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -11,11 +12,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Discord Clone</title>
       </Head>
       <main>
-        <PopupContextProvider>
+        <Provider store={store}>
           <UserContextProvider>
             <Component {...pageProps} />
           </UserContextProvider>
-        </PopupContextProvider>
+        </Provider>
       </main>
     </>
   );

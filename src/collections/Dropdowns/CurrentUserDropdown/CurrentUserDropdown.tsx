@@ -1,9 +1,9 @@
 import { avatars, banners } from "collections/Forms";
 import { CurrentStatus, Loader, Popup } from "components";
-import { usePopup } from "contexts";
+import { useAppDispatch, useAppSelector } from "hooks";
 import Image from "next/image";
 import React, { RefObject } from "react";
-import { IUserInfo } from "services";
+import { IUserInfo, togglePopup } from "services";
 import { statuses } from "utils";
 
 interface CurrentUserDropdownProps {
@@ -14,14 +14,19 @@ interface CurrentUserDropdownProps {
 
 export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
   ref,
-  userInfo,
   opened,
+  userInfo,
   ...props
 }) => {
-  const { popupOpened, togglePopup } = usePopup();
+  const dispatch = useAppDispatch();
+  const { popupOpened } = useAppSelector((state) => state.counter);
+
   return userInfo ? (
     <>
-      <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
+      <Popup
+        closePopup={() => dispatch(togglePopup("null"))}
+        popupType={popupOpened || "null"}
+      />
       <div
         className={
           opened
@@ -29,7 +34,10 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
             : "dropdown-menu-closed dropdown-menu" + " z-40"
         }
       >
-        <div className="profile-banner" onClick={togglePopup("editBanner")}>
+        <div
+          className="profile-banner"
+          onClick={() => dispatch(togglePopup("editBanner"))}
+        >
           <Image
             src={banners[userInfo.banner] || userInfo.banner}
             fill
@@ -55,7 +63,10 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
           <div className="absolute bottom-[-2px] right-[-2px] z-20 p-[4px] rounded-full bg-[#232428]">
             {statuses[userInfo.status].icon}
           </div>
-          <div className="status-bg" onClick={togglePopup("editProfile")}>
+          <div
+            className="status-bg"
+            onClick={() => dispatch(togglePopup("editProfile"))}
+          >
             CHANGE AVATAR
           </div>
         </div>

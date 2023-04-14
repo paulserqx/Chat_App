@@ -1,7 +1,5 @@
-import { useRouter } from "next/router";
 import React, { RefObject } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { firebaseApi } from "services";
 
 interface GoogleBtnProps {
   handleGoogleSignIn: () => void;

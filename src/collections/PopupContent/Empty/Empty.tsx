@@ -1,5 +1,5 @@
 import { TPopups } from "components";
-import React, { RefObject, useState } from "react";
+import React, { RefObject } from "react";
 
 interface EmptyPopupProps {
   closePopup: (type?: TPopups) => () => void;

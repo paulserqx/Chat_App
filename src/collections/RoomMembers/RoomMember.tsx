@@ -1,9 +1,10 @@
 import { avatars } from "collections/Forms";
-import { Loader, Popup } from "components";
-import { usePopup } from "contexts";
+import { Loader } from "components";
+import { useAppDispatch } from "hooks";
+
 import Image from "next/image";
 import { RefObject } from "react";
-import { IUserInfo } from "services";
+import { IUserInfo, changeUserInfo, togglePopup } from "services";
 import { statuses } from "utils";
 
 interface RoomMemberProps {
@@ -12,13 +13,13 @@ interface RoomMemberProps {
 }
 
 export const RoomMember: React.FC<RoomMemberProps> = ({ member }) => {
-  const { popupOpened, togglePopup, changeUserInfo } = usePopup();
+  const dispatch = useAppDispatch();
   return (
     <div
       className="room-member"
       onClick={() => {
-        changeUserInfo(member)();
-        togglePopup("userInfo")();
+        dispatch(changeUserInfo(member));
+        dispatch(togglePopup("userInfo"));
       }}
     >
       <div className="rounded-full !basis-[40px] flex pr-[3px] shrink-0">

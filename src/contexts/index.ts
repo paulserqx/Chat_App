@@ -1,2 +1,1 @@
-export * from "./PopupContext";
-export * from './UserContext'
+export * from "./UserContext";

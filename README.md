@@ -12,7 +12,7 @@ password: 123123
 The project was built using
 
 - Next JS / React
-- Typescript / JavaScript
+- TypeScript / JavaScript
 - Tailwind CSS
 - Redux-Toolkit
 - Firebase for User Authentication

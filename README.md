@@ -14,6 +14,7 @@ The project was built using
 - Next JS / React
 - Typescript / JavaScript
 - Tailwind CSS
+- Redux-Toolkit
 - Firebase for User Authentication
 - Firebaase for Real Time Database
 

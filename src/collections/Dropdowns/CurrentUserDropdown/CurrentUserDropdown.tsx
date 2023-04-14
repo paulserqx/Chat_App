@@ -3,21 +3,23 @@ import { CurrentStatus, Loader, Popup } from "components";
 import { useAppDispatch, useAppSelector } from "hooks";
 import Image from "next/image";
 import React, { RefObject } from "react";
-import { togglePopup } from "services";
+import { IUserInfo, togglePopup } from "services";
 import { statuses } from "utils";
 
 interface CurrentUserDropdownProps {
   opened: boolean;
+  userInfo: IUserInfo;
   ref?: RefObject<HTMLDivElement>;
 }
 
 export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
   ref,
   opened,
+  userInfo,
   ...props
 }) => {
   const dispatch = useAppDispatch();
-  const { popupOpened, userInfo } = useAppSelector((state) => state.counter);
+  const { popupOpened } = useAppSelector((state) => state.counter);
   return userInfo ? (
     <>
       <Popup

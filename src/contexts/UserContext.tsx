@@ -1,7 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import { IUserInfo, auth, changeUserInfo, firebaseApi } from "services";
-import { useAppDispatch } from "hooks";
+import { IUserInfo, auth, firebaseApi } from "services";
 
 interface UserContextProviderProps {
   children: any;
@@ -20,7 +19,6 @@ const UserContext = createContext<UserContextProps>({
 export const UserContextProvider: React.FC<UserContextProviderProps> = ({
   children,
 }) => {
-  const dispatch = useAppDispatch();
   const [userInfo, setUserInfo] = useState<IUserInfo[]>([]);
 
   const changeStatus = (status: string) => async () => {
@@ -34,14 +32,9 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({
     onAuthStateChanged(auth, (user) => {
       if (user) {
         firebaseApi.GET.user.info(user.uid, setUserInfo);
-      } else return;
+      }
     });
   }, []);
-
-  useEffect(() => {
-    dispatch(changeUserInfo(userInfo[0]));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userInfo]);
 
   return (
     <UserContext.Provider value={{ changeStatus, user: userInfo[0] }}>

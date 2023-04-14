@@ -1,5 +1,5 @@
 import { avatars } from "collections/Forms";
-import { Loader, Popup } from "components";
+import { Loader } from "components";
 import { useAppDispatch } from "hooks";
 
 import Image from "next/image";

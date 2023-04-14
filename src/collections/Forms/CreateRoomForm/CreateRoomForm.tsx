@@ -61,7 +61,6 @@ interface CreateRoomFormProps {
 }
 
 export const CreateRoomForm: React.FC<CreateRoomFormProps> = ({ ...props }) => {
-  const [joinRoom, setJoinRoom] = useState<string>("");
   const [successfulRoomCreation, setSuccessfulRoomCreation] =
     useState<boolean>(false);
   const [error, setError] = useState<string | null>();

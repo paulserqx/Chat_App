@@ -4,10 +4,9 @@ import { Loader } from "components";
 import { useUser } from "contexts";
 import Image from "next/image";
 import React, { RefObject, useEffect, useState } from "react";
-import { IoSettingsSharp } from "react-icons/io5";
 import { IUserInfo, firebaseApi } from "services";
 import { Statuses } from "types";
-import { shortenDisplayName, statuses } from "utils";
+import { statuses } from "utils";
 
 interface CurrentUserProfileProps {
   ref?: RefObject<HTMLButtonElement>;

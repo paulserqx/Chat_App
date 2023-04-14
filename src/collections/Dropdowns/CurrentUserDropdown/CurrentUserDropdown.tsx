@@ -20,6 +20,7 @@ export const CurrentUserDropdown: React.FC<CurrentUserDropdownProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const { popupOpened } = useAppSelector((state) => state.counter);
+
   return userInfo ? (
     <>
       <Popup

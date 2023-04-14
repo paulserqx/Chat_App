@@ -1,5 +1,5 @@
 import { avatars, banners } from "collections/Forms";
-import { Loader, Popup, TPopups } from "components";
+import { Loader, TPopups } from "components";
 import Image from "next/image";
 import { IUserInfo } from "services";
 import { statuses } from "utils";
@@ -48,7 +48,6 @@ const UserInfo: React.FC<UserInfoProps> = ({ closePopup, userInfo }) => {
               {userInfo.memberSince.slice(0, -13)}
             </div>
           </div>
-          {/* <CurrentStatus status={userInfo.status} /> */}
         </div>
       </div>
     </div>

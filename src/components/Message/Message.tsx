@@ -9,7 +9,7 @@ import { Loader } from "components/Loader";
 import { MessageOptions } from "components/MessageOptions";
 import { Popup } from "components/Popup";
 import { Emoji, EmojiStyle } from "emoji-picker-react";
-import { usePopup, useUser } from "contexts";
+import { useUser } from "contexts";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
@@ -36,8 +36,10 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
   const [userInfo, setUserInfo] = useState<IUserInfo[]>([]);
 
   const router = useRouter();
+
   const dispatch = useAppDispatch();
   const { popupOpened } = useAppSelector((state) => state.counter);
+
   const { user } = useUser();
   const slug = router.query.slug ? router.query.slug[0] : "";
 

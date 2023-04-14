@@ -1,5 +1,4 @@
 import { GoogleBtn, Loader, TPopups } from "components";
-import { FirebaseError } from "firebase/app";
 import { FaDiscord } from "react-icons/fa";
 import { useRouter } from "next/router";
 import React, { RefObject, useState } from "react";
@@ -51,7 +50,6 @@ export const LoginPopup: React.FC<LoginProps> = ({ closePopup, ...props }) => {
       router.push("/chats");
       closePopup("null")();
     } else {
-      console.log("error");
       const message = transformErrorMessage(result.error.message);
       const error = FirebaseErrors[message];
       setError(error);

@@ -1,4 +1,4 @@
-import { User, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { IUserInfo, auth, firebaseApi } from "services";
 
@@ -7,7 +7,6 @@ interface UserContextProviderProps {
 }
 
 interface UserContextProps {
-  // user: null | User;
   user: IUserInfo | null;
   changeStatus: (status: string) => () => Promise<void>;
 }
@@ -33,7 +32,7 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({
     onAuthStateChanged(auth, (user) => {
       if (user) {
         firebaseApi.GET.user.info(user.uid, setUserInfo);
-      } else return;
+      }
     });
   }, []);
 

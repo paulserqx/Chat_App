@@ -2,15 +2,18 @@ import { section4, stars } from "assets";
 import { Button, Popup, TPopups } from "components";
 import FadeAnimation from "components/FadeAnimation/FadeAnimation";
 import { usePopup } from "contexts";
+import { useAppDispatch, useAppSelector } from "hooks";
 import Image from "next/image";
 import { RefObject } from "react";
+import { togglePopup } from "services";
 
 interface section4Props {
   ref?: RefObject<HTMLDivElement>;
 }
 
 export const Section4: React.FC<section4Props> = ({ ...props }) => {
-  const { popupOpened, togglePopup } = usePopup();
+  const dispatch = useAppDispatch();
+  const { popupOpened } = useAppSelector((state) => state.counter);
 
   return (
     <>
@@ -37,7 +40,10 @@ export const Section4: React.FC<section4Props> = ({ ...props }) => {
           </div>
         </FadeAnimation>
       </section>
-      <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
+      <Popup
+        closePopup={() => dispatch(togglePopup("null"))}
+        popupType={popupOpened || "null"}
+      />
 
       <section className="bg-white">
         <FadeAnimation>
@@ -51,7 +57,7 @@ export const Section4: React.FC<section4Props> = ({ ...props }) => {
               />
             </h4>
             <div
-              onClick={togglePopup("login")}
+              onClick={() => dispatch(togglePopup("login"))}
               className="text-[20px] flex w-full justify-center"
             >
               <Button blueTheme text="Login" />
@@ -60,7 +66,7 @@ export const Section4: React.FC<section4Props> = ({ ...props }) => {
               Or
             </span>
             <div
-              onClick={togglePopup("signUp")}
+              onClick={() => dispatch(togglePopup("signUp"))}
               className="text-[20px] flex w-[200px] justify-center"
             >
               <Button blueTheme text="Sign Up" />

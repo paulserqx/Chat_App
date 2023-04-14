@@ -13,7 +13,15 @@ import { usePopup, useUser } from "contexts";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useState } from "react";
-import { IMessage, formatTime, firebaseApi, IUserInfo } from "services";
+import {
+  IMessage,
+  formatTime,
+  firebaseApi,
+  IUserInfo,
+  togglePopup,
+  changeUserInfo,
+} from "services";
+import { useAppDispatch, useAppSelector } from "hooks";
 
 interface MessageProps {
   message: IMessage;
@@ -28,7 +36,8 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
   const [userInfo, setUserInfo] = useState<IUserInfo[]>([]);
 
   const router = useRouter();
-  const { popupOpened, togglePopup, changeUserInfo } = usePopup();
+  const dispatch = useAppDispatch();
+  const { popupOpened } = useAppSelector((state) => state.counter);
   const { user } = useUser();
   const slug = router.query.slug ? router.query.slug[0] : "";
 
@@ -67,7 +76,10 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
       className={edit || emojiPicker ? "message-hovered" : "message"}
     >
       {togglePopup && (
-        <Popup closePopup={togglePopup} popupType={popupOpened || "null"} />
+        <Popup
+          closePopup={() => dispatch(togglePopup("null"))}
+          popupType={popupOpened || "null"}
+        />
       )}
       {emojiPicker && (
         <>
@@ -89,8 +101,8 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
       {userInfo[0] ? (
         <Image
           onClick={() => {
-            togglePopup("userInfo")();
-            changeUserInfo(userInfo[0])();
+            dispatch(togglePopup("userInfo"));
+            dispatch(changeUserInfo(userInfo[0]));
           }}
           className="rounded-full mr-[10px] cursor-pointer hover:scale-[1.15] transtion-all"
           src={avatars[userInfo[0].profileImg] || userInfo[0].profileImg}
@@ -105,8 +117,8 @@ export const Message: React.FC<MessageProps> = ({ message, ...props }) => {
         <div className="flex mb-[3px]">
           <h4
             onClick={() => {
-              togglePopup("userInfo")();
-              changeUserInfo(userInfo[0])();
+              dispatch(togglePopup("userInfo"));
+              dispatch(changeUserInfo(userInfo[0]));
             }}
             className="text-[13px] pb-[5px] border-b-[1px] border-transparent mr-[5px] text-green-600 cursor-pointer hover:scale-[1.05] transtion-all"
           >

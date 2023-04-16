@@ -52,6 +52,12 @@ export default function ChatRoom() {
     widthWatcher();
   }, []);
 
+  useEffect(() => {
+    if (slug === "") return;
+    firebaseApi.GET.notifiction(slug);
+    firebaseApi.POST.message.lastSeen(slug);
+  }, [slug]);
+
   return (
     <>
       <div className="flex h-[100vh] overflow-hidden">

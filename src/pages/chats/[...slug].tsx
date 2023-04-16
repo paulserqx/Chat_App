@@ -55,7 +55,6 @@ export default function ChatRoom() {
   useEffect(() => {
     if (slug === "") return;
     firebaseApi.GET.notifiction(slug);
-    firebaseApi.POST.message.lastSeen(slug);
   }, [slug]);
 
   return (

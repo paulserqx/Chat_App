@@ -53,16 +53,17 @@ interface DataResponse<T = UserCredential> {
 const db = getDatabase();
 const dbRef = ref(db);
 
-const listedForNewMessages = async (room: string) => {
+const listenForNewMessages = async (room: string) => {
   const roomRef = ref(db, `messages/${room}`);
   onChildAdded(roomRef, (child) => {
     const message: IMessage = child.val();
-    console.log(message.timePosted, Date.now());
+    // console.log(message.timePosted, Date.now());
   });
 };
 
 const addLastMessagesSeen = async (room: string) => {
   const userRef = ref(db, `users/${auth.currentUser?.uid}/rooms/${room}`);
+  console.log(room);
   update(userRef, {
     lastSeen: Date.now(),
   });
@@ -501,7 +502,7 @@ export const firebaseApi = {
     },
     emojis: getEmojis,
     room: getRoom,
-    notifiction: listedForNewMessages,
+    notifiction: listenForNewMessages,
   },
   DELETE: {
     emoji: removeEmoji,

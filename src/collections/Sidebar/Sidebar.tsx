@@ -61,7 +61,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         ? "active-room room-img-tail"
                         : "sidebar-room room-img-tail"
                     }
-                    onClick={handleGoToRoom(room.name)}
+                    onClick={() => {
+                      handleGoToRoom(room.name)();
+                      firebaseApi.POST.message.lastSeen(slug);
+                    }}
                   >
                     <Icon size={25} fill="black" />
                   </div>

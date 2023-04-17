@@ -35,7 +35,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   useEffect(() => {
     if (rooms.length === 0) return;
     if (!user) return;
-    console.log("running");
+    if (!user.rooms) return;
     Object.keys(user.rooms).forEach((room) => {
       const unsubscribeFromLastListener = firebaseApi.GET.unreadMessages(
         room,

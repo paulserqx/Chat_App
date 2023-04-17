@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useRef, useState } from "react";
 import { firebaseApi, INotifications, IRoom } from "services";
 import { CurrentUserProfile, icons } from "collections";
-import { Explore } from "components";
+import { Explore, RoomUnreadMessages } from "components";
 import { useUser } from "contexts";
 import { hasUserJoined } from "utils";
 import { Unsubscribe } from "firebase/auth";
@@ -91,6 +91,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     }}
                   >
                     <Icon size={25} fill="black" />
+                    {newMessages[room.name] > 0 && (
+                      <RoomUnreadMessages>
+                        {newMessages[room.name]}
+                      </RoomUnreadMessages>
+                    )}
                   </div>
                 )
               );

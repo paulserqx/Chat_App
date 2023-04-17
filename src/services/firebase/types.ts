@@ -40,6 +40,11 @@ export interface IUserInfo {
   uid: string;
   profileImg: string;
   banner: string;
+  rooms: {
+    [key: string]: {
+      lastSeen: number;
+    };
+  };
 }
 
 export interface IMessage {
@@ -51,4 +56,8 @@ export interface IMessage {
   timePosted: number;
   edited: boolean;
   greeting: boolean;
+}
+
+export interface INotifications {
+  [key: string]: number;
 }

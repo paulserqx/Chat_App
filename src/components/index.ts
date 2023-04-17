@@ -8,3 +8,4 @@ export * from "./MessageOptions";
 export * from "./NewUserAnouncement";
 export * from "./RoomInfo";
 export * from "./FadeAnimation";
+export * from "./RoomUnreadMessages";

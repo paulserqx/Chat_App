@@ -52,6 +52,13 @@ export default function ChatRoom() {
     widthWatcher();
   }, []);
 
+  // this is going to update the last seen timestamp
+  // of the room on refresh
+  // useEffect(() => {
+  //   if (slug === "") return;
+  //   firebaseApi.POST.message.lastSeen(slug);
+  // }, [slug]);
+
   return (
     <>
       <div className="flex h-[100vh] overflow-hidden">

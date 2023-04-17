@@ -15,6 +15,7 @@ import {
   get,
   getDatabase,
   off,
+  onChildAdded,
   onValue,
   push,
   ref,
@@ -32,6 +33,7 @@ import {
   IRoom,
   GetRoomResponse,
   IUserInfo,
+  INotifications,
 } from "./types";
 import { Statuses } from "types";
 import { EmojiClickData } from "emoji-picker-react/dist/types/exposedTypes";
@@ -51,6 +53,50 @@ interface DataResponse<T = UserCredential> {
 
 const db = getDatabase();
 const dbRef = ref(db);
+
+const listenForNewMessages = async (room: string) => {
+  const roomRef = ref(db, `messages/${room}`);
+  onChildAdded(roomRef, (child) => {
+    const message: IMessage = child.val();
+    // console.log(message.timePosted, Date.now());
+  });
+};
+
+const addLastMessagesSeen = async (room: string) => {
+  const userRef = ref(db, `users/${auth.currentUser?.uid}/rooms/${room}`);
+  if (room === "") return;
+  update(userRef, {
+    lastSeen: Date.now(),
+  });
+};
+
+const getUnreadMessages = async (
+  room: string,
+  setter: React.Dispatch<React.SetStateAction<INotifications>>,
+  userLastSeen: number
+) => {
+  const roomMessagesRef = ref(db, `messages/${room}`);
+  const unsubscribe = onValue(roomMessagesRef, (msgs) => {
+    if (!msgs.val()) {
+      setter({});
+    } else {
+      const data: IMessage[] = Object.values(msgs.val());
+      const result = Object.values(data);
+      // Fixed a unexpected bug where after a client refresh
+      // the msgs.val() returns slug:{data} instead of just data
+      const newMessages = result
+        .filter((msg) => msg.timePosted > userLastSeen)
+        .filter((msg) => msg.author !== auth.currentUser?.displayName);
+      if (msgs.key === room) {
+        // updating the old state
+        setter((oldState) => ({ ...oldState, [room]: newMessages.length }));
+      }
+    }
+  });
+
+  // Returning the unsubscribe so i can detach from the old listeners
+  return unsubscribe;
+};
 
 const changeStatus = async (status: string, username: string) => {
   const usersPathRef = ref(db, `users/${auth.currentUser?.uid}`);
@@ -464,6 +510,7 @@ export const firebaseApi = {
     message: {
       send: sendMessage,
       edit: editMessage,
+      lastSeen: addLastMessagesSeen,
     },
     update: {
       status: changeStatus,
@@ -478,12 +525,14 @@ export const firebaseApi = {
   GET: {
     allRooms: getAllRooms,
     messages: getMessages,
+    unreadMessages: getUnreadMessages,
     user: {
       status: getUserStatus,
       info: getUserInfo,
     },
     emojis: getEmojis,
     room: getRoom,
+    notifiction: listenForNewMessages,
   },
   DELETE: {
     emoji: removeEmoji,

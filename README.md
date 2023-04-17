@@ -26,6 +26,7 @@ The project was built using
 - Profile customisation - change your avatar and banner
 - Send, Edit and Delete Messages in the chat rooms
 - Real Time chat messages updates
+- Notification for new messages in the rooms you have joined
 - React with Emojis
 
 ## How to use

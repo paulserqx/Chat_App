@@ -57,3 +57,7 @@ export interface IMessage {
   edited: boolean;
   greeting: boolean;
 }
+
+export interface INotifications {
+  [key: string]: number;
+}

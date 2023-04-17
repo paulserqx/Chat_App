@@ -33,6 +33,7 @@ import {
   IRoom,
   GetRoomResponse,
   IUserInfo,
+  INotifications,
 } from "./types";
 import { Statuses } from "types";
 import { EmojiClickData } from "emoji-picker-react/dist/types/exposedTypes";
@@ -71,7 +72,7 @@ const addLastMessagesSeen = async (room: string) => {
 
 const getUnreadMessages = async (
   room: string,
-  setter: React.Dispatch<React.SetStateAction<{ [key: string]: number }>>,
+  setter: React.Dispatch<React.SetStateAction<INotifications>>,
   userLastSeen: number
 ) => {
   const roomMessagesRef = ref(db, `messages/${room}`);

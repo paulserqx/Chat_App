@@ -52,6 +52,8 @@ export default function ChatRoom() {
     widthWatcher();
   }, []);
 
+  // this is going to update the last seen timestamp
+  // of the room on refresh
   // useEffect(() => {
   //   if (slug === "") return;
   //   firebaseApi.POST.message.lastSeen(slug);

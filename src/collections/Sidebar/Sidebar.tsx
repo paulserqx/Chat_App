@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { RefObject, useEffect, useRef, useState } from "react";
-import { firebaseApi, IRoom } from "services";
+import { firebaseApi, INotifications, IRoom } from "services";
 import { CurrentUserProfile, icons } from "collections";
 import { Explore } from "components";
 import { useUser } from "contexts";
@@ -19,7 +19,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   ...props
 }) => {
   const [rooms, setRooms] = useState<IRoom[]>([]);
-  const [newMessages, setNewMessage] = useState<{ [key: string]: number }>({});
+  const [newMessages, setNewMessage] = useState<INotifications>({});
   const router = useRouter();
   const { user } = useUser();
   // No idea how it works but it does
@@ -41,7 +41,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         setNewMessage,
         user.rooms[room].lastSeen
       );
-      console.log(user.rooms[room].lastSeen);
       // No idea how it works but it does
       // It removes the old onValue listeners correctly
       unsubscribe.current = unsubscribeFromLastListener;

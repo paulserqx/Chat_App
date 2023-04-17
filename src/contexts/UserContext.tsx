@@ -9,11 +9,13 @@ interface UserContextProviderProps {
 interface UserContextProps {
   user: IUserInfo | null;
   changeStatus: (status: string) => () => Promise<void>;
+  setUserInfo: React.Dispatch<React.SetStateAction<IUserInfo[]>>;
 }
 
 const UserContext = createContext<UserContextProps>({
   user: null,
   changeStatus: () => async () => {},
+  setUserInfo: () => {},
 });
 
 export const UserContextProvider: React.FC<UserContextProviderProps> = ({
@@ -37,7 +39,9 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({
   }, []);
 
   return (
-    <UserContext.Provider value={{ changeStatus, user: userInfo[0] }}>
+    <UserContext.Provider
+      value={{ setUserInfo, changeStatus, user: userInfo[0] }}
+    >
       {children}
     </UserContext.Provider>
   );

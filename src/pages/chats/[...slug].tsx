@@ -6,6 +6,7 @@ import { IoMenuSharp } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import { firebaseApi } from "services";
 import dynamic from "next/dynamic";
+import { useUser } from "contexts";
 
 const Sidebar = dynamic(() => import("collections").then((el) => el.Sidebar));
 const RoomMembers = dynamic(() =>
@@ -22,9 +23,12 @@ export default function ChatRoom() {
   const router = useRouter();
   const slug = router.query.slug ? router.query.slug[0] : "";
 
+  const { setUserInfo } = useUser();
+
   const handleSignOut = async () => {
     try {
       const response = await firebaseApi.POST.signOut();
+      setUserInfo([]);
     } catch (error: any) {
       alert(error.message);
     } finally {

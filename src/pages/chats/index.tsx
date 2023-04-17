@@ -6,6 +6,7 @@ import { RxCross1 } from "react-icons/rx";
 import { BiHash } from "react-icons/bi";
 
 import dynamic from "next/dynamic";
+import { useUser } from "contexts";
 
 const Sidebar = dynamic(() => import("collections").then((el) => el.Sidebar));
 const Button = dynamic(() => import("components").then((el) => el.Button));
@@ -13,10 +14,12 @@ const _Dashboard = dynamic(() => import("sections").then((el) => el.Dashboard));
 
 export default function Dashboard({ ...props }) {
   const router = useRouter();
+  const { setUserInfo } = useUser();
 
   const handleSignOut = async () => {
     try {
       const response = await firebaseApi.POST.signOut();
+      setUserInfo([]);
     } catch (error: any) {
       alert(error.message);
     } finally {

@@ -63,10 +63,38 @@ const listenForNewMessages = async (room: string) => {
 
 const addLastMessagesSeen = async (room: string) => {
   const userRef = ref(db, `users/${auth.currentUser?.uid}/rooms/${room}`);
-  console.log(room);
+  if (room === "") return;
   update(userRef, {
     lastSeen: Date.now(),
   });
+};
+
+const getUnreadMessages = async (
+  room: string,
+  setter: React.Dispatch<React.SetStateAction<{ [key: string]: number }>>,
+  userLastSeen: number
+) => {
+  const roomMessagesRef = ref(db, `messages/${room}`);
+  const unsubscribe = onValue(roomMessagesRef, (msgs) => {
+    if (!msgs.val()) {
+      setter({});
+    } else {
+      const data: IMessage[] = Object.values(msgs.val());
+      const result = Object.values(data);
+      // Fixed a unexpected bug where after a client refresh
+      // the msgs.val() returns slug:{data} instead of just data
+      const newMessages = result
+        .filter((msg) => msg.timePosted > userLastSeen)
+        .filter((msg) => msg.author !== auth.currentUser?.displayName);
+      if (msgs.key === room) {
+        // updating the old state
+        setter((oldState) => ({ ...oldState, [room]: newMessages.length }));
+      }
+    }
+  });
+
+  // Returning the unsubscribe so i can detach from the old listeners
+  return unsubscribe;
 };
 
 const changeStatus = async (status: string, username: string) => {
@@ -496,6 +524,7 @@ export const firebaseApi = {
   GET: {
     allRooms: getAllRooms,
     messages: getMessages,
+    unreadMessages: getUnreadMessages,
     user: {
       status: getUserStatus,
       info: getUserInfo,

@@ -52,10 +52,10 @@ export default function ChatRoom() {
     widthWatcher();
   }, []);
 
-  useEffect(() => {
-    if (slug === "") return;
-    firebaseApi.GET.notifiction(slug);
-  }, [slug]);
+  // useEffect(() => {
+  //   if (slug === "") return;
+  //   firebaseApi.POST.message.lastSeen(slug);
+  // }, [slug]);
 
   return (
     <>

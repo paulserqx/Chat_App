@@ -26,6 +26,7 @@ export const Messages: React.FC<MessagesProps> = ({ ...props }) => {
   const handleSubmitMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await firebaseApi.POST.message.send(slug, message);
+    await firebaseApi.POST.message.lastSeen(slug);
     setMessage("");
     scrollToLastMessage();
   };

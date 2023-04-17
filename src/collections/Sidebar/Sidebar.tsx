@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
-import React, { RefObject, useEffect, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import { firebaseApi, IRoom } from "services";
 import { CurrentUserProfile, icons } from "collections";
 import { Explore } from "components";
 import { useUser } from "contexts";
 import { hasUserJoined } from "utils";
+import { Unsubscribe } from "firebase/auth";
 
 interface SidebarProps {
   sidebarOpened: boolean;
@@ -18,14 +19,35 @@ export const Sidebar: React.FC<SidebarProps> = ({
   ...props
 }) => {
   const [rooms, setRooms] = useState<IRoom[]>([]);
+  const [newMessages, setNewMessage] = useState<{ [key: string]: number }>({});
   const router = useRouter();
   const { user } = useUser();
+  // No idea how it works but it does
+  // It removes the old onValue listeners correctly
+  const unsubscribe = useRef<Unsubscribe | any>(() => {});
 
   const slug = router.query.slug ? router.query.slug[0] : "";
 
   useEffect(() => {
     firebaseApi.GET.allRooms(setRooms);
   }, []);
+
+  useEffect(() => {
+    if (rooms.length === 0) return;
+    if (!user) return;
+    Object.keys(user.rooms).forEach((room) => {
+      const unsubscribeFromLastListener = firebaseApi.GET.unreadMessages(
+        room,
+        setNewMessage,
+        user.rooms[room].lastSeen
+      );
+      console.log(user.rooms[room].lastSeen);
+      // No idea how it works but it does
+      // It removes the old onValue listeners correctly
+      unsubscribe.current = unsubscribeFromLastListener;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug, user?.rooms]);
 
   const handleGoToRoom = (path: string) => () => {
     if (router.pathname === "/chats") {
@@ -34,6 +56,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
       router.push(path);
     }
   };
+
+  console.log(newMessages);
 
   return (
     <>
@@ -64,6 +88,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     onClick={() => {
                       handleGoToRoom(room.name)();
                       firebaseApi.POST.message.lastSeen(slug);
+                      firebaseApi.POST.message.lastSeen(room.name);
                     }}
                   >
                     <Icon size={25} fill="black" />
@@ -71,7 +96,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 )
               );
             })}
-            <Explore />
+            <Explore
+              onClick={() => {
+                firebaseApi.POST.message.lastSeen(slug);
+              }}
+            />
           </div>
         </div>
         <CurrentUserProfile />

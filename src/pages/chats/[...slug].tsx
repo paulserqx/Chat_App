@@ -1,13 +1,19 @@
-import { RoomMembers, Sidebar } from "collections";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BiHash } from "react-icons/bi";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { IoMenuSharp } from "react-icons/io5";
-import { Dashboard as _Dashboard, Messages } from "sections";
 import { RxCross1 } from "react-icons/rx";
 import { firebaseApi } from "services";
-import { Button } from "components";
+import dynamic from "next/dynamic";
+
+const Sidebar = dynamic(() => import("collections").then((el) => el.Sidebar));
+const RoomMembers = dynamic(() =>
+  import("collections").then((el) => el.RoomMembers)
+);
+const Button = dynamic(() => import("components").then((el) => el.Button));
+const _Dashboard = dynamic(() => import("sections").then((el) => el.Dashboard));
+const Messages = dynamic(() => import("sections").then((el) => el.Messages));
 
 export default function ChatRoom() {
   const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);

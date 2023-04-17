@@ -1,12 +1,15 @@
-import { Sidebar } from "collections";
-import { Button } from "components";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Dashboard as _Dashboard } from "sections";
 import { firebaseApi } from "services";
 import { IoMenuSharp } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import { BiHash } from "react-icons/bi";
+
+import dynamic from "next/dynamic";
+
+const Sidebar = dynamic(() => import("collections").then((el) => el.Sidebar));
+const Button = dynamic(() => import("components").then((el) => el.Button));
+const _Dashboard = dynamic(() => import("sections").then((el) => el.Dashboard));
 
 export default function Dashboard({ ...props }) {
   const router = useRouter();

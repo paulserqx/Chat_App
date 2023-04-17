@@ -35,6 +35,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   useEffect(() => {
     if (rooms.length === 0) return;
     if (!user) return;
+    console.log("running");
     Object.keys(user.rooms).forEach((room) => {
       const unsubscribeFromLastListener = firebaseApi.GET.unreadMessages(
         room,
@@ -46,7 +47,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       unsubscribe.current = unsubscribeFromLastListener;
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug, user?.rooms]);
+  }, [slug, user?.rooms, rooms]);
 
   const handleGoToRoom = (path: string) => () => {
     if (router.pathname === "/chats") {
